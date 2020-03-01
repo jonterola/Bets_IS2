@@ -1,51 +1,55 @@
 package domain;
 
-import java.io.*;
+import java.io.Serializable;
+import java.util.Vector;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
 @SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Question implements Serializable {
-	
-	@Id 
+
+	@Id
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@GeneratedValue
 	private Integer questionNumber;
-	private String question; 
+	private String question;
 	private float betMinimum;
-	private String result;  
+	private String result;
+	private Integer numop;
+	private Vector<String>[][] opciones;
 	@XmlIDREF
 	private Event event;
 
-	public Question(){
+	public Question() {
 		super();
 	}
-	
+
 	public Question(Integer queryNumber, String query, float betMinimum, Event event) {
 		super();
 		this.questionNumber = queryNumber;
 		this.question = query;
-		this.betMinimum=betMinimum;
+		this.betMinimum = betMinimum;
 		this.event = event;
 	}
-	
-	public Question(String query, float betMinimum,  Event event) {
+
+	public Question(String query, float betMinimum, Event event) {
 		super();
 		this.question = query;
-		this.betMinimum=betMinimum;
+		this.betMinimum = betMinimum;
 
-		//this.event = event;
+		// this.event = event;
 	}
 
 	/**
-	 * Get the  number of the question
+	 * Get the number of the question
 	 * 
 	 * @return the question number
 	 */
@@ -62,7 +66,6 @@ public class Question implements Serializable {
 		this.questionNumber = questionNumber;
 	}
 
-
 	/**
 	 * Get the question description of the bet
 	 * 
@@ -73,43 +76,37 @@ public class Question implements Serializable {
 		return question;
 	}
 
-
 	/**
 	 * Set the question description of the bet
 	 * 
 	 * @param question to be setted
-	 */	
+	 */
 	public void setQuestion(String question) {
 		this.question = question;
 	}
-
-
 
 	/**
 	 * Get the minimun ammount of the bet
 	 * 
 	 * @return the minimum bet ammount
 	 */
-	
+
 	public float getBetMinimum() {
 		return betMinimum;
 	}
 
-
 	/**
 	 * Get the minimun ammount of the bet
 	 * 
-	 * @param  betMinimum minimum bet ammount to be setted
+	 * @param betMinimum minimum bet ammount to be setted
 	 */
 
 	public void setBetMinimum(float betMinimum) {
 		this.betMinimum = betMinimum;
 	}
 
-
-
 	/**
-	 * Get the result of the  query
+	 * Get the result of the query
 	 * 
 	 * @return the the query result
 	 */
@@ -117,19 +114,15 @@ public class Question implements Serializable {
 		return result;
 	}
 
-
-
 	/**
-	 * Get the result of the  query
+	 * Get the result of the query
 	 * 
 	 * @param result of the query to be setted
 	 */
-	
+
 	public void setResult(String result) {
 		this.result = result;
 	}
-
-
 
 	/**
 	 * Get the event associated to the bet
@@ -140,8 +133,6 @@ public class Question implements Serializable {
 		return event;
 	}
 
-
-
 	/**
 	 * Set the event associated to the bet
 	 * 
@@ -151,15 +142,9 @@ public class Question implements Serializable {
 		this.event = event;
 	}
 
-
-
-
-	public String toString(){
-		return questionNumber+";"+question+";"+Float.toString(betMinimum);
+	@Override
+	public String toString() {
+		return questionNumber + ";" + question + ";" + Float.toString(betMinimum);
 	}
 
-
-
-
-	
 }
