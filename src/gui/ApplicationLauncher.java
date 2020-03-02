@@ -18,11 +18,11 @@ public class ApplicationLauncher {
 		ConfigXML c = ConfigXML.getInstance();
 
 		System.out.println(c.getLocale());
-
 		Locale.setDefault(new Locale(c.getLocale()));
 
 		System.out.println("Locale: " + Locale.getDefault());
 		MainGUI a = new MainGUI();
+
 		a.setVisible(true);
 
 		try {
@@ -63,7 +63,9 @@ public class ApplicationLauncher {
 			MainGUI.setBussinessLogic(appFacadeInterface);
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			a.jLabelSelectOption.setText("Error: " + e.toString());
+			a.jLabelSelectOption.setForeground(Color.RED);
+			System.out.println("Error in ApplicationLauncher: " + e.toString());
 		}
 		// a.pack();
 

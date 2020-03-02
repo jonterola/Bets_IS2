@@ -18,6 +18,7 @@ import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.Event;
 import domain.Question;
+import domain.Registro;
 import exceptions.QuestionAlreadyExist;
 
 /**
@@ -208,6 +209,13 @@ public class DataAccess {
 		db.getTransaction().begin();
 		Event ev = new Event(id, nombre, date);
 		db.persist(ev);
+		db.getTransaction().commit();
+	}
+
+	public void addUser(String dni, String user, String mail, String pwd, int age) {
+		Registro u = new Registro(user, pwd, dni, mail, age);
+		db.getTransaction().begin();
+		db.persist(u);
 		db.getTransaction().commit();
 	}
 
