@@ -7,24 +7,21 @@ import javax.persistence.Id;
 public class Registro {
 	@Id
 	private String nick; // nombre dentro de la aplicación
+	private String mail;
 	private String pw;
 	@Id
 	private String dni;
 	private boolean admin;
+	private int edad;
 	// private Pronostico pron;
 
-	public Registro(String nick, String pw, String dni) {
-		if (checkDNI(dni))
-			this.dni = dni;
-		else
-			System.out.println("DNI incorrecto");
-
-		if (pw.length() < 8)
-			System.out.println("El password debe contener como minimo 8 caracteres.");
-
+	public Registro(String nick, String pw, String dni, String mail, int edad) {
+		this.dni = dni;
 		this.pw = pw;
 		this.nick = nick;
 		this.admin = false;
+		this.mail = mail;
+		this.edad = edad;
 	}
 
 	public String getNick() {
@@ -75,5 +72,13 @@ public class Registro {
 			return false;
 		}
 		return true;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 }
