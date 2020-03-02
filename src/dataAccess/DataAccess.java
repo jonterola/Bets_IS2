@@ -203,8 +203,8 @@ public class DataAccess {
 	public void addEvent(String nombre, Date date) throws QuestionAlreadyExist {
 		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev", Event.class);
 		List<Event> events = query.getResultList();
-		int id = events.size();
-
+		int id = events.size() + 1;
+		System.out.println(">> DataAccess: createEvent=> nombre= " + nombre + " Date= " + date + " id=" + id);
 		db.getTransaction().begin();
 		Event ev = new Event(id, nombre, date);
 		db.persist(ev);
