@@ -53,14 +53,14 @@ public class LoginGUI extends JFrame {
 	 */
 	private void initialize() {
 
-		this.setBounds(100, 100, 450, 441);
+		this.setBounds(100, 100, 450, 382);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
-		getPanel();
+//		getPanel();
 		txtpnLogin = new JLabel();
 		txtpnLogin.setFont(new Font("Times New Roman", Font.PLAIN, 30));
 		txtpnLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("Login"));
-		txtpnLogin.setBounds(23, 11, 105, 42);
+		txtpnLogin.setBounds(23, 11, 200, 42);
 		this.getContentPane().add(txtpnLogin);
 
 		txtpnCorreoElectronico = new JLabel();
@@ -116,7 +116,7 @@ public class LoginGUI extends JFrame {
 		getContentPane().add(reg);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(-23, 341, 479, 50);
+		panel_1.setBounds(-21, 300, 479, 50);
 		getContentPane().add(panel_1);
 
 		JRadioButton radioButton = getRdbtnNewRadioButton();
@@ -193,15 +193,15 @@ public class LoginGUI extends JFrame {
 		return rdbtnNewRadioButton_2;
 	}
 
-	private JPanel getPanel() {
-		if (panel == null) {
-			panel = new JPanel();
-			panel.add(getRdbtnNewRadioButton_1());
-			panel.add(getRdbtnNewRadioButton_2());
-			panel.add(getRdbtnNewRadioButton());
-		}
-		return panel;
-	}
+//	private JPanel getPanel() {
+//		if (panel == null) {
+//			panel = new JPanel();
+//			panel.add(getRdbtnNewRadioButton_1());
+//			panel.add(getRdbtnNewRadioButton_2());
+//			panel.add(getRdbtnNewRadioButton());
+//		}
+//		return panel;
+//	}
 
 	private void redibujar() {
 		txtpnLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("Login"));
