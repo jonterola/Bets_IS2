@@ -10,6 +10,7 @@ import javax.jws.WebService;
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
 import domain.Event;
+import domain.Options;
 import domain.Question;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
@@ -61,6 +62,16 @@ public class BLFacadeImplementation implements BLFacade {
 		dBManager.close();
 
 		return qry;
+	};
+
+	@Override
+	@WebMethod
+	public void updateQuestion(Question q, Vector<Options> op) {
+
+		// The minimum bed must be greater than 0
+		DataAccess dBManager = new DataAccess();
+		dBManager.updateQuestion(q, op);
+		dBManager.close();
 	};
 
 	/**

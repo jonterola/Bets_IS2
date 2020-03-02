@@ -23,8 +23,7 @@ public class Question implements Serializable {
 	private String question;
 	private float betMinimum;
 	private String result;
-	private Integer numop;
-	private Vector<String>[][] opciones;
+	private Vector<Options> opciones;
 	@XmlIDREF
 	private Event event;
 
@@ -64,6 +63,14 @@ public class Question implements Serializable {
 	 */
 	public void setQuestionNumber(Integer questionNumber) {
 		this.questionNumber = questionNumber;
+	}
+
+	public void setOdds(Vector<Options> opciones) {
+		this.opciones = opciones;
+	}
+
+	public Vector<Options> getOdds() {
+		return opciones;
 	}
 
 	/**

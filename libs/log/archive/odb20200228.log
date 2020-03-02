@@ -1,0 +1,69 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-02-28 13:23:17 #1 store] 
+Database '/home/ander/git/BetsIS2020/resources/bets.temp' is opened by 5369@i7
+
+[2020-02-28 13:23:17 #2 type.registry] 
+New type domain.Question
+
+[2020-02-28 13:23:17 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-02-28 13:23:17 #4 type.registry] 
+New type domain.Event
+
+[2020-02-28 13:23:17 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-02-28 13:23:17 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-02-28 13:23:17 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-02-28 14:02:22 #1 store] 
+Database '/home/ander/git/BetsIS2020/resources/bets.temp' is opened by 7735@i7
+
+[2020-02-28 14:02:22 #2 type.registry] 
+New type domain.Question
+
+[2020-02-28 14:02:22 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-02-28 14:02:22 #4 type.registry] 
+New type domain.Event
+
+[2020-02-28 14:02:22 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-02-28 14:02:22 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-02-28 14:02:22 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-02-28 14:02:32 #1 store] 
+Database '/home/ander/git/BetsIS2020/resources/bets.temp' is opened by 7857@i7
+
+[2020-02-28 14:02:32 #2 type.registry] 
+New type domain.Question
+
+[2020-02-28 14:02:32 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-02-28 14:02:32 #4 type.registry] 
+New type domain.Event
+
+[2020-02-28 14:02:32 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-02-28 14:02:32 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-02-28 14:02:32 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+

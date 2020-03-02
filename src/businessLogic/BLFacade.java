@@ -7,6 +7,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import domain.Event;
+import domain.Options;
 //import domain.Booking;
 import domain.Question;
 import exceptions.EventFinished;
@@ -35,6 +36,9 @@ public interface BLFacade {
 	 */
 	@WebMethod
 	Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist;
+
+	@WebMethod
+	void updateQuestion(Question q, Vector<Options> op);
 
 	/**
 	 * This method retrieves the events of a given date

@@ -17,6 +17,7 @@ import javax.persistence.TypedQuery;
 import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.Event;
+import domain.Options;
 import domain.Question;
 import exceptions.QuestionAlreadyExist;
 
@@ -198,6 +199,15 @@ public class DataAccess {
 		db.getTransaction().commit();
 		return q;
 
+	}
+
+	public void updateQuestion(Question q, Vector<Options> op) {
+		db.getTransaction().begin();
+		for (int i = 0; i < op.size(); i++) {
+			db.persist(op.get(i));
+		}
+		q.setOdds(op);
+		db.getTransaction().commit();
 	}
 
 	public void addEvent(String nombre, Date date) throws QuestionAlreadyExist {
