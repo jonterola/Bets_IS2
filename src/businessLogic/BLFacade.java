@@ -66,4 +66,7 @@ public interface BLFacade {
 
 	@WebMethod
 	public void createUser(String dni, String user, String mail, String pwd, int age);
+
+	@WebMethod
+	public boolean newLogin(String mail, String pwd);
 }
