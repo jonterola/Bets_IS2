@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Color;
 import java.net.URL;
 import java.util.Locale;
 
@@ -19,11 +18,9 @@ public class ApplicationLauncher {
 		ConfigXML c = ConfigXML.getInstance();
 
 		System.out.println(c.getLocale());
-
 		Locale.setDefault(new Locale(c.getLocale()));
 
 		System.out.println("Locale: " + Locale.getDefault());
-
 		MainGUI a = new MainGUI();
 
 		a.setVisible(true);

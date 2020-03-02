@@ -7,9 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.Vector;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,12 +18,10 @@ import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
-import domain.Event;
 
 public class EventCreate extends JFrame {
 	private static final long serialVersionUID = 1L;
-	DefaultComboBoxModel<Event> modelEvents = new DefaultComboBoxModel<Event>();
-	private JLabel jLabelQuery = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Query"));
+	private JLabel jLabelQuery = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Event"));
 	private JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
 
 	private JTextField jTextFieldQuery = new JTextField();
@@ -33,24 +29,24 @@ public class EventCreate extends JFrame {
 
 	private JScrollPane scrollPaneEvents = new JScrollPane();
 
-	private JButton jButtonCreate = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CreateQuery"));
+	private JButton jButtonCreate = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 	private JLabel jLabelMsg = new JLabel();
 	private JLabel jLabelError = new JLabel();
 
-	public EventCreate(Vector<domain.Event> v) {
+	public EventCreate() {
 		try {
-			jbInit(v);
+			jbInit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void jbInit(Vector<domain.Event> v) throws Exception {
+	private void jbInit() throws Exception {
 
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(604, 370));
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CreateQuery"));
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
 		jLabelQuery.setBounds(new Rectangle(25, 211, 75, 20));
 		jTextFieldQuery.setBounds(new Rectangle(100, 211, 429, 20));
 
@@ -58,7 +54,7 @@ public class EventCreate extends JFrame {
 		scrollPaneEvents.setBounds(new Rectangle(25, 44, 346, 116));
 
 		jButtonCreate.setBounds(new Rectangle(100, 275, 130, 30));
-		jButtonCreate.setEnabled(false);
+		jButtonCreate.setEnabled(true);
 
 		jButtonCreate.addActionListener(new ActionListener() {
 			@Override
@@ -152,10 +148,10 @@ public class EventCreate extends JFrame {
 
 				facade.addEvent(inputQuery, date);
 
-				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryCreated"));
+				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("EventCreated"));
 
 			} else
-				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorQuery"));
+				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorEvent"));
 		} catch (Exception e1) {
 
 			e1.printStackTrace();
