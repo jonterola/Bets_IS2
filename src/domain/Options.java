@@ -1,13 +1,17 @@
 package domain;
 
-import java.util.Random;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @Entity
 public class Options {
+	@XmlID
+	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@Id
+	@GeneratedValue
 	private int id;
 	private int questionID;
 	private String option;
@@ -15,9 +19,6 @@ public class Options {
 
 	public Options(int questionID, String option, float odds) {
 		super();
-		Random r = new Random();
-		this.questionID = questionID;
-		this.id = r.nextInt();
 		this.option = option;
 		this.odds = odds;
 	}

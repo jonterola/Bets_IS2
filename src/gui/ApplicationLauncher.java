@@ -23,8 +23,6 @@ public class ApplicationLauncher {
 		System.out.println("Locale: " + Locale.getDefault());
 		LoginGUI a = new LoginGUI();
 		a.setVisible(true);
-		UsuarioGUI u = new UsuarioGUI();
-		u.setVisible(true);
 		try {
 
 			BLFacade appFacadeInterface;

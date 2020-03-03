@@ -90,7 +90,7 @@ public class MainGUI extends JFrame {
 			jContentPane.add(getBoton3());
 			jContentPane.add(getBoton4());
 			jContentPane.add(getBoton2());
-			jContentPane.add(getPanel());
+
 		}
 		return jContentPane;
 	}

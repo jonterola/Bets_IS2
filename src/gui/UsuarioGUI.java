@@ -69,8 +69,7 @@ public class UsuarioGUI extends JFrame {
 	};
 	private final JLabel lblCuota = new JLabel(
 			ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblCuota.text")); //$NON-NLS-1$ //$NON-NLS-2$
-	private final JLabel lblNewLabel = new JLabel(
-			ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblNewLabel.text")); //$NON-NLS-1$ //$NON-NLS-2$
+	private final JLabel lblNewLabel = new JLabel(); // $NON-NLS-1$ //$NON-NLS-2$
 
 	public UsuarioGUI() {
 		try {
@@ -170,7 +169,7 @@ public class UsuarioGUI extends JFrame {
 					}
 
 				}
-				// CreateQuestionGUI.paintDaysWithEvents(jCalendar1);
+				CreateQuestionGUI.paintDaysWithEvents(jCalendar1);
 			}
 		});
 
