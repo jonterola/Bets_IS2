@@ -19,6 +19,7 @@ import configuration.UtilDate;
 import domain.Event;
 import domain.Options;
 import domain.Question;
+import domain.Registro;
 import exceptions.QuestionAlreadyExist;
 
 /**
@@ -226,6 +227,23 @@ public class DataAccess {
 		Event ev = new Event(id, nombre, date);
 		db.persist(ev);
 		db.getTransaction().commit();
+	}
+
+	public void addUser(String dni, String user, String mail, String pwd, int age) {
+		Registro u = new Registro(user, pwd, dni, mail, age);
+		db.getTransaction().begin();
+		db.persist(u);
+		db.getTransaction().commit();
+	}
+
+	public boolean login(String mail, String pwd) {
+		TypedQuery<Registro> query = db.createQuery(
+				"SELECT rg FROM Registro rg WHERE rg.mail ='" + mail + "' AND rg.pw = '" + pwd + "'", Registro.class);
+		if (!query.getResultList().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**

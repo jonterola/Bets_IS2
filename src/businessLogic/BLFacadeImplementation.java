@@ -123,6 +123,25 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.close();
 	}
 
+	@Override
+	@WebMethod
+	public void createUser(String dni, String user, String mail, String pwd, int age) {
+		DataAccess dbManager = new DataAccess();
+		dbManager.addUser(dni, user, mail, pwd, age);
+		dbManager.close();
+
+	}
+
+	@Override
+	@WebMethod
+	public boolean newLogin(String mail, String pwd) {
+		boolean resul = false;
+		DataAccess dbManager = new DataAccess();
+		resul = dbManager.login(mail, pwd);
+		dbManager.close();
+		return resul;
+	}
+
 	/**
 	 * This method invokes the data access to initialize the database with some
 	 * events and questions. It is invoked only when the option "initialize" is

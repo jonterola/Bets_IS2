@@ -65,10 +65,18 @@ public interface BLFacade {
 	 * and questions. It is invoked only when the option "initialize" is declared in
 	 * the tag dataBaseOpenMode of resources/config.xml file
 	 */
+
 	@WebMethod
 	public void initializeBD();
 
 	@WebMethod
+
 	public List<Options> getOptionsQuestion(Question q);
 
+	@WebMethod
+
+	public void createUser(String dni, String user, String mail, String pwd, int age);
+
+	@WebMethod
+	public boolean newLogin(String mail, String pwd);
 }
