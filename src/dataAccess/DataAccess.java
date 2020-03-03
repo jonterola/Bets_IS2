@@ -219,6 +219,16 @@ public class DataAccess {
 		db.getTransaction().commit();
 	}
 
+	public boolean login(String mail, String pwd) {
+		TypedQuery<Registro> query = db.createQuery(
+				"SELECT rg FROM Registro rg WHERE rg.mail ='" + mail + "' AND rg.pw = '" + pwd + "'", Registro.class);
+		if (!query.getResultList().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	/**
 	 * This method retrieves from the database the events of a given date
 	 * 
