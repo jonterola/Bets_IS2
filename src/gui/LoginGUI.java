@@ -150,7 +150,9 @@ public class LoginGUI extends JFrame {
 			m.setVisible(true);
 			this.setVisible(false);
 		} else {
-			// cosas de telle
+			UsuarioGUI u = new UsuarioGUI();
+			u.setVisible(true);
+			this.setVisible(false);
 		}
 	}
 
