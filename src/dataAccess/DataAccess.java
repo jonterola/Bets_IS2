@@ -1,6 +1,5 @@
 package dataAccess;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -115,7 +114,6 @@ public class DataAccess {
 
 			Registro admin = new Registro("admin", "admin", "79133379Q", "admin@sinkingsoft.com", 21);
 
-      
 			if (Locale.getDefault().equals(new Locale("es"))) {
 				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
 				q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2);
@@ -139,15 +137,6 @@ public class DataAccess {
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
 
 			}
-
-			ev1.getQuestions().get(0).setOpciones(jeje);
-			q2.setOpciones(jeje);
-			q3.setOpciones(jeje);
-			q4.setOpciones(jeje);
-			q5.setOpciones(jeje);
-			q6.setOpciones(jeje);
-
-			System.out.println(ev1.getQuestions().get(0).getOpciones().toString() + " soy uno");
 
 			db.persist(q1);
 			db.persist(q2);
@@ -176,7 +165,6 @@ public class DataAccess {
 			db.persist(ev18);
 			db.persist(ev19);
 			db.persist(ev20);
-
 
 			db.persist(admin);
 

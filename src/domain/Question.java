@@ -22,17 +22,9 @@ public class Question implements Serializable {
 	private String question;
 	private float betMinimum;
 	private String result;
-  
+
 	@XmlIDREF
 	private Event event;
-
-	public ArrayList<String> getOpciones() {
-		return opciones;
-	}
-
-	public void setOpciones(ArrayList<String> opciones) {
-		this.opciones = opciones;
-	}
 
 	// public void setOpciones(ArrayList<String> opciones) {
 	// this.opciones = opciones;
