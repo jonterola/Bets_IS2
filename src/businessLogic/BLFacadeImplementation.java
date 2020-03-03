@@ -131,10 +131,11 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
-	public void createUser(String dni, String user, String mail, String pwd, int age) {
+	public int createUser(String dni, String user, String mail, String pwd, int age) {
 		DataAccess dbManager = new DataAccess();
-		dbManager.addUser(dni, user, mail, pwd, age);
+		int i = dbManager.addUser(dni, user, mail, pwd, age);
 		dbManager.close();
+		return i;
 
 	}
 
@@ -144,6 +145,16 @@ public class BLFacadeImplementation implements BLFacade {
 		boolean resul = false;
 		DataAccess dbManager = new DataAccess();
 		resul = dbManager.login(mail, pwd);
+		dbManager.close();
+		return resul;
+	}
+
+	@Override
+	@WebMethod
+	public boolean isAdmin(String mail, String pwd) {
+		boolean resul = false;
+		DataAccess dbManager = new DataAccess();
+		resul = dbManager.admin(mail, pwd);
 		dbManager.close();
 		return resul;
 	}
