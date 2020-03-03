@@ -7,6 +7,7 @@ import javax.persistence.Id;
 public class Registro {
 	@Id
 	private String nick; // nombre dentro de la aplicación
+	@Id
 	private String mail;
 	private String pw;
 	@Id
@@ -19,7 +20,11 @@ public class Registro {
 		this.dni = dni;
 		this.pw = pw;
 		this.nick = nick;
-		this.admin = false;
+		if (mail.contains("@sinkingsoft.com")) {
+			this.admin = true;
+		} else {
+			this.admin = false;
+		}
 		this.mail = mail;
 		this.edad = edad;
 	}
@@ -50,10 +55,6 @@ public class Registro {
 
 	public boolean isAdmin() {
 		return admin;
-	}
-
-	public void setAdmin() {
-		this.admin = true;
 	}
 
 	@Override

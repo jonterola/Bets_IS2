@@ -233,11 +233,27 @@ public class DataAccess {
 		db.getTransaction().commit();
 	}
 
-	public void addUser(String dni, String user, String mail, String pwd, int age) {
+	public int addUser(String dni, String user, String mail, String pwd, int age) {
+
+		TypedQuery<Registro> query1 = db.createQuery("SELECT rg FROM Registro rg WHERE rg.mail ='" + mail + "'",
+				Registro.class);
+		if (!query1.getResultList().isEmpty())
+			return 1;
+		TypedQuery<Registro> query2 = db.createQuery("SELECT rg FROM Registro rg WHERE rg.nick ='" + user + "'",
+				Registro.class);
+		if (!query2.getResultList().isEmpty())
+			return 2;
+		TypedQuery<Registro> query3 = db.createQuery("SELECT rg FROM Registro rg WHERE rg.dni ='" + dni + "'",
+				Registro.class);
+		if (!query3.getResultList().isEmpty())
+			return 3;
+
 		Registro u = new Registro(user, pwd, dni, mail, age);
+
 		db.getTransaction().begin();
 		db.persist(u);
 		db.getTransaction().commit();
+		return 0;
 	}
 
 	public boolean login(String mail, String pwd) {
@@ -248,6 +264,13 @@ public class DataAccess {
 		} else {
 			return false;
 		}
+	}
+
+	public boolean admin(String mail, String pwd) {
+		TypedQuery<Registro> query = db.createQuery(
+				"SELECT rg FROM Registro rg WHERE rg.mail ='" + mail + "' AND rg.pw = '" + pwd + "'", Registro.class);
+		return query.getResultList().get(0).isAdmin();
+
 	}
 
 	/**

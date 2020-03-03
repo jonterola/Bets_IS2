@@ -105,6 +105,7 @@ public class LoginGUI extends JFrame {
 				BLFacade facade = LoginGUI.getBusinessLogic();
 				if (facade.newLogin(tMail.getText(), tPwd.getText())) {
 					loginSuccessful();
+
 				} else {
 					errors.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginEr"));
 				}
@@ -140,10 +141,17 @@ public class LoginGUI extends JFrame {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private void loginSuccessful() {
-		MainGUI m = new MainGUI();
-		m.setVisible(true);
-		this.setVisible(false);
+
+		BLFacade facade = LoginGUI.getBusinessLogic();
+		if (facade.isAdmin(tMail.getText(), tPwd.getText())) {
+			MainGUI m = new MainGUI();
+			m.setVisible(true);
+			this.setVisible(false);
+		} else {
+			// cosas de telle
+		}
 	}
 
 	private void goToRegister() {

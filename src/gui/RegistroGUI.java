@@ -131,7 +131,12 @@ public class RegistroGUI extends JFrame {
 					if (!tfMail.getText().contains("@") || !tfMail.getText().contains(".")) {
 						textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Mailer"));
 						txtpnCorreoElectronico.setForeground(Color.RED);
+					} else if (tfMail.getText().contains("@sinkingsoft.com")) {
+						textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Mailer3"));
+						txtpnCorreoElectronico.setForeground(Color.RED);
+
 					} else if (tfUser.getText().length() < 4) {
+
 						textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Userer"));
 						txtpnNombreDeUsuario.setForeground(Color.RED);
 
@@ -154,10 +159,20 @@ public class RegistroGUI extends JFrame {
 
 					} else {
 						BLFacade facade = LoginGUI.getBusinessLogic();
-						facade.createUser(tfDni.getText(), tfUser.getText(), tfMail.getText(), passwordField.getText(),
-								age);
-						RegisterSuccessful();
-
+						int i = facade.createUser(tfDni.getText(), tfUser.getText(), tfMail.getText(),
+								passwordField.getText(), age);
+						if (i == 1) {
+							textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Mailer2"));
+							txtpnCorreoElectronico.setForeground(Color.RED);
+						} else if (i == 2) {
+							textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Userer2"));
+							txtpnNombreDeUsuario.setForeground(Color.RED);
+						} else if (i == 3) {
+							textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Dnier2"));
+							txtpnDni.setForeground(Color.RED);
+						} else {
+							RegisterSuccessful();
+						}
 					}
 				} catch (Exception e) {
 					textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Ageer2"));
@@ -195,8 +210,7 @@ public class RegistroGUI extends JFrame {
 	}
 
 	private void RegisterSuccessful() {
-		LoginGUI l = new LoginGUI();
-		l.setVisible(true);
+
 		this.setVisible(false);
 	}
 
