@@ -1,12 +1,14 @@
 package businessLogic;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import domain.Event;
+import domain.Options;
 //import domain.Booking;
 import domain.Question;
 import exceptions.EventFinished;
@@ -35,6 +37,9 @@ public interface BLFacade {
 	 */
 	@WebMethod
 	Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist;
+
+	@WebMethod
+	public void updateQuestion(List<Options> op);
 
 	/**
 	 * This method retrieves the events of a given date
@@ -65,6 +70,11 @@ public interface BLFacade {
 	public void initializeBD();
 
 	@WebMethod
+
+	public List<Options> getOptionsQuestion(Question q);
+
+	@WebMethod
+
 	public void createUser(String dni, String user, String mail, String pwd, int age);
 
 	@WebMethod

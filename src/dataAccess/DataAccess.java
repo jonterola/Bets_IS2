@@ -17,6 +17,7 @@ import javax.persistence.TypedQuery;
 import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.Event;
+import domain.Options;
 import domain.Question;
 import domain.Registro;
 import exceptions.QuestionAlreadyExist;
@@ -201,6 +202,22 @@ public class DataAccess {
 
 	}
 
+	public void updateQuestion(List<Options> op) {
+		TypedQuery<Options> query = db.createQuery("SELECT op FROM Options op WHERE op.questionID= ?1", Options.class);
+		query.setParameter(1, op.get(0).getQuestionID());
+		List<Options> og = query.getResultList();
+		db.getTransaction().begin();
+		for (int i = 0; i < og.size(); i++) {
+			db.remove(og.get(i));
+		}
+		db.getTransaction().commit();
+		db.getTransaction().begin();
+		for (int i = 0; i < op.size(); i++) {
+			db.persist(op.get(i));
+		}
+		db.getTransaction().commit();
+	}
+
 	public void addEvent(String nombre, Date date) throws QuestionAlreadyExist {
 		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev", Event.class);
 		List<Event> events = query.getResultList();
@@ -277,6 +294,13 @@ public class DataAccess {
 	public void close() {
 		db.close();
 		System.out.println("DataBase closed");
+	}
+
+	public List<Options> getOptionsQuestion(Question q) {
+		TypedQuery<Options> query = db.createQuery("SELECT op FROM Options op WHERE op.questionID= ?1", Options.class);
+		query.setParameter(1, q.getQuestionNumber());
+		List<Options> op = query.getResultList();
+		return op;
 	}
 
 }
