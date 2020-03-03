@@ -34,6 +34,7 @@ public class FindQuestionsGUI extends JFrame {
 	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
 	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
+
 	private JButton btnEditarCuotas;
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 	private Question selectedQuestion = null;
@@ -109,6 +110,7 @@ public class FindQuestionsGUI extends JFrame {
 					try {
 						tableModelEvents.setDataVector(null, columnNamesEvents);
 						tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
+
 
 						BLFacade facade = LoginGUI.getBusinessLogic();
 

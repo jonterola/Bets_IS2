@@ -1,5 +1,6 @@
 package dataAccess;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -114,6 +115,7 @@ public class DataAccess {
 
 			Registro admin = new Registro("admin", "admin", "79133379Q", "admin@sinkingsoft.com", 21);
 
+      
 			if (Locale.getDefault().equals(new Locale("es"))) {
 				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
 				q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2);
@@ -137,6 +139,15 @@ public class DataAccess {
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
 
 			}
+
+			ev1.getQuestions().get(0).setOpciones(jeje);
+			q2.setOpciones(jeje);
+			q3.setOpciones(jeje);
+			q4.setOpciones(jeje);
+			q5.setOpciones(jeje);
+			q6.setOpciones(jeje);
+
+			System.out.println(ev1.getQuestions().get(0).getOpciones().toString() + " soy uno");
 
 			db.persist(q1);
 			db.persist(q2);
@@ -166,9 +177,11 @@ public class DataAccess {
 			db.persist(ev19);
 			db.persist(ev20);
 
+
 			db.persist(admin);
 
 			db.getTransaction().commit();
+
 			System.out.println("Db initialized");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -179,12 +192,15 @@ public class DataAccess {
 	 * This method creates a question for an event, with a question text and the
 	 * minimum bet
 	 * 
-	 * @param event      to which question is added
-	 * @param question   text of the question
-	 * @param betMinimum minimum quantity of the bet
+	 * @param event
+	 *            to which question is added
+	 * @param question
+	 *            text of the question
+	 * @param betMinimum
+	 *            minimum quantity of the bet
 	 * @return the created question, or null, or an exception
-	 * @throws QuestionAlreadyExist if the same question already exists for the
-	 *                              event
+	 * @throws QuestionAlreadyExist
+	 *             if the same question already exists for the event
 	 */
 	public Question createQuestion(Event event, String question, float betMinimum) throws QuestionAlreadyExist {
 		System.out.println(">> DataAccess: createQuestion=> event= " + event + " question= " + question + " betMinimum="
@@ -253,7 +269,8 @@ public class DataAccess {
 	/**
 	 * This method retrieves from the database the events of a given date
 	 * 
-	 * @param date in which events are retrieved
+	 * @param date
+	 *            in which events are retrieved
 	 * @return collection of events
 	 */
 	public Vector<Event> getEvents(Date date) {
@@ -273,7 +290,8 @@ public class DataAccess {
 	 * This method retrieves from the database the dates a month for which there are
 	 * events
 	 * 
-	 * @param date of the month for which days with events want to be retrieved
+	 * @param date
+	 *            of the month for which days with events want to be retrieved
 	 * @return collection of dates
 	 */
 	public Vector<Date> getEventsMonth(Date date) {

@@ -21,14 +21,17 @@ public class ApplicationLauncher {
 		Locale.setDefault(new Locale(c.getLocale()));
 
 		System.out.println("Locale: " + Locale.getDefault());
+
 		LoginGUI a = new LoginGUI();
 		a.setVisible(true);
+		UsuarioGUI u = new UsuarioGUI();
+		u.setVisible(true);
 
 		try {
 
 			BLFacade appFacadeInterface;
-//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
-//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+			// UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
+			// UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 
 			if (c.isBusinessLogicLocal()) {
@@ -48,7 +51,8 @@ public class ApplicationLauncher {
 
 				// 1st argument refers to wsdl document above
 				// 2nd argument is service name, refer to wsdl document above
-//		        QName qname = new QName("http://businessLogic/", "FacadeImplementationWSService");
+				// QName qname = new QName("http://businessLogic/",
+				// "FacadeImplementationWSService");
 				QName qname = new QName("http://businessLogic/", "BLFacadeImplementationService");
 
 				Service service = Service.create(url, qname);
