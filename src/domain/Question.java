@@ -1,7 +1,7 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,9 +24,21 @@ public class Question implements Serializable {
 	private float betMinimum;
 	private String result;
 	private Integer numop;
-	private Vector<String>[][] opciones;
+	private ArrayList<String> opciones;
 	@XmlIDREF
 	private Event event;
+
+	public ArrayList<String> getOpciones() {
+		return opciones;
+	}
+
+	public void setOpciones(ArrayList<String> opciones) {
+		this.opciones = opciones;
+	}
+
+	// public void setOpciones(ArrayList<String> opciones) {
+	// this.opciones = opciones;
+	// }
 
 	public Question() {
 		super();
@@ -60,7 +72,8 @@ public class Question implements Serializable {
 	/**
 	 * Set the bet number to a question
 	 * 
-	 * @param questionNumber to be setted
+	 * @param questionNumber
+	 *            to be setted
 	 */
 	public void setQuestionNumber(Integer questionNumber) {
 		this.questionNumber = questionNumber;
@@ -79,7 +92,8 @@ public class Question implements Serializable {
 	/**
 	 * Set the question description of the bet
 	 * 
-	 * @param question to be setted
+	 * @param question
+	 *            to be setted
 	 */
 	public void setQuestion(String question) {
 		this.question = question;
@@ -98,7 +112,8 @@ public class Question implements Serializable {
 	/**
 	 * Get the minimun ammount of the bet
 	 * 
-	 * @param betMinimum minimum bet ammount to be setted
+	 * @param betMinimum
+	 *            minimum bet ammount to be setted
 	 */
 
 	public void setBetMinimum(float betMinimum) {
@@ -117,7 +132,8 @@ public class Question implements Serializable {
 	/**
 	 * Get the result of the query
 	 * 
-	 * @param result of the query to be setted
+	 * @param result
+	 *            of the query to be setted
 	 */
 
 	public void setResult(String result) {
@@ -136,7 +152,8 @@ public class Question implements Serializable {
 	/**
 	 * Set the event associated to the bet
 	 * 
-	 * @param event to associate to the bet
+	 * @param event
+	 *            to associate to the bet
 	 */
 	public void setEvent(Event event) {
 		this.event = event;

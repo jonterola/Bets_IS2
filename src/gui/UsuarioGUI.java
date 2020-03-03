@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -9,13 +10,16 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -28,7 +32,7 @@ import businessLogic.BLFacade;
 import configuration.UtilDate;
 import domain.Question;
 
-public class FindQuestionsGUI extends JFrame {
+public class UsuarioGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
@@ -43,6 +47,8 @@ public class FindQuestionsGUI extends JFrame {
 	private JScrollPane scrollPaneEvents = new JScrollPane();
 	private JScrollPane scrollPaneQueries = new JScrollPane();
 
+	private DefaultComboBoxModel<String> options = new DefaultComboBoxModel<String>();
+
 	private JTable tableEvents = new JTable();
 	private JTable tableQueries = new JTable();
 
@@ -54,11 +60,15 @@ public class FindQuestionsGUI extends JFrame {
 
 	};
 	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
-			ResourceBundle.getBundle("Etiquetas").getString("Query")
+			ResourceBundle.getBundle("Etiquetas").getString("Query"),
 
 	};
+	private final JLabel lblCuota = new JLabel(
+			ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblCuota.text")); //$NON-NLS-1$ //$NON-NLS-2$
+	private final JLabel lblNewLabel = new JLabel(
+			ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblNewLabel.text")); //$NON-NLS-1$ //$NON-NLS-2$
 
-	public FindQuestionsGUI() {
+	public UsuarioGUI() {
 		try {
 			jbInit();
 		} catch (Exception e) {
@@ -70,7 +80,7 @@ public class FindQuestionsGUI extends JFrame {
 
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(700, 500));
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries")); //$NON-NLS-1$ //$NON-NLS-2$
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelQueries.setBounds(138, 248, 406, 14);
@@ -79,6 +89,10 @@ public class FindQuestionsGUI extends JFrame {
 		this.getContentPane().add(jLabelEventDate, null);
 		this.getContentPane().add(jLabelQueries);
 		this.getContentPane().add(jLabelEvents);
+
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.setBounds(514, 322, 149, 25);
+		getContentPane().add(comboBox);
 
 		jButtonClose.setBounds(new Rectangle(274, 419, 130, 30));
 
@@ -132,24 +146,23 @@ public class FindQuestionsGUI extends JFrame {
 						}
 						tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
 						tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
-						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(2)); // not
-																												// shown
-																												// in
-																												// JTable
+						// shown
+						// in
+						// JTable
 					} catch (Exception e1) {
 
 						jLabelQueries.setText(e1.getMessage());
 					}
 
 				}
-				CreateQuestionGUI.paintDaysWithEvents(jCalendar1);
+				// CreateQuestionGUI.paintDaysWithEvents(jCalendar1);
 			}
 		});
 
 		this.getContentPane().add(jCalendar1, null);
 
 		scrollPaneEvents.setBounds(new Rectangle(292, 50, 346, 150));
-		scrollPaneQueries.setBounds(new Rectangle(138, 274, 406, 116));
+		scrollPaneQueries.setBounds(new Rectangle(138, 274, 355, 116));
 
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
@@ -159,6 +172,7 @@ public class FindQuestionsGUI extends JFrame {
 				Vector<Question> queries = ev.getQuestions();
 
 				tableModelQueries.setDataVector(null, columnNamesQueries);
+				tableModelQueries.setColumnCount(3);
 
 				if (queries.isEmpty())
 					jLabelQueries.setText(
@@ -172,11 +186,32 @@ public class FindQuestionsGUI extends JFrame {
 
 					row.add(q.getQuestionNumber());
 					row.add(q.getQuestion());
+					row.add(q);
 					tableModelQueries.addRow(row);
 				}
 				tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
 				tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
 			}
+		});
+
+		comboBox.setModel(options);
+
+		tableQueries.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i = tableQueries.getSelectedRow();
+				Question q = (Question) tableModelQueries.getValueAt(i, 2);
+				System.out.println(q.toString());
+				BLFacade facade = MainGUI.getBusinessLogic();
+				ArrayList<String> opciones = facade.getOpciones(q.getQuestionNumber());
+				if (opciones != null) {
+					System.out.println(opciones.toString());
+					for (String op : opciones) {
+						options.addElement(op);
+					}
+				}
+			}
+
 		});
 
 		scrollPaneEvents.setViewportView(tableEvents);
@@ -196,10 +231,25 @@ public class FindQuestionsGUI extends JFrame {
 		this.getContentPane().add(scrollPaneEvents, null);
 		this.getContentPane().add(scrollPaneQueries, null);
 
+		JButton btnLogout = new JButton(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.btnLogout.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		btnLogout.setBounds(585, 12, 89, 23);
+		getContentPane().add(btnLogout);
+
+		JLabel lblPronostico = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblPronostico.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblPronostico.setBounds(513, 292, 101, 30);
+		getContentPane().add(lblPronostico);
+		lblCuota.setBounds(514, 375, 65, 14);
+
+		getContentPane().add(lblCuota);
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setBounds(583, 375, 80, 14);
+
+		getContentPane().add(lblNewLabel);
+
 	}
 
 	private void jButton2_actionPerformed(ActionEvent e) {
 		this.setVisible(false);
 	}
-
 }
