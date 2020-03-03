@@ -3,8 +3,8 @@ package gui;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +23,7 @@ public class OddsGUI extends JFrame {
 	private JScrollPane scrollPaneEvents = new JScrollPane();
 	private JTable table;
 	private DefaultTableModel modelo;
+	private List<Options> op;
 
 	public OddsGUI(Question questio) {
 		setSize(433, 206);
@@ -30,6 +31,9 @@ public class OddsGUI extends JFrame {
 		setAlwaysOnTop(true);
 		try {
 			question = questio;
+			BLFacade facade = MainGUI.getBusinessLogic();
+
+			op = facade.getOptionsQuestion(question);
 			jbInit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,8 +49,12 @@ public class OddsGUI extends JFrame {
 
 		table = new JTable();
 		table.setRowSelectionAllowed(false);
-		table.setModel(new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "Opcion", "Cuota" }));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Opcion", "Cuota" }));
 		modelo = (DefaultTableModel) table.getModel();
+		for (int i = 0; i < op.size(); i++) {
+			modelo.addRow(new String[] { op.get(i).getOption(), String.valueOf(op.get(i).getOdds()) });
+		}
+		modelo.addRow(new String[] { null, null });
 		scrollPane.setViewportView(table);
 
 		JButton btnNewButton = new JButton("+"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -76,14 +84,23 @@ public class OddsGUI extends JFrame {
 
 	private void guardar() {
 		// TODO Auto-generated method stub
-		Vector<Options> op = new Vector<Options>();
+		op.clear();
 		try {
 			for (int i = 0; i < modelo.getRowCount(); i++) {
-				op.add(new Options((String) modelo.getValueAt(i, 0), Float.valueOf((String) modelo.getValueAt(i, 1))));
+				if (!(modelo.getValueAt(i, 0) == null || modelo.getValueAt(i, 0).equals(" ")
+						|| modelo.getValueAt(i, 0).equals("") || modelo.getValueAt(i, 1) == null
+						|| modelo.getValueAt(i, 1).equals(" ") || modelo.getValueAt(i, 1).equals(""))) {
+					op.add(new Options(question.getQuestionNumber(), (String) modelo.getValueAt(i, 0),
+							Float.valueOf((String) modelo.getValueAt(i, 1))));
+				}
+			}
+			if (op.size() == 0) {
+				this.setVisible(false);
+				return;
 			}
 			BLFacade facade = MainGUI.getBusinessLogic();
 
-			facade.updateQuestion(question, op);
+			facade.updateQuestion(op);
 			this.setVisible(false);
 
 		} catch (Exception e) {

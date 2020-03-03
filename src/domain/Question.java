@@ -1,7 +1,6 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.Vector;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +22,6 @@ public class Question implements Serializable {
 	private String question;
 	private float betMinimum;
 	private String result;
-	private Vector<Options> opciones;
 	@XmlIDREF
 	private Event event;
 
@@ -63,14 +61,6 @@ public class Question implements Serializable {
 	 */
 	public void setQuestionNumber(Integer questionNumber) {
 		this.questionNumber = questionNumber;
-	}
-
-	public void setOdds(Vector<Options> opciones) {
-		this.opciones = opciones;
-	}
-
-	public Vector<Options> getOdds() {
-		return opciones;
 	}
 
 	/**

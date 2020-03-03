@@ -201,12 +201,19 @@ public class DataAccess {
 
 	}
 
-	public void updateQuestion(Question q, Vector<Options> op) {
+	public void updateQuestion(List<Options> op) {
+		TypedQuery<Options> query = db.createQuery("SELECT op FROM Options op WHERE op.questionID= ?1", Options.class);
+		query.setParameter(1, op.get(0).getQuestionID());
+		List<Options> og = query.getResultList();
+		db.getTransaction().begin();
+		for (int i = 0; i < og.size(); i++) {
+			db.remove(og.get(i));
+		}
+		db.getTransaction().commit();
 		db.getTransaction().begin();
 		for (int i = 0; i < op.size(); i++) {
 			db.persist(op.get(i));
 		}
-		q.setOdds(op);
 		db.getTransaction().commit();
 	}
 
@@ -269,6 +276,13 @@ public class DataAccess {
 	public void close() {
 		db.close();
 		System.out.println("DataBase closed");
+	}
+
+	public List<Options> getOptionsQuestion(Question q) {
+		TypedQuery<Options> query = db.createQuery("SELECT op FROM Options op WHERE op.questionID= ?1", Options.class);
+		query.setParameter(1, q.getQuestionNumber());
+		List<Options> op = query.getResultList();
+		return op;
 	}
 
 }

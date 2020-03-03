@@ -9,15 +9,21 @@ import javax.persistence.Id;
 public class Options {
 	@Id
 	private int id;
+	private int questionID;
 	private String option;
 	private float odds;
 
-	public Options(String option, float odds) {
+	public Options(int questionID, String option, float odds) {
 		super();
 		Random r = new Random();
+		this.questionID = questionID;
 		this.id = r.nextInt();
 		this.option = option;
 		this.odds = odds;
+	}
+
+	public int getQuestionID() {
+		return questionID;
 	}
 
 	public String getOption() {

@@ -1,6 +1,7 @@
 package businessLogic;
 
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -66,11 +67,11 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
-	public void updateQuestion(Question q, Vector<Options> op) {
+	public void updateQuestion(List<Options> op) {
 
 		// The minimum bed must be greater than 0
 		DataAccess dBManager = new DataAccess();
-		dBManager.updateQuestion(q, op);
+		dBManager.updateQuestion(op);
 		dBManager.close();
 	};
 
@@ -103,6 +104,15 @@ public class BLFacadeImplementation implements BLFacade {
 		Vector<Date> dates = dbManager.getEventsMonth(date);
 		dbManager.close();
 		return dates;
+	}
+
+	@Override
+	@WebMethod
+	public List<Options> getOptionsQuestion(Question q) {
+		DataAccess dbManager = new DataAccess();
+		List<Options> op = dbManager.getOptionsQuestion(q);
+		dbManager.close();
+		return op;
 	}
 
 	@Override
