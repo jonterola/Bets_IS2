@@ -2,6 +2,7 @@ package businessLogic;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -11,6 +12,7 @@ import javax.jws.WebService;
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
 import domain.Event;
+import domain.Options;
 import domain.Question;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
@@ -70,14 +72,13 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
-	public ArrayList<String> getOpciones(int questionNumber) {
-		DataAccess dbManager = new DataAccess();
-		ArrayList<String> opciones = dbManager.getOpciones(questionNumber);
-		dbManager.close();
-		return opciones;
+	public void updateQuestion(List<Options> op) {
 
-	}
-
+		// The minimum bed must be greater than 0
+		DataAccess dBManager = new DataAccess();
+		dBManager.updateQuestion(op);
+		dBManager.close();
+	};
 	/**
 	 * This method invokes the data access to retrieve the events of a given date
 	 * 
@@ -113,6 +114,15 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
+	public List<Options> getOptionsQuestion(Question q) {
+		DataAccess dbManager = new DataAccess();
+		List<Options> op = dbManager.getOptionsQuestion(q);
+		dbManager.close();
+		return op;
+	}
+
+	@Override
+	@WebMethod
 	public void addEvent(String nombre, Date date) throws QuestionAlreadyExist {
 		DataAccess dbManager = new DataAccess();
 		dbManager.addEvent(nombre, date);
@@ -126,6 +136,16 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.addUser(dni, user, mail, pwd, age);
 		dbManager.close();
 
+	}
+
+	@Override
+	@WebMethod
+	public boolean newLogin(String mail, String pwd) {
+		boolean resul = false;
+		DataAccess dbManager = new DataAccess();
+		resul = dbManager.login(mail, pwd);
+		dbManager.close();
+		return resul;
 	}
 
 	/**

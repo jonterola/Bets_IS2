@@ -101,7 +101,7 @@ public class EventCreate extends JFrame {
 	 * in current month, it is checked if there are events, and in that // case, the
 	 * background color for that day is changed.
 	 * 
-	 * BLFacade facade = MainGUI.getBusinessLogic();
+	 * BLFacade facade = LoginGUI.getBusinessLogic();
 	 * 
 	 * Calendar calendar = jCalendar.getCalendar();
 	 * 
@@ -143,7 +143,7 @@ public class EventCreate extends JFrame {
 				// It could be to trigger an exception if the introduced string is not a number
 
 				// Obtain the business logic from a StartWindow class (local or remote)
-				BLFacade facade = MainGUI.getBusinessLogic();
+				BLFacade facade = LoginGUI.getBusinessLogic();
 				Date date = UtilDate.trim(new Date(jCalendar.getCalendar().getTime().getTime()));
 
 				facade.addEvent(inputQuery, date);

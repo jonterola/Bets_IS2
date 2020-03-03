@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,47 +43,46 @@ public class RegistroGUI extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		this.setTitle("Registro");
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("Regist"));
 		this.setBounds(100, 100, 450, 429);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
 
 		JLabel txtpnRegistro = new JLabel();
 		txtpnRegistro.setBackground(SystemColor.control);
 		txtpnRegistro.setFont(new Font("Times New Roman", Font.PLAIN, 29));
-		txtpnRegistro.setText("REGISTRO");
+		txtpnRegistro.setText(ResourceBundle.getBundle("Etiquetas").getString("Regist"));
 		txtpnRegistro.setBounds(140, 11, 146, 40);
 		this.getContentPane().add(txtpnRegistro);
 
 		JLabel txtpnCorreoElectronico = new JLabel();
 		txtpnCorreoElectronico.setBackground(SystemColor.control);
-		txtpnCorreoElectronico.setText("Correo Electronico:");
+		txtpnCorreoElectronico.setText(ResourceBundle.getBundle("Etiquetas").getString("Mail"));
 		txtpnCorreoElectronico.setBounds(29, 68, 129, 20);
 		this.getContentPane().add(txtpnCorreoElectronico);
 
 		JLabel txtpnContrasea = new JLabel();
 		txtpnContrasea.setBackground(SystemColor.control);
-		txtpnContrasea.setText("Contrase\u00F1a:");
+		txtpnContrasea.setText(ResourceBundle.getBundle("Etiquetas").getString("Pwd"));
 		txtpnContrasea.setBounds(29, 192, 129, 20);
 		this.getContentPane().add(txtpnContrasea);
 
 		JLabel txtpnNombreDeUsuario = new JLabel();
-		txtpnNombreDeUsuario.setText("Nombre de usuario:");
+		txtpnNombreDeUsuario.setText(ResourceBundle.getBundle("Etiquetas").getString("User"));
 		txtpnNombreDeUsuario.setBounds(29, 99, 129, 20);
 		this.getContentPane().add(txtpnNombreDeUsuario);
 
 		JLabel txtpnDni = new JLabel();
-		txtpnDni.setText("DNI:");
+		txtpnDni.setText(ResourceBundle.getBundle("Etiquetas").getString("Dni"));
 		txtpnDni.setBounds(29, 161, 129, 20);
 		this.getContentPane().add(txtpnDni);
 
 		JLabel txtpnConfirmarContrasea = new JLabel();
-		txtpnConfirmarContrasea.setText("Confirmar Contrase\u00F1a:");
+		txtpnConfirmarContrasea.setText(ResourceBundle.getBundle("Etiquetas").getString("Pwd2"));
 		txtpnConfirmarContrasea.setBounds(29, 223, 129, 20);
 		this.getContentPane().add(txtpnConfirmarContrasea);
 
 		JLabel txtpnEdad = new JLabel();
-		txtpnEdad.setText("Edad:");
+		txtpnEdad.setText(ResourceBundle.getBundle("Etiquetas").getString("Age"));
 		txtpnEdad.setBounds(29, 130, 129, 20);
 		this.getContentPane().add(txtpnEdad);
 
@@ -112,7 +112,7 @@ public class RegistroGUI extends JFrame {
 		this.getContentPane().add(textPane);
 		textPane.setForeground(Color.RED);
 
-		JButton btnReg = new JButton("REGISTRARSE");
+		JButton btnReg = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Regist"));
 		btnReg.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -129,38 +129,38 @@ public class RegistroGUI extends JFrame {
 					int age = Integer.parseInt(tfAge.getText());
 
 					if (!tfMail.getText().contains("@") || !tfMail.getText().contains(".")) {
-						textPane.setText("NO EXISTE EL CORREO");
+						textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Mailer"));
 						txtpnCorreoElectronico.setForeground(Color.RED);
 					} else if (tfUser.getText().length() < 4) {
-						textPane.setText("EL NOMBRE DE USUARIO DEBE TENER AL MENOS 4 CARACTERES");
+						textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Userer"));
 						txtpnNombreDeUsuario.setForeground(Color.RED);
 
 					} else if (age < 18) {
-						textPane.setText("DEBES SER MAYOR DE EDAD");
+						textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Ageer"));
 						txtpnEdad.setForeground(Color.RED);
 					} else if (!checkDNI(tfDni.getText())) {
-						textPane.setText("EL DNI ES ERRONEO");
+						textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Dnier"));
 						txtpnDni.setForeground(Color.RED);
 
 					} else if (!passwordField.getText().equals(passwordField_1.getText())) {
-						textPane.setText("LAS CONTRASEÑAS NO COINCIDEN");
+						textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Pwder1"));
 						txtpnContrasea.setForeground(Color.RED);
 						txtpnConfirmarContrasea.setForeground(Color.RED);
 
 					} else if (passwordField.getText().length() < 7) {
-						textPane.setText("LA CONTRASEÑA DEBE TENER AL MENOS 7 CARACTERES");
+						textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Pwder2"));
 						txtpnContrasea.setForeground(Color.RED);
 						txtpnConfirmarContrasea.setForeground(Color.RED);
 
 					} else {
-						System.out.println("todo ok"); // meter en base de datos y cambiar de interfaz
-						BLFacade facade = MainGUI.getBusinessLogic();
+						BLFacade facade = LoginGUI.getBusinessLogic();
 						facade.createUser(tfDni.getText(), tfUser.getText(), tfMail.getText(), passwordField.getText(),
 								age);
+						RegisterSuccessful();
+
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
-					textPane.setText("LA EDAD ES SOLO UN NUMERO");
+					textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Ageer2"));
 					txtpnEdad.setForeground(Color.RED);
 				}
 			}
@@ -193,4 +193,11 @@ public class RegistroGUI extends JFrame {
 		}
 		return true;
 	}
+
+	private void RegisterSuccessful() {
+		LoginGUI l = new LoginGUI();
+		l.setVisible(true);
+		this.setVisible(false);
+	}
+
 }

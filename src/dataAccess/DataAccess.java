@@ -18,6 +18,7 @@ import javax.persistence.TypedQuery;
 import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.Event;
+import domain.Options;
 import domain.Question;
 import domain.Registro;
 import exceptions.QuestionAlreadyExist;
@@ -112,10 +113,9 @@ public class DataAccess {
 			Question q5;
 			Question q6;
 
-			ArrayList<String> jeje = new ArrayList<String>();
-			jeje.add("meq uiero morir");
-			jeje.add("eskere");
+			Registro admin = new Registro("admin", "admin", "79133379Q", "admin@sinkingsoft.com", 21);
 
+      
 			if (Locale.getDefault().equals(new Locale("es"))) {
 				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
 				q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2);
@@ -177,14 +177,10 @@ public class DataAccess {
 			db.persist(ev19);
 			db.persist(ev20);
 
-			System.out.println(ev1.getQuestions().get(0).getOpciones().toString() + " soy 1 despues de persist");
+
+			db.persist(admin);
 
 			db.getTransaction().commit();
-
-			Question q46 = db.find(Question.class, 1);
-
-			System.out.println(ev1.getQuestions().get(0).getOpciones().toString() + " soy 1 despues de commit");
-			System.out.println(q46.getOpciones().toString() + "	 soy 87");
 
 			System.out.println("Db initialized");
 		} catch (Exception e) {
@@ -226,6 +222,22 @@ public class DataAccess {
 
 	}
 
+	public void updateQuestion(List<Options> op) {
+		TypedQuery<Options> query = db.createQuery("SELECT op FROM Options op WHERE op.questionID= ?1", Options.class);
+		query.setParameter(1, op.get(0).getQuestionID());
+		List<Options> og = query.getResultList();
+		db.getTransaction().begin();
+		for (int i = 0; i < og.size(); i++) {
+			db.remove(og.get(i));
+		}
+		db.getTransaction().commit();
+		db.getTransaction().begin();
+		for (int i = 0; i < op.size(); i++) {
+			db.persist(op.get(i));
+		}
+		db.getTransaction().commit();
+	}
+
 	public void addEvent(String nombre, Date date) throws QuestionAlreadyExist {
 		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev", Event.class);
 		List<Event> events = query.getResultList();
@@ -242,6 +254,16 @@ public class DataAccess {
 		db.getTransaction().begin();
 		db.persist(u);
 		db.getTransaction().commit();
+	}
+
+	public boolean login(String mail, String pwd) {
+		TypedQuery<Registro> query = db.createQuery(
+				"SELECT rg FROM Registro rg WHERE rg.mail ='" + mail + "' AND rg.pw = '" + pwd + "'", Registro.class);
+		if (!query.getResultList().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -262,15 +284,6 @@ public class DataAccess {
 			res.add(ev);
 		}
 		return res;
-	}
-
-	public ArrayList<String> getOpciones(int questionNumber) {
-		TypedQuery<Question> query = db.createQuery("SELECT q FROM Question q WHERE q.questionNumber=?1",
-				Question.class);
-		query.setParameter(1, questionNumber);
-		Question q = query.getSingleResult();
-		System.out.println(q.getOpciones().toString());
-		return q.getOpciones();
 	}
 
 	/**
@@ -303,6 +316,13 @@ public class DataAccess {
 	public void close() {
 		db.close();
 		System.out.println("DataBase closed");
+	}
+
+	public List<Options> getOptionsQuestion(Question q) {
+		TypedQuery<Options> query = db.createQuery("SELECT op FROM Options op WHERE op.questionID= ?1", Options.class);
+		query.setParameter(1, q.getQuestionNumber());
+		List<Options> op = query.getResultList();
+		return op;
 	}
 
 }

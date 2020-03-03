@@ -35,8 +35,9 @@ public class FindQuestionsGUI extends JFrame {
 	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
 
+	private JButton btnEditarCuotas;
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-
+	private Question selectedQuestion = null;
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
 	private Calendar calendarMio = null;
@@ -73,7 +74,7 @@ public class FindQuestionsGUI extends JFrame {
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
-		jLabelQueries.setBounds(138, 248, 406, 14);
+		jLabelQueries.setBounds(158, 248, 406, 14);
 		jLabelEvents.setBounds(295, 19, 259, 16);
 
 		this.getContentPane().add(jLabelEventDate, null);
@@ -110,7 +111,8 @@ public class FindQuestionsGUI extends JFrame {
 						tableModelEvents.setDataVector(null, columnNamesEvents);
 						tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
 
-						BLFacade facade = MainGUI.getBusinessLogic();
+
+						BLFacade facade = LoginGUI.getBusinessLogic();
 
 						Vector<domain.Event> events = facade.getEvents(firstDay);
 
@@ -149,7 +151,7 @@ public class FindQuestionsGUI extends JFrame {
 		this.getContentPane().add(jCalendar1, null);
 
 		scrollPaneEvents.setBounds(new Rectangle(292, 50, 346, 150));
-		scrollPaneQueries.setBounds(new Rectangle(138, 274, 406, 116));
+		scrollPaneQueries.setBounds(new Rectangle(158, 274, 346, 116));
 
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
@@ -159,6 +161,7 @@ public class FindQuestionsGUI extends JFrame {
 				Vector<Question> queries = ev.getQuestions();
 
 				tableModelQueries.setDataVector(null, columnNamesQueries);
+				tableModelQueries.setColumnCount(3);
 
 				if (queries.isEmpty())
 					jLabelQueries.setText(
@@ -172,10 +175,22 @@ public class FindQuestionsGUI extends JFrame {
 
 					row.add(q.getQuestionNumber());
 					row.add(q.getQuestion());
+					row.add(q);
 					tableModelQueries.addRow(row);
 				}
 				tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
 				tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
+				tableQueries.removeColumn(tableQueries.getColumnModel().getColumn(2));
+
+			}
+		});
+
+		tableQueries.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i = tableQueries.getSelectedRow();
+				selectedQuestion = (Question) tableModelQueries.getValueAt(i, 2);
+				btnEditarCuotas.setEnabled(true);
 			}
 		});
 
@@ -196,10 +211,22 @@ public class FindQuestionsGUI extends JFrame {
 		this.getContentPane().add(scrollPaneEvents, null);
 		this.getContentPane().add(scrollPaneQueries, null);
 
+		btnEditarCuotas = new JButton(
+				ResourceBundle.getBundle("Etiquetas").getString("FindQuestionsGUI.btnEditarCuotas.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		btnEditarCuotas.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				OddsGUI o = new OddsGUI(selectedQuestion);
+				o.setVisible(true);
+			}
+		});
+		btnEditarCuotas.setBounds(12, 309, 114, 30);
+		btnEditarCuotas.setEnabled(false);
+		getContentPane().add(btnEditarCuotas);
+
 	}
 
 	private void jButton2_actionPerformed(ActionEvent e) {
 		this.setVisible(false);
 	}
-
 }

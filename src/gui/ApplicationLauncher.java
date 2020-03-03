@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Color;
 import java.net.URL;
 import java.util.Locale;
 
@@ -22,7 +21,8 @@ public class ApplicationLauncher {
 		Locale.setDefault(new Locale(c.getLocale()));
 
 		System.out.println("Locale: " + Locale.getDefault());
-		MainGUI a = new MainGUI();
+
+		LoginGUI a = new LoginGUI();
 		a.setVisible(true);
 		UsuarioGUI u = new UsuarioGUI();
 		u.setVisible(true);
@@ -63,11 +63,9 @@ public class ApplicationLauncher {
 			 * if (c.getDataBaseOpenMode().equals("initialize"))
 			 * appFacadeInterface.initializeBD();
 			 */
-			MainGUI.setBussinessLogic(appFacadeInterface);
+			LoginGUI.setBussinessLogic(appFacadeInterface);
 
 		} catch (Exception e) {
-			a.jLabelSelectOption.setText("Error: " + e.toString());
-			a.jLabelSelectOption.setForeground(Color.RED);
 			System.out.println("Error in ApplicationLauncher: " + e.toString());
 		}
 		// a.pack();
