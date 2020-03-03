@@ -31,7 +31,7 @@ public class OddsGUI extends JFrame {
 		setAlwaysOnTop(true);
 		try {
 			question = questio;
-			BLFacade facade = MainGUI.getBusinessLogic();
+			BLFacade facade = LoginGUI.getBusinessLogic();
 
 			op = facade.getOptionsQuestion(question);
 			jbInit();
@@ -98,7 +98,7 @@ public class OddsGUI extends JFrame {
 				this.setVisible(false);
 				return;
 			}
-			BLFacade facade = MainGUI.getBusinessLogic();
+			BLFacade facade = LoginGUI.getBusinessLogic();
 
 			facade.updateQuestion(op);
 			this.setVisible(false);

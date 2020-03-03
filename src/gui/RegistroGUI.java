@@ -153,7 +153,7 @@ public class RegistroGUI extends JFrame {
 						txtpnConfirmarContrasea.setForeground(Color.RED);
 
 					} else {
-						BLFacade facade = MainGUI.getBusinessLogic();
+						BLFacade facade = LoginGUI.getBusinessLogic();
 						facade.createUser(tfDni.getText(), tfUser.getText(), tfMail.getText(), passwordField.getText(),
 								age);
 						RegisterSuccessful();

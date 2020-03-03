@@ -33,6 +33,16 @@ public class LoginGUI extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JPanel panel;
 
+	private static BLFacade appFacadeInterface;
+
+	public static BLFacade getBusinessLogic() {
+		return appFacadeInterface;
+	}
+
+	public static void setBussinessLogic(BLFacade afi) {
+		appFacadeInterface = afi;
+	}
+
 	private JLabel txtpnLogin;
 	private JLabel txtpnCorreoElectronico;
 	private JLabel txtpnContrasea;
@@ -92,7 +102,7 @@ public class LoginGUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				errors.setText(" ");
-				BLFacade facade = MainGUI.getBusinessLogic();
+				BLFacade facade = LoginGUI.getBusinessLogic();
 				if (facade.newLogin(tMail.getText(), tPwd.getText())) {
 					loginSuccessful();
 				} else {

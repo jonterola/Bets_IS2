@@ -34,16 +34,6 @@ public class MainGUI extends JFrame {
 	private JButton jButtonQueryQueries = null;
 	private JButton jButtonCreateEvent = null;
 
-	private static BLFacade appFacadeInterface;
-
-	public static BLFacade getBusinessLogic() {
-		return appFacadeInterface;
-	}
-
-	public static void setBussinessLogic(BLFacade afi) {
-		appFacadeInterface = afi;
-	}
-
 	protected JLabel jLabelSelectOption;
 	private JRadioButton rdbtnNewRadioButton;
 	private JRadioButton rdbtnNewRadioButton_1;
@@ -117,7 +107,7 @@ public class MainGUI extends JFrame {
 			jButtonCreateQuery.addActionListener(new java.awt.event.ActionListener() {
 				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					BLFacade facade = MainGUI.getBusinessLogic();
+					BLFacade facade = LoginGUI.getBusinessLogic();
 					// Vector<Event> events=facade.getAllEvents();
 					JFrame a = new CreateQuestionGUI(new Vector<Event>());
 					a.setVisible(true);
@@ -160,7 +150,7 @@ public class MainGUI extends JFrame {
 			jButtonCreateEvent.addActionListener(new java.awt.event.ActionListener() {
 				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					BLFacade facade = MainGUI.getBusinessLogic();
+					BLFacade facade = LoginGUI.getBusinessLogic();
 					// Vector<Event> events=facade.getAllEvents();
 					JFrame a = new EventCreate();
 					a.setVisible(true);

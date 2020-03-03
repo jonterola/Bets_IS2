@@ -59,7 +59,7 @@ public class ApplicationLauncher {
 			 * if (c.getDataBaseOpenMode().equals("initialize"))
 			 * appFacadeInterface.initializeBD();
 			 */
-			MainGUI.setBussinessLogic(appFacadeInterface);
+			LoginGUI.setBussinessLogic(appFacadeInterface);
 
 		} catch (Exception e) {
 			System.out.println("Error in ApplicationLauncher: " + e.toString());

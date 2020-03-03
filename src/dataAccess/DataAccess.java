@@ -112,6 +112,8 @@ public class DataAccess {
 			Question q5;
 			Question q6;
 
+			Registro admin = new Registro("admin", "admin", "79133379Q", "admin@sinkingsoft.com", 21);
+
 			if (Locale.getDefault().equals(new Locale("es"))) {
 				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
 				q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2);
@@ -163,6 +165,8 @@ public class DataAccess {
 			db.persist(ev18);
 			db.persist(ev19);
 			db.persist(ev20);
+
+			db.persist(admin);
 
 			db.getTransaction().commit();
 			System.out.println("Db initialized");

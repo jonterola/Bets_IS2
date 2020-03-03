@@ -110,7 +110,7 @@ public class FindQuestionsGUI extends JFrame {
 						tableModelEvents.setDataVector(null, columnNamesEvents);
 						tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
 
-						BLFacade facade = MainGUI.getBusinessLogic();
+						BLFacade facade = LoginGUI.getBusinessLogic();
 
 						Vector<domain.Event> events = facade.getEvents(firstDay);
 
