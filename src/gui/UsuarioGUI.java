@@ -10,13 +10,14 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -30,6 +31,7 @@ import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
+import domain.Options;
 import domain.Question;
 
 public class UsuarioGUI extends JFrame {
@@ -47,7 +49,9 @@ public class UsuarioGUI extends JFrame {
 	private JScrollPane scrollPaneEvents = new JScrollPane();
 	private JScrollPane scrollPaneQueries = new JScrollPane();
 
-	private DefaultComboBoxModel<String> options = new DefaultComboBoxModel<String>();
+	private ComboBoxModel<String> options = new DefaultComboBoxModel<String>();
+
+	private List<Options> opciones;
 
 	private JTable tableEvents = new JTable();
 	private JTable tableQueries = new JTable();
@@ -93,6 +97,17 @@ public class UsuarioGUI extends JFrame {
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(514, 322, 149, 25);
 		getContentPane().add(comboBox);
+		comboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (options.getSize() > 0) {
+					int selectedIndex = comboBox.getSelectedIndex();
+					float cuota = opciones.get(selectedIndex).getOdds();
+					lblNewLabel.setText(String.valueOf(cuota));
+				}
+			}
+
+		});
 
 		jButtonClose.setBounds(new Rectangle(274, 419, 130, 30));
 
@@ -124,7 +139,7 @@ public class UsuarioGUI extends JFrame {
 						tableModelEvents.setDataVector(null, columnNamesEvents);
 						tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
 
-						BLFacade facade = MainGUI.getBusinessLogic();
+						BLFacade facade = LoginGUI.getBusinessLogic();
 
 						Vector<domain.Event> events = facade.getEvents(firstDay);
 
@@ -202,12 +217,13 @@ public class UsuarioGUI extends JFrame {
 				int i = tableQueries.getSelectedRow();
 				Question q = (Question) tableModelQueries.getValueAt(i, 2);
 				System.out.println(q.toString());
-				BLFacade facade = MainGUI.getBusinessLogic();
-				ArrayList<String> opciones = facade.getOpciones(q.getQuestionNumber());
+				BLFacade facade = LoginGUI.getBusinessLogic();
+				opciones = facade.getOptionsQuestion(q);
+				System.out.println(opciones.toString());
 				if (opciones != null) {
 					System.out.println(opciones.toString());
-					for (String op : opciones) {
-						options.addElement(op);
+					for (Options op : opciones) {
+						((DefaultComboBoxModel<String>) options).addElement(op.getOption());
 					}
 				}
 			}
@@ -234,6 +250,13 @@ public class UsuarioGUI extends JFrame {
 		JButton btnLogout = new JButton(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.btnLogout.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		btnLogout.setBounds(585, 12, 89, 23);
 		getContentPane().add(btnLogout);
+		btnLogout.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				logout();
+			}
+
+		});
 
 		JLabel lblPronostico = new JLabel(
 				ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblPronostico.text")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -247,6 +270,12 @@ public class UsuarioGUI extends JFrame {
 
 		getContentPane().add(lblNewLabel);
 
+	}
+
+	private void logout() {
+		this.setVisible(false);
+		LoginGUI log = new LoginGUI();
+		log.setVisible(true);
 	}
 
 	private void jButton2_actionPerformed(ActionEvent e) {
