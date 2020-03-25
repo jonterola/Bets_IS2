@@ -40,12 +40,15 @@ public class MainGUI extends JFrame {
 	private JRadioButton rdbtnNewRadioButton_2;
 	private JPanel panel;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JButton btnNewButton;
+	private LoginGUI log;
 
 	/**
 	 * This is the default constructor
 	 */
-	public MainGUI() {
+	public MainGUI(LoginGUI lo) {
 		super();
+		log = lo;
 
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -90,6 +93,7 @@ public class MainGUI extends JFrame {
 			jContentPane.add(getBoton3());
 			jContentPane.add(getBoton4());
 			jContentPane.add(getBoton2());
+			jContentPane.add(getBtnNewButton());
 
 		}
 		return jContentPane;
@@ -236,4 +240,21 @@ public class MainGUI extends JFrame {
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
 
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.btnLogout.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			btnNewButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					logout();
+				}
+			});
+		}
+		return btnNewButton;
+	}
+
+	private void logout() {
+		this.setVisible(false);
+		log.setVisible(true);
+	}
 } // @jve:decl-index=0:visual-constraint="0,0"

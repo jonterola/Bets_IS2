@@ -19,6 +19,7 @@ public class Options {
 
 	public Options(int questionID, String option, float odds) {
 		super();
+		this.questionID = questionID;
 		this.option = option;
 		this.odds = odds;
 	}

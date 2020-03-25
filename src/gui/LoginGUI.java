@@ -66,7 +66,7 @@ public class LoginGUI extends JFrame {
 		this.setBounds(100, 100, 450, 382);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
-//		getPanel();
+		// getPanel();
 		txtpnLogin = new JLabel();
 		txtpnLogin.setFont(new Font("Times New Roman", Font.PLAIN, 30));
 		txtpnLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("Login"));
@@ -146,11 +146,11 @@ public class LoginGUI extends JFrame {
 
 		BLFacade facade = LoginGUI.getBusinessLogic();
 		if (facade.isAdmin(tMail.getText(), tPwd.getText())) {
-			MainGUI m = new MainGUI();
+			MainGUI m = new MainGUI(this);
 			m.setVisible(true);
 			this.setVisible(false);
 		} else {
-			UsuarioGUI u = new UsuarioGUI();
+			UsuarioGUI u = new UsuarioGUI(this);
 			u.setVisible(true);
 			this.setVisible(false);
 		}
@@ -213,15 +213,15 @@ public class LoginGUI extends JFrame {
 		return rdbtnNewRadioButton_2;
 	}
 
-//	private JPanel getPanel() {
-//		if (panel == null) {
-//			panel = new JPanel();
-//			panel.add(getRdbtnNewRadioButton_1());
-//			panel.add(getRdbtnNewRadioButton_2());
-//			panel.add(getRdbtnNewRadioButton());
-//		}
-//		return panel;
-//	}
+	// private JPanel getPanel() {
+	// if (panel == null) {
+	// panel = new JPanel();
+	// panel.add(getRdbtnNewRadioButton_1());
+	// panel.add(getRdbtnNewRadioButton_2());
+	// panel.add(getRdbtnNewRadioButton());
+	// }
+	// return panel;
+	// }
 
 	private void redibujar() {
 		txtpnLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("Login"));

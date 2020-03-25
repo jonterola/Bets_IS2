@@ -62,19 +62,6 @@ public class Registro {
 		return "Registro [nick=" + nick + ", pw=" + pw + ", dni=" + dni + ", admin=" + admin + "]";
 	}
 
-	private boolean checkDNI(String DNI) {
-		if (DNI.length() != 9)
-			return false;
-		if (!Character.isLetter(DNI.charAt(8)))
-			return false;
-		try {
-			Integer.parseInt(DNI.substring(0, 8));
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
-
 	public String getMail() {
 		return mail;
 	}
