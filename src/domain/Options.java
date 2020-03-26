@@ -28,6 +28,10 @@ public class Options {
 		return questionID;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public String getOption() {
 		return option;
 	}

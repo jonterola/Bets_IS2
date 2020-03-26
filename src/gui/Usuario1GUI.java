@@ -8,13 +8,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import domain.Registro;
+
 public class Usuario1GUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private LoginGUI log;
-	private String user; // mail
+	private Registro user; // mail
 
-	public Usuario1GUI(LoginGUI lo, String usr) {
+	public Usuario1GUI(LoginGUI lo, Registro usr) {
 		log = lo;
 		user = usr;
 		try {
@@ -46,7 +52,7 @@ public class Usuario1GUI extends JFrame {
 		btnApuesta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UsuarioGUI u = new UsuarioGUI();
+				UsuarioGUI u = new UsuarioGUI(user);
 				u.setVisible(true);
 			}
 		});
@@ -65,6 +71,13 @@ public class Usuario1GUI extends JFrame {
 		contentPane.add(btnHistorial);
 
 		JButton btnRMonedero = new JButton("Recargar Monedero");
+		btnRMonedero.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				AddMoneyGUI m = new AddMoneyGUI(user);
+				m.setVisible(true);
+			}
+		});
 		btnRMonedero.setBounds(10, 153, 414, 35);
 		contentPane.add(btnRMonedero);
 	}

@@ -1,6 +1,5 @@
 package businessLogic;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -8,10 +7,12 @@ import java.util.Vector;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import domain.Bet;
 import domain.Event;
 import domain.Options;
 //import domain.Booking;
 import domain.Question;
+import domain.Registro;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
 
@@ -85,8 +86,12 @@ public interface BLFacade {
 	public int createUser(String dni, String user, String mail, String pwd, int age);
 
 	@WebMethod
-	public boolean newLogin(String mail, String pwd);
+	public Registro newLogin(String mail, String pwd);
 
 	@WebMethod
-	public boolean isAdmin(String mail, String pwd);
+	public void updateUser(Registro user);
+
+	@WebMethod
+	public void newBet(Bet b);
+
 }

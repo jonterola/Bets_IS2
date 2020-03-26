@@ -31,8 +31,10 @@ import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
+import domain.Event;
 import domain.Options;
 import domain.Question;
+import domain.Registro;
 
 public class UsuarioGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -41,7 +43,8 @@ public class UsuarioGUI extends JFrame {
 	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
 
-	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
+	private JButton jButtonClose = new JButton(
+			ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.btnApostar.text")); //$NON-NLS-1$ //$NON-NLS-2$
 
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
@@ -70,8 +73,13 @@ public class UsuarioGUI extends JFrame {
 	private final JLabel lblCuota = new JLabel(
 			ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblCuota.text")); //$NON-NLS-1$ //$NON-NLS-2$
 	private final JLabel lblNewLabel = new JLabel(); // $NON-NLS-1$ //$NON-NLS-2$
+	private Options selectedOption;
+	private Registro user;
+	private Event event;
+	private Question question;
 
-	public UsuarioGUI() {
+	public UsuarioGUI(Registro user2) {
+		user = user2;
 		try {
 			jbInit();
 		} catch (Exception e) {
@@ -80,28 +88,29 @@ public class UsuarioGUI extends JFrame {
 	}
 
 	private void jbInit() throws Exception {
-
+		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(700, 500));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries")); //$NON-NLS-1$ //$NON-NLS-2$
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelQueries.setBounds(138, 248, 406, 14);
-		jLabelEvents.setBounds(295, 19, 259, 16);
+		jLabelEvents.setBounds(295, 19, 49, 16);
 
 		this.getContentPane().add(jLabelEventDate, null);
 		this.getContentPane().add(jLabelQueries);
 		this.getContentPane().add(jLabelEvents);
 
 		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(514, 322, 149, 25);
+		comboBox.setBounds(514, 303, 149, 25);
 		getContentPane().add(comboBox);
 		comboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (options.getSize() > 0) {
 					int selectedIndex = comboBox.getSelectedIndex();
-					float cuota = opciones.get(selectedIndex).getOdds();
+					selectedOption = opciones.get(selectedIndex);
+					float cuota = selectedOption.getOdds();
 					lblNewLabel.setText(String.valueOf(cuota));
 				}
 			}
@@ -113,7 +122,8 @@ public class UsuarioGUI extends JFrame {
 		jButtonClose.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				jButton2_actionPerformed(e);
+				ConfirmBetGUI c = new ConfirmBetGUI(event, question, user, selectedOption);
+				c.setVisible(true);
 			}
 		});
 
@@ -182,18 +192,18 @@ public class UsuarioGUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i = tableEvents.getSelectedRow();
-				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2); // obtain ev object
-				Vector<Question> queries = ev.getQuestions();
+				event = (domain.Event) tableModelEvents.getValueAt(i, 2); // obtain ev object
+				Vector<Question> queries = event.getQuestions();
 
 				tableModelQueries.setDataVector(null, columnNamesQueries);
 				tableModelQueries.setColumnCount(3);
 
 				if (queries.isEmpty())
-					jLabelQueries.setText(
-							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
+					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": "
+							+ event.getDescription());
 				else
 					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
-							+ ev.getDescription());
+							+ event.getDescription());
 
 				for (domain.Question q : queries) {
 					Vector<Object> row = new Vector<Object>();
@@ -214,10 +224,10 @@ public class UsuarioGUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i = tableQueries.getSelectedRow();
-				Question q = (Question) tableModelQueries.getValueAt(i, 2);
-				System.out.println(q.toString());
+				question = (Question) tableModelQueries.getValueAt(i, 2);
+				System.out.println(question.toString());
 				BLFacade facade = LoginGUI.getBusinessLogic();
-				opciones = facade.getOptionsQuestion(q);
+				opciones = facade.getOptionsQuestion(question);
 				System.out.println(opciones.toString());
 				if (opciones != null) {
 					System.out.println(opciones.toString());
@@ -259,24 +269,30 @@ public class UsuarioGUI extends JFrame {
 
 		JLabel lblPronostico = new JLabel(
 				ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblPronostico.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		lblPronostico.setBounds(513, 292, 101, 30);
+		lblPronostico.setBounds(513, 273, 101, 30);
 		getContentPane().add(lblPronostico);
-		lblCuota.setBounds(514, 375, 65, 14);
+		lblCuota.setBounds(514, 339, 65, 14);
 
 		getContentPane().add(lblCuota);
 		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setBounds(583, 375, 80, 14);
+		lblNewLabel.setBounds(583, 339, 80, 14);
 
 		getContentPane().add(lblNewLabel);
 
+		JLabel lblSaldoDiponible = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblSaldoDiponible.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblSaldoDiponible.setBounds(397, 20, 96, 14);
+		getContentPane().add(lblSaldoDiponible);
+
+		JLabel lblSaldo = new JLabel(String.valueOf(user.getSaldo())); // $NON-NLS-1$ //$NON-NLS-2$
+		lblSaldo.setBounds(498, 20, 46, 14);
+		getContentPane().add(lblSaldo);
+
 	}
 
-	private void logout() {
+	public void logout() {
 		this.setVisible(false);
 
 	}
 
-	private void jButton2_actionPerformed(ActionEvent e) {
-		this.setVisible(false);
-	}
 }

@@ -16,6 +16,7 @@ import javax.persistence.TypedQuery;
 
 import configuration.ConfigXML;
 import configuration.UtilDate;
+import domain.Bet;
 import domain.Event;
 import domain.Options;
 import domain.Question;
@@ -195,12 +196,15 @@ public class DataAccess {
 	 * This method creates a question for an event, with a question text and the
 	 * minimum bet
 	 * 
-	 * @param event      to which question is added
-	 * @param question   text of the question
-	 * @param betMinimum minimum quantity of the bet
+	 * @param event
+	 *            to which question is added
+	 * @param question
+	 *            text of the question
+	 * @param betMinimum
+	 *            minimum quantity of the bet
 	 * @return the created question, or null, or an exception
-	 * @throws QuestionAlreadyExist if the same question already exists for the
-	 *                              event
+	 * @throws QuestionAlreadyExist
+	 *             if the same question already exists for the event
 	 */
 	public Question createQuestion(Event event, String question, float betMinimum) throws QuestionAlreadyExist {
 		System.out.println(">> DataAccess: createQuestion=> event= " + event + " question= " + question + " betMinimum="
@@ -272,27 +276,23 @@ public class DataAccess {
 		return 0;
 	}
 
-	public boolean login(String mail, String pwd) {
+	public Registro login(String mail, String pwd) {
 		TypedQuery<Registro> query = db.createQuery(
 				"SELECT rg FROM Registro rg WHERE rg.mail ='" + mail + "' AND rg.pw = '" + pwd + "'", Registro.class);
-		if (!query.getResultList().isEmpty()) {
-			return true;
+		List<Registro> events = query.getResultList();
+
+		if (events.isEmpty()) {
+			return null;
 		} else {
-			return false;
+			return events.get(0);
 		}
-	}
-
-	public boolean admin(String mail, String pwd) {
-		TypedQuery<Registro> query = db.createQuery(
-				"SELECT rg FROM Registro rg WHERE rg.mail ='" + mail + "' AND rg.pw = '" + pwd + "'", Registro.class);
-		return query.getResultList().get(0).isAdmin();
-
 	}
 
 	/**
 	 * This method retrieves from the database the events of a given date
 	 * 
-	 * @param date in which events are retrieved
+	 * @param date
+	 *            in which events are retrieved
 	 * @return collection of events
 	 */
 	public Vector<Event> getEvents(Date date) {
@@ -312,7 +312,8 @@ public class DataAccess {
 	 * This method retrieves from the database the dates a month for which there are
 	 * events
 	 * 
-	 * @param date of the month for which days with events want to be retrieved
+	 * @param date
+	 *            of the month for which days with events want to be retrieved
 	 * @return collection of dates
 	 */
 	public Vector<Date> getEventsMonth(Date date) {
@@ -344,6 +345,26 @@ public class DataAccess {
 		query.setParameter(1, q.getQuestionNumber());
 		List<Options> op = query.getResultList();
 		return op;
+	}
+
+	public void updateUser(Registro user) {
+		TypedQuery<Options> query = db.createQuery("SELECT us FROM Registro us WHERE us.dni= ?1", Options.class);
+		query.setParameter(1, user.getDni());
+		List<Options> og = query.getResultList();
+		db.getTransaction().begin();
+		for (int i = 0; i < og.size(); i++) {
+			db.remove(og.get(i));
+		}
+		db.getTransaction().commit();
+		db.getTransaction().begin();
+		db.persist(user);
+		db.getTransaction().commit();
+	}
+
+	public void newBet(Bet b) {
+		db.getTransaction().begin();
+		db.persist(b);
+		db.getTransaction().commit();
 	}
 
 }

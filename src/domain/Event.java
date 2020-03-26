@@ -19,6 +19,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @Entity
 public class Event implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@XmlID
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@Id

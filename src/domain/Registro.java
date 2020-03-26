@@ -14,6 +14,7 @@ public class Registro {
 	private String dni;
 	private boolean admin;
 	private int edad;
+	private float saldo;
 	// private Pronostico pron;
 
 	public Registro(String nick, String pw, String dni, String mail, int edad) {
@@ -27,6 +28,15 @@ public class Registro {
 		}
 		this.mail = mail;
 		this.edad = edad;
+		this.saldo = 0f;
+	}
+
+	public float getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(float saldo) {
+		this.saldo = saldo;
 	}
 
 	public String getNick() {

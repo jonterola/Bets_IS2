@@ -16,6 +16,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import businessLogic.BLFacade;
+import domain.Registro;
 
 public class LoginGUI extends JFrame {
 
@@ -102,8 +103,9 @@ public class LoginGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				errors.setText(" ");
 				BLFacade facade = LoginGUI.getBusinessLogic();
-				if (facade.newLogin(tMail.getText(), tPwd.getText())) {
-					loginSuccessful();
+				Registro login = facade.newLogin(tMail.getText(), tPwd.getText());
+				if (login != null) {
+					loginSuccessful(login);
 
 				} else {
 					errors.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginEr"));
@@ -141,15 +143,15 @@ public class LoginGUI extends JFrame {
 	}
 
 	@SuppressWarnings("deprecation")
-	private void loginSuccessful() {
+	private void loginSuccessful(Registro login) {
 
 		BLFacade facade = LoginGUI.getBusinessLogic();
-		if (facade.isAdmin(tMail.getText(), tPwd.getText())) {
-			MainGUI m = new MainGUI(this);
+		if (login.isAdmin()) {
+			MainGUI m = new MainGUI(this, login);
 			m.setVisible(true);
 			this.setVisible(false);
 		} else {
-			Usuario1GUI u = new Usuario1GUI(this, tMail.getText());
+			Usuario1GUI u = new Usuario1GUI(this, login);
 			u.setVisible(true);
 			this.setVisible(false);
 		}

@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 
 import businessLogic.BLFacade;
 import domain.Event;
+import domain.Registro;
 
 public class MainGUI extends JFrame {
 
@@ -42,13 +43,15 @@ public class MainGUI extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JButton btnNewButton;
 	private LoginGUI log;
+	private Registro login;
 
 	/**
 	 * This is the default constructor
 	 */
-	public MainGUI(LoginGUI lo) {
+	public MainGUI(LoginGUI lo, Registro login1) {
 		super();
 		log = lo;
+		login = login1;
 
 		addWindowListener(new WindowAdapter() {
 			@Override

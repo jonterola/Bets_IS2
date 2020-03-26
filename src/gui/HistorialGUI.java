@@ -11,13 +11,15 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import domain.Registro;
+
 public class HistorialGUI extends JFrame {
 
 	private JPanel contentPane;
-	private String user;
+	private Registro user;
 
-	public HistorialGUI(String usr) {
-		user = usr;
+	public HistorialGUI(Registro user2) {
+		user = user2;
 		init();
 	}
 

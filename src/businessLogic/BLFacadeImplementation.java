@@ -1,6 +1,5 @@
 package businessLogic;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -11,9 +10,11 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
+import domain.Bet;
 import domain.Event;
 import domain.Options;
 import domain.Question;
+import domain.Registro;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
 
@@ -79,6 +80,7 @@ public class BLFacadeImplementation implements BLFacade {
 		dBManager.updateQuestion(op);
 		dBManager.close();
 	};
+
 	/**
 	 * This method invokes the data access to retrieve the events of a given date
 	 * 
@@ -141,8 +143,8 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
-	public boolean newLogin(String mail, String pwd) {
-		boolean resul = false;
+	public Registro newLogin(String mail, String pwd) {
+		Registro resul = null;
 		DataAccess dbManager = new DataAccess();
 		resul = dbManager.login(mail, pwd);
 		dbManager.close();
@@ -151,12 +153,10 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
-	public boolean isAdmin(String mail, String pwd) {
-		boolean resul = false;
+	public void updateUser(Registro user) {
 		DataAccess dbManager = new DataAccess();
-		resul = dbManager.admin(mail, pwd);
+		dbManager.updateUser(user);
 		dbManager.close();
-		return resul;
 	}
 
 	/**
@@ -170,6 +170,14 @@ public class BLFacadeImplementation implements BLFacade {
 		DataAccess dBManager = new DataAccess();
 		dBManager.initializeDB();
 		dBManager.close();
+	}
+
+	@Override
+	@WebMethod
+	public void newBet(Bet b) {
+		DataAccess dbManager = new DataAccess();
+		dbManager.newBet(b);
+		dbManager.close();
 	}
 
 }
