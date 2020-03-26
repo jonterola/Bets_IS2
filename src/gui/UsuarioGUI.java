@@ -70,10 +70,8 @@ public class UsuarioGUI extends JFrame {
 	private final JLabel lblCuota = new JLabel(
 			ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblCuota.text")); //$NON-NLS-1$ //$NON-NLS-2$
 	private final JLabel lblNewLabel = new JLabel(); // $NON-NLS-1$ //$NON-NLS-2$
-	private LoginGUI log;
 
-	public UsuarioGUI(LoginGUI lo) {
-		log = lo;
+	public UsuarioGUI() {
 		try {
 			jbInit();
 		} catch (Exception e) {
@@ -275,7 +273,7 @@ public class UsuarioGUI extends JFrame {
 
 	private void logout() {
 		this.setVisible(false);
-		log.setVisible(true);
+
 	}
 
 	private void jButton2_actionPerformed(ActionEvent e) {

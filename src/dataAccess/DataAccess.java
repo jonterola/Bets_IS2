@@ -117,6 +117,7 @@ public class DataAccess {
 			Options o3;
 
 			Registro admin = new Registro("admin", "admin", "79133379Q", "admin@sinkingsoft.com", 21);
+			Registro user = new Registro("user", "user", "35743378F", "user@gmail.com", 18);
 
 			if (Locale.getDefault().equals(new Locale("es"))) {
 				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
@@ -174,6 +175,7 @@ public class DataAccess {
 
 			db.getTransaction().begin();
 			db.persist(admin);
+			db.persist(user);
 			o1 = new Options(q1.getQuestionNumber(), "Athletic", Float.valueOf("1.1"));
 			o2 = new Options(q1.getQuestionNumber(), "X", Float.valueOf("1.6"));
 			o3 = new Options(q1.getQuestionNumber(), "Atletico", Float.valueOf("2.7"));

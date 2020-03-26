@@ -31,7 +31,6 @@ public class LoginGUI extends JFrame {
 	private JRadioButton rdbtnNewRadioButton_1;
 	private JRadioButton rdbtnNewRadioButton_2;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JPanel panel;
 
 	private static BLFacade appFacadeInterface;
 
@@ -150,7 +149,7 @@ public class LoginGUI extends JFrame {
 			m.setVisible(true);
 			this.setVisible(false);
 		} else {
-			UsuarioGUI u = new UsuarioGUI(this);
+			Usuario1GUI u = new Usuario1GUI(this, tMail.getText());
 			u.setVisible(true);
 			this.setVisible(false);
 		}
