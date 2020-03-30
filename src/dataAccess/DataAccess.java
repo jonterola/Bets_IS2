@@ -347,6 +347,33 @@ public class DataAccess {
 		return op;
 	}
 
+	public List<Bet> getBetOptions(Options o) {
+		TypedQuery<Bet> query = db.createQuery("SELECT b FROM Bet b WHERE b.optionID= ?1", Bet.class);
+		query.setParameter(1, o.getId());
+		List<Bet> bet = query.getResultList();
+		return bet;
+	}
+
+	public void updateMoney(Bet bet, float cuota) {
+		float profit = cuota * bet.getCantidadApostada();
+		TypedQuery<Registro> query = db.createQuery("SELECT r FROM Registro r WHERE r.dni= ?1", Registro.class);
+		query.setParameter(1, bet.getUserDNI());
+		Registro user = query.getSingleResult();
+		float saldo = user.getSaldo();
+		db.getTransaction().begin();
+		System.out.println(user.getSaldo());
+		user.setSaldo(saldo + profit);
+		System.out.println(user.getSaldo());
+		db.getTransaction().commit();
+	}
+
+	public void updateEvent(Event e) {
+		db.getTransaction().begin();
+		Event ev = db.find(Event.class, e);
+		ev.setFinished(true);
+		db.getTransaction().commit();
+	}
+
 	public void updateUser(Registro user) {
 		TypedQuery<Options> query = db.createQuery("SELECT us FROM Registro us WHERE us.dni= ?1", Options.class);
 		query.setParameter(1, user.getDni());

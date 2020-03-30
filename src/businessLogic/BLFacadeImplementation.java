@@ -133,6 +133,30 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
+	public List<Bet> getBetOptions(Options o) {
+		DataAccess dbManager = new DataAccess();
+		List<Bet> bets = dbManager.getBetOptions(o);
+		dbManager.close();
+		return bets;
+	}
+
+	@Override
+	@WebMethod
+	public void updateMoney(Bet bet, float cuota) {
+		DataAccess dbManager = new DataAccess();
+		dbManager.updateMoney(bet, cuota);
+		dbManager.close();
+	}
+
+	@Override
+	public void updateEvent(Event e) {
+		DataAccess dbManager = new DataAccess();
+		dbManager.updateEvent(e);
+		dbManager.close();
+	}
+
+	@Override
+	@WebMethod
 	public int createUser(String dni, String user, String mail, String pwd, int age) {
 		DataAccess dbManager = new DataAccess();
 		int i = dbManager.addUser(dni, user, mail, pwd, age);

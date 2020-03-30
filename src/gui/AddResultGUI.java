@@ -31,6 +31,7 @@ import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
+import domain.Bet;
 import domain.Event;
 import domain.Options;
 import domain.Question;
@@ -116,13 +117,30 @@ public class AddResultGUI extends JFrame {
 
 		});
 
-		jButtonClose.setBounds(new Rectangle(274, 419, 130, 30));
+		jButtonClose.setBounds(new Rectangle(220, 420, 197, 30));
 
 		jButtonClose.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ConfirmBetGUI c = new ConfirmBetGUI(event, question, user, selectedOption);
-				c.setVisible(true);
+				int i = tableEvents.getSelectedRow();
+				event = (domain.Event) tableModelEvents.getValueAt(i, 2);
+				if (event.isFinished()) {
+					jButtonClose.setText(ResourceBundle.getBundle("Etiquetas").getString("EventFinished"));
+					jButtonClose.setEnabled(false);
+				} else {
+					BLFacade facade = LoginGUI.getBusinessLogic();
+					event.setFinished(true);
+					facade.updateEvent(event);
+					int selectedIndex = comboBox.getSelectedIndex();
+					selectedOption = opciones.get(selectedIndex);
+					List<Bet> bets = facade.getBetOptions(selectedOption);
+					float cuota = selectedOption.getOdds();
+					if (bets != null) {
+						for (Bet b : bets) {
+							facade.updateMoney(b, cuota);
+						}
+					}
+				}
 			}
 		});
 

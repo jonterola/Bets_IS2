@@ -103,3 +103,360 @@ New type domain.Options
 [2020-03-30 20:11:33 #11 type] 
 Type domain.Options is not enhanced.
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-03-30 20:17:05 #1 store] 
+Database 'C:\Users\JON\git\Iteracion1\resources\bets.temp' is opened by 7956@JON-PORTATIL-3Q7UV4Q
+
+[2020-03-30 20:17:05 #2 type.registry] 
+New type domain.Question
+
+[2020-03-30 20:17:05 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-03-30 20:17:05 #4 type.registry] 
+New type domain.Event
+
+[2020-03-30 20:17:05 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-03-30 20:17:05 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-03-30 20:17:05 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2020-03-30 20:17:05 #8 type.registry] 
+New type domain.Registro
+
+[2020-03-30 20:17:05 #9 type] 
+Type domain.Registro is not enhanced.
+
+[2020-03-30 20:17:05 #10 type.registry] 
+New type domain.Options
+
+[2020-03-30 20:17:05 #11 type] 
+Type domain.Options is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-03-30 20:28:02 #1 store] 
+Database 'C:\Users\JON\git\Iteracion1\resources\bets.temp' is opened by 3916@JON-PORTATIL-3Q7UV4Q
+
+[2020-03-30 20:28:02 #2 type.registry] 
+New type domain.Question
+
+[2020-03-30 20:28:02 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-03-30 20:28:02 #4 type.registry] 
+New type domain.Event
+
+[2020-03-30 20:28:02 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-03-30 20:28:02 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-03-30 20:28:02 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2020-03-30 20:28:03 #8 type.registry] 
+New type domain.Registro
+
+[2020-03-30 20:28:03 #9 type] 
+Type domain.Registro is not enhanced.
+
+[2020-03-30 20:28:03 #10 type.registry] 
+New type domain.Options
+
+[2020-03-30 20:28:03 #11 type] 
+Type domain.Options is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-03-30 21:49:51 #1 store] 
+Database 'C:\Users\JON\git\Iteracion1\resources\bets.temp' is opened by 7328@JON-PORTATIL-3Q7UV4Q
+
+[2020-03-30 21:49:51 #2 type.registry] 
+New type domain.Question
+
+[2020-03-30 21:49:51 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-03-30 21:49:51 #4 type.registry] 
+New type domain.Event
+
+[2020-03-30 21:49:51 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-03-30 21:49:51 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-03-30 21:49:51 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2020-03-30 21:49:51 #8 type.registry] 
+New type domain.Registro
+
+[2020-03-30 21:49:51 #9 type] 
+Type domain.Registro is not enhanced.
+
+[2020-03-30 21:49:51 #10 type.registry] 
+New type domain.Options
+
+[2020-03-30 21:49:51 #11 type] 
+Type domain.Options is not enhanced.
+
+[2020-03-30 21:50:39 #12 type.registry] 
+New type domain.Bet
+
+[2020-03-30 21:50:39 #13 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-03-30 21:53:12 #1 store] 
+Database 'C:\Users\JON\git\Iteracion1\resources\bets.temp' is opened by 8940@JON-PORTATIL-3Q7UV4Q
+
+[2020-03-30 21:53:13 #2 type.registry] 
+New type domain.Question
+
+[2020-03-30 21:53:13 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-03-30 21:53:13 #4 type.registry] 
+New type domain.Event
+
+[2020-03-30 21:53:13 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-03-30 21:53:13 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-03-30 21:53:13 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2020-03-30 21:53:13 #8 type.registry] 
+New type domain.Registro
+
+[2020-03-30 21:53:13 #9 type] 
+Type domain.Registro is not enhanced.
+
+[2020-03-30 21:53:13 #10 type.registry] 
+New type domain.Options
+
+[2020-03-30 21:53:13 #11 type] 
+Type domain.Options is not enhanced.
+
+[2020-03-30 21:53:56 #12 type.registry] 
+New type domain.Bet
+
+[2020-03-30 21:53:56 #13 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-03-30 21:56:39 #1 store] 
+Database 'C:\Users\JON\git\Iteracion1\resources\bets.temp' is opened by 9680@JON-PORTATIL-3Q7UV4Q
+
+[2020-03-30 21:56:40 #2 type.registry] 
+New type domain.Question
+
+[2020-03-30 21:56:40 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-03-30 21:56:40 #4 type.registry] 
+New type domain.Event
+
+[2020-03-30 21:56:40 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-03-30 21:56:40 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-03-30 21:56:40 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2020-03-30 21:56:40 #8 type.registry] 
+New type domain.Registro
+
+[2020-03-30 21:56:40 #9 type] 
+Type domain.Registro is not enhanced.
+
+[2020-03-30 21:56:40 #10 type.registry] 
+New type domain.Options
+
+[2020-03-30 21:56:40 #11 type] 
+Type domain.Options is not enhanced.
+
+[2020-03-30 21:57:04 #12 type.registry] 
+New type domain.Bet
+
+[2020-03-30 21:57:04 #13 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-03-30 22:02:47 #1 store] 
+Database 'C:\Users\JON\git\Iteracion1\resources\bets.temp' is opened by 2940@JON-PORTATIL-3Q7UV4Q
+
+[2020-03-30 22:02:47 #2 type.registry] 
+New type domain.Question
+
+[2020-03-30 22:02:47 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-03-30 22:02:47 #4 type.registry] 
+New type domain.Event
+
+[2020-03-30 22:02:47 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-03-30 22:02:47 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-03-30 22:02:47 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2020-03-30 22:02:47 #8 type.registry] 
+New type domain.Registro
+
+[2020-03-30 22:02:47 #9 type] 
+Type domain.Registro is not enhanced.
+
+[2020-03-30 22:02:47 #10 type.registry] 
+New type domain.Options
+
+[2020-03-30 22:02:47 #11 type] 
+Type domain.Options is not enhanced.
+
+[2020-03-30 22:03:29 #12 type.registry] 
+New type domain.Bet
+
+[2020-03-30 22:03:29 #13 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-03-30 22:09:42 #1 store] 
+Database 'C:\Users\JON\git\Iteracion1\resources\bets.temp' is opened by 8372@JON-PORTATIL-3Q7UV4Q
+
+[2020-03-30 22:09:42 #2 type.registry] 
+New type domain.Question
+
+[2020-03-30 22:09:42 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-03-30 22:09:42 #4 type.registry] 
+New type domain.Event
+
+[2020-03-30 22:09:42 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-03-30 22:09:42 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-03-30 22:09:42 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2020-03-30 22:09:42 #8 type.registry] 
+New type domain.Registro
+
+[2020-03-30 22:09:42 #9 type] 
+Type domain.Registro is not enhanced.
+
+[2020-03-30 22:09:42 #10 type.registry] 
+New type domain.Options
+
+[2020-03-30 22:09:42 #11 type] 
+Type domain.Options is not enhanced.
+
+[2020-03-30 22:10:37 #12 type.registry] 
+New type domain.Bet
+
+[2020-03-30 22:10:37 #13 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-03-30 22:13:20 #1 store] 
+Database 'C:\Users\JON\git\Iteracion1\resources\bets.temp' is opened by 11552@JON-PORTATIL-3Q7UV4Q
+
+[2020-03-30 22:13:20 #2 type.registry] 
+New type domain.Question
+
+[2020-03-30 22:13:20 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-03-30 22:13:20 #4 type.registry] 
+New type domain.Event
+
+[2020-03-30 22:13:20 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-03-30 22:13:20 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-03-30 22:13:20 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2020-03-30 22:13:20 #8 type.registry] 
+New type domain.Registro
+
+[2020-03-30 22:13:20 #9 type] 
+Type domain.Registro is not enhanced.
+
+[2020-03-30 22:13:20 #10 type.registry] 
+New type domain.Options
+
+[2020-03-30 22:13:20 #11 type] 
+Type domain.Options is not enhanced.
+
+[2020-03-30 22:13:38 #12 type.registry] 
+New type domain.Bet
+
+[2020-03-30 22:13:38 #13 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2020-03-30 22:16:04 #1 store] 
+Database 'C:\Users\JON\git\Iteracion1\resources\bets.temp' is opened by 6640@JON-PORTATIL-3Q7UV4Q
+
+[2020-03-30 22:16:04 #2 type.registry] 
+New type domain.Question
+
+[2020-03-30 22:16:04 #3 type] 
+Type domain.Question is not enhanced.
+
+[2020-03-30 22:16:04 #4 type.registry] 
+New type domain.Event
+
+[2020-03-30 22:16:04 #5 type] 
+Type domain.Event is not enhanced.
+
+[2020-03-30 22:16:04 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2020-03-30 22:16:04 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2020-03-30 22:16:04 #8 type.registry] 
+New type domain.Registro
+
+[2020-03-30 22:16:04 #9 type] 
+Type domain.Registro is not enhanced.
+
+[2020-03-30 22:16:04 #10 type.registry] 
+New type domain.Options
+
+[2020-03-30 22:16:04 #11 type] 
+Type domain.Options is not enhanced.
+
+[2020-03-30 22:16:21 #12 type.registry] 
+New type domain.Bet
+
+[2020-03-30 22:16:21 #13 type] 
+Type domain.Bet is not enhanced.
+

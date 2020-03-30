@@ -94,4 +94,13 @@ public interface BLFacade {
 	@WebMethod
 	public void newBet(Bet b);
 
+	@WebMethod
+	public List<Bet> getBetOptions(Options o);
+
+	@WebMethod
+	public void updateMoney(Bet bet, float cuota);
+
+	@WebMethod
+	public void updateEvent(Event event);
+
 }
