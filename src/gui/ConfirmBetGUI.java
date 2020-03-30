@@ -103,7 +103,7 @@ public class ConfirmBetGUI extends JFrame {
 					lblMSGBOX.setForeground(Color.RED);
 					lblMSGBOX.setText("ERROR: Not enough money");
 				} else {
-					Bet b = new Bet(option.getId(), user.getDni(), desired);
+					Bet b = new Bet(option.getId(), user, desired);
 					BLFacade db = LoginGUI.getBusinessLogic();
 					db.newBet(b);
 					close();

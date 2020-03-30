@@ -6,6 +6,9 @@ import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import businessLogic.BLFacade;
+import gui.LoginGUI;
+
 @Entity
 public class Bet {
 	@XmlID
@@ -18,12 +21,15 @@ public class Bet {
 	private float cantidadApostada;
 	private boolean activa;
 
-	public Bet(int optionID, String userDNI, float cantidadApostada) {
+	public Bet(int optionID, Registro user, float cantidadApostada) {
 		super();
 		this.optionID = optionID;
-		this.userDNI = userDNI;
+		this.userDNI = user.getDni();
 		this.cantidadApostada = cantidadApostada;
 		this.activa = true;
+		user.setSaldo(user.getSaldo() - cantidadApostada);
+		BLFacade facade = LoginGUI.getBusinessLogic();
+		facade.updateUser(user);
 	}
 
 	public int getId() {
