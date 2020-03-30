@@ -34,6 +34,7 @@ public class MainGUI extends JFrame {
 	private JButton jButtonCreateQuery = null;
 	private JButton jButtonQueryQueries = null;
 	private JButton jButtonCreateEvent = null;
+	private JButton jButtonAddResult = null;
 
 	protected JLabel jLabelSelectOption;
 	private JRadioButton rdbtnNewRadioButton;
@@ -91,11 +92,12 @@ public class MainGUI extends JFrame {
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			jContentPane = new JPanel();
-			jContentPane.setLayout(new GridLayout(5, 1, 0, 0));
+			jContentPane.setLayout(new GridLayout(6, 1, 0, 0));
 			jContentPane.add(getLblNewLabel());
 			jContentPane.add(getBoton3());
 			jContentPane.add(getBoton4());
 			jContentPane.add(getBoton2());
+			jContentPane.add(getBoton5());
 			jContentPane.add(getBtnNewButton());
 
 		}
@@ -165,6 +167,23 @@ public class MainGUI extends JFrame {
 			});
 		}
 		return jButtonCreateEvent;
+	}
+
+	private JButton getBoton5() {
+		if (jButtonAddResult == null) {
+			jButtonAddResult = new JButton();
+			jButtonAddResult.setText(ResourceBundle.getBundle("Etiquetas").getString("AddResult"));
+			jButtonAddResult.addActionListener(new java.awt.event.ActionListener() {
+				@Override
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					BLFacade facade = LoginGUI.getBusinessLogic();
+					// Vector<Event> events=facade.getAllEvents();
+					JFrame a = new AddResultGUI(login);
+					a.setVisible(true);
+				}
+			});
+		}
+		return jButtonAddResult;
 	}
 
 	private JLabel getLblNewLabel() {
@@ -240,6 +259,8 @@ public class MainGUI extends JFrame {
 		jButtonQueryQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
 		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateQuery"));
 		jButtonCreateEvent.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
+		jButtonAddResult.setText(ResourceBundle.getBundle("Etiquetas").getString("AddResult"));
+
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
 
