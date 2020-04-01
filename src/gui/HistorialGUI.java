@@ -112,9 +112,9 @@ public class HistorialGUI extends JFrame {
 				Fecha.setText(q.getEvent().getEventDate().toString());
 				ARealizada.setText(o.getOption());
 				if (q.getEvent().isFinished()) {
-					Activa.setText("No");
-				} else {
 					Activa.setText("Si");
+				} else {
+					Activa.setText("No");
 				}
 
 			}
