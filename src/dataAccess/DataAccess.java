@@ -394,4 +394,23 @@ public class DataAccess {
 		db.getTransaction().commit();
 	}
 
+	public List<Bet> getBet(String user) {
+		TypedQuery<Bet> query = db.createQuery("SELECT rg FROM Bet rg WHERE rg.userDNI ='" + user + "'", Bet.class);
+		List<Bet> og = query.getResultList();
+		return og;
+	}
+
+	public Options getOption(int id) {
+		System.out.println("SELECT rg FROM Options rg WHERE rg.id ='" + id + "'");
+		TypedQuery<Options> query = db.createQuery("SELECT rg FROM Options rg WHERE rg.id = " + id, Options.class);
+		List<Options> og = query.getResultList();
+		return og.get(0);
+	}
+
+	public Question getQuestion(int id) {
+		TypedQuery<Question> query = db.createQuery("SELECT rg FROM Question rg WHERE rg.questionNumber = " + id,
+				Question.class);
+		List<Question> og = query.getResultList();
+		return og.get(0);
+	}
 }
