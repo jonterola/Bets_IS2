@@ -17,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 
 import businessLogic.BLFacade;
 import domain.Bet;
+import domain.Options;
+import domain.Question;
 import domain.Registro;
 
 public class HistorialGUI extends JFrame {
@@ -63,7 +65,8 @@ public class HistorialGUI extends JFrame {
 
 		List<Bet> bets = facade.getBet(user.getDni());
 		for (Bet b : bets) {
-			modelo.addElement(facade.getQuestion(facade.getOption(b.getOptionID()).getQuestionID()).getQuestion());
+			modelo.addElement(
+					facade.getQuestion(facade.getOption(b.getOptionID()).getQuestionID()).getEvent().getDescription());
 		}
 		apuestas.setModel(modelo);
 
@@ -88,7 +91,7 @@ public class HistorialGUI extends JFrame {
 		contentPane.add(Capostada);
 
 		JLabel Fecha = new JLabel("");
-		Fecha.setBounds(345, 89, 67, 14);
+		Fecha.setBounds(333, 89, 79, 14);
 		contentPane.add(Fecha);
 
 		JLabel ARealizada = new JLabel("");
@@ -102,6 +105,17 @@ public class HistorialGUI extends JFrame {
 		apuestas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				int i = apuestas.getSelectedIndex();
+				Options o = facade.getOption(bets.get(i).getOptionID());
+				Question q = facade.getQuestion(facade.getOption(bets.get(i).getOptionID()).getQuestionID());
+				Capostada.setText(String.valueOf(bets.get(i).getCantidadApostada()));
+				Fecha.setText(q.getEvent().getEventDate().toString());
+				ARealizada.setText(o.getOption());
+				if (q.getEvent().isFinished()) {
+					Activa.setText("No");
+				} else {
+					Activa.setText("Si");
+				}
 
 			}
 		});
