@@ -111,10 +111,10 @@ public class HistorialGUI extends JFrame {
 				Capostada.setText(String.valueOf(bets.get(i).getCantidadApostada()));
 				Fecha.setText(q.getEvent().getEventDate().toString());
 				ARealizada.setText(o.getOption());
-				if (q.getEvent().isFinished()) {
-					Activa.setText("Si");
-				} else {
+				if (q.isFinished()) {
 					Activa.setText("No");
+				} else {
+					Activa.setText("Si");
 				}
 
 			}
