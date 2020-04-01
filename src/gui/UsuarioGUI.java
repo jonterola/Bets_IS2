@@ -223,6 +223,7 @@ public class UsuarioGUI extends JFrame {
 		tableQueries.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				comboBox.removeAllItems();
 				int i = tableQueries.getSelectedRow();
 				question = (Question) tableModelQueries.getValueAt(i, 2);
 				System.out.println(question.toString());

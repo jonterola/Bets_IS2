@@ -22,6 +22,7 @@ public class Question implements Serializable {
 	private String question;
 	private float betMinimum;
 	private String result;
+	private boolean finished;
 
 	@XmlIDREF
 	private Event event;
@@ -48,6 +49,14 @@ public class Question implements Serializable {
 		this.betMinimum = betMinimum;
 
 		// this.event = event;
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
 	}
 
 	/**

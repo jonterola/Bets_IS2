@@ -122,15 +122,15 @@ public class AddResultGUI extends JFrame {
 		jButtonClose.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int i = tableEvents.getSelectedRow();
-				event = (domain.Event) tableModelEvents.getValueAt(i, 2);
-				if (event.isFinished()) {
+				int i = tableQueries.getSelectedRow();
+				question = (Question) tableModelQueries.getValueAt(i, 2);
+				if (question.isFinished()) {
 					jButtonClose.setText(ResourceBundle.getBundle("Etiquetas").getString("EventFinished"));
 					jButtonClose.setEnabled(false);
 				} else {
 					BLFacade facade = LoginGUI.getBusinessLogic();
-					event.setFinished(true);
-					facade.updateEvent(event);
+					question.setFinished(true);
+					facade.updateQuestion(question);
 					int selectedIndex = comboBox.getSelectedIndex();
 					selectedOption = opciones.get(selectedIndex);
 					List<Bet> bets = facade.getBetOptions(selectedOption);
@@ -240,8 +240,13 @@ public class AddResultGUI extends JFrame {
 		tableQueries.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				comboBox.removeAllItems();
 				int i = tableQueries.getSelectedRow();
 				question = (Question) tableModelQueries.getValueAt(i, 2);
+				if (!question.isFinished()) {
+					jButtonClose.setText(ResourceBundle.getBundle("Etiquetas").getString("AddResult"));
+					jButtonClose.setEnabled(true);
+				}
 				System.out.println(question.toString());
 				BLFacade facade = LoginGUI.getBusinessLogic();
 				opciones = facade.getOptionsQuestion(question);

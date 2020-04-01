@@ -149,9 +149,9 @@ public class BLFacadeImplementation implements BLFacade {
 	}
 
 	@Override
-	public void updateEvent(Event e) {
+	public void updateQuestion(Question q) {
 		DataAccess dbManager = new DataAccess();
-		dbManager.updateEvent(e);
+		dbManager.updateQuestion(q);
 		dbManager.close();
 	}
 

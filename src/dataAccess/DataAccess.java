@@ -367,10 +367,10 @@ public class DataAccess {
 		db.getTransaction().commit();
 	}
 
-	public void updateEvent(Event e) {
+	public void updateQuestion(Question q) {
 		db.getTransaction().begin();
-		Event ev = db.find(Event.class, e);
-		ev.setFinished(true);
+		Question qu = db.find(Question.class, q);
+		qu.setFinished(true);
 		db.getTransaction().commit();
 	}
 

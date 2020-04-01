@@ -101,6 +101,6 @@ public interface BLFacade {
 	public void updateMoney(Bet bet, float cuota);
 
 	@WebMethod
-	public void updateEvent(Event event);
+	public void updateQuestion(Question question);
 
 }
