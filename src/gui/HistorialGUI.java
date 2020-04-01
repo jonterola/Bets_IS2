@@ -63,8 +63,7 @@ public class HistorialGUI extends JFrame {
 
 		List<Bet> bets = facade.getBet(user.getDni());
 		for (Bet b : bets) {
-			// modelo.addElement(facade.getQuestion(facade.getOption(b.getOptionID()).getQuestionID()).getQuestion());
-			modelo.addElement(facade.getOption(b.getOptionID()).getOption());
+			modelo.addElement(facade.getQuestion(facade.getOption(b.getOptionID()).getQuestionID()).getQuestion());
 		}
 		apuestas.setModel(modelo);
 
