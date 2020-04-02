@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BLFacade;
@@ -23,6 +25,10 @@ import domain.Registro;
 
 public class HistorialGUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Registro user;
 
@@ -42,12 +48,14 @@ public class HistorialGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblHistorialDeApuestas = new JLabel("HISTORIAL DE APUESTAS");
+		JLabel lblHistorialDeApuestas = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("HistorialGUI.lblHistorialDeApuestas.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblHistorialDeApuestas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHistorialDeApuestas.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblHistorialDeApuestas.setBounds(124, 11, 180, 27);
 		contentPane.add(lblHistorialDeApuestas);
 
-		JButton btnAtras = new JButton("Atras");
+		JButton btnAtras = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Back")); //$NON-NLS-1$ //$NON-NLS-2$
 		btnAtras.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -70,19 +78,22 @@ public class HistorialGUI extends JFrame {
 		}
 		apuestas.setModel(modelo);
 
-		JLabel lblCantidadApostada = new JLabel("Cantidad apostada");
+		JLabel lblCantidadApostada = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("HistorialGUI.lblCantidadApostada.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblCantidadApostada.setBounds(200, 49, 147, 14);
 		contentPane.add(lblCantidadApostada);
 
-		JLabel lblF = new JLabel("Fecha");
+		JLabel lblF = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("HistorialGUI.lblF.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblF.setBounds(200, 89, 89, 14);
 		contentPane.add(lblF);
 
-		JLabel lblApuestaRealizada = new JLabel("Apuesta realizada");
+		JLabel lblApuestaRealizada = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("HistorialGUI.lblApuestaRealizada.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblApuestaRealizada.setBounds(200, 127, 147, 14);
 		contentPane.add(lblApuestaRealizada);
 
-		JLabel lblEstaActiva = new JLabel("Esta activa?");
+		JLabel lblEstaActiva = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("HistorialGUI.lblEstaActiva.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblEstaActiva.setBounds(200, 172, 147, 14);
 		contentPane.add(lblEstaActiva);
 

@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,7 +39,7 @@ public class Usuario1GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnLogout = new JButton("Logout");
+		JButton btnLogout = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Usuario1GUI.btnLogout.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		btnLogout.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -48,7 +49,8 @@ public class Usuario1GUI extends JFrame {
 		btnLogout.setBounds(320, 11, 104, 35);
 		contentPane.add(btnLogout);
 
-		JButton btnApuesta = new JButton("Realizar apuesta");
+		JButton btnApuesta = new JButton(
+				ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblSaldoDiponible.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		btnApuesta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -59,7 +61,8 @@ public class Usuario1GUI extends JFrame {
 		btnApuesta.setBounds(10, 59, 414, 35);
 		contentPane.add(btnApuesta);
 
-		JButton btnHistorial = new JButton("Historial de apuestas");
+		JButton btnHistorial = new JButton(
+				ResourceBundle.getBundle("Etiquetas").getString("Usuario1GUI.btnHistorial.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		btnHistorial.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -70,7 +73,8 @@ public class Usuario1GUI extends JFrame {
 		btnHistorial.setBounds(10, 107, 414, 35);
 		contentPane.add(btnHistorial);
 
-		JButton btnRMonedero = new JButton("Recargar Monedero");
+		JButton btnRMonedero = new JButton(
+				ResourceBundle.getBundle("Etiquetas").getString("Usuario1GUI.btnRMonedero.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		btnRMonedero.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

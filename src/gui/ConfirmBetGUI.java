@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,6 +30,7 @@ public class ConfirmBetGUI extends JFrame {
 	private JTextField textField;
 
 	public ConfirmBetGUI(Event evento1, Question q, Registro user1, Options opcion1) {
+		setTitle(ResourceBundle.getBundle("Etiquetas").getString("ConfirmBetGUI.this.title")); //$NON-NLS-1$ //$NON-NLS-2$
 		event = evento1;
 		question = q;
 		user = user1;
@@ -40,11 +42,13 @@ public class ConfirmBetGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblSelectedEvent = new JLabel("Selected event:");
+		JLabel lblSelectedEvent = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("ConfirmBetGUI.lblSelectedEvent.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblSelectedEvent.setBounds(67, 39, 102, 14);
 		contentPane.add(lblSelectedEvent);
 
-		JLabel lblQuestion = new JLabel("Question:");
+		JLabel lblQuestion = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("ConfirmBetGUI.lblQuestion.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblQuestion.setBounds(67, 64, 89, 14);
 		contentPane.add(lblQuestion);
 
@@ -56,7 +60,7 @@ public class ConfirmBetGUI extends JFrame {
 		lblQ.setBounds(210, 64, 214, 14);
 		contentPane.add(lblQ);
 
-		JLabel lblOdd = new JLabel("Odd:");
+		JLabel lblOdd = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ConfirmBetGUI.lblOdd.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblOdd.setBounds(67, 89, 46, 14);
 		contentPane.add(lblOdd);
 
@@ -64,7 +68,8 @@ public class ConfirmBetGUI extends JFrame {
 		lblO.setBounds(210, 89, 102, 14);
 		contentPane.add(lblO);
 
-		JLabel lblAvaiableMoney = new JLabel("Avaiable money:");
+		JLabel lblAvaiableMoney = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblSaldoDiponible.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblAvaiableMoney.setBounds(67, 114, 102, 14);
 		contentPane.add(lblAvaiableMoney);
 
@@ -77,11 +82,13 @@ public class ConfirmBetGUI extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 
-		JLabel lblMoneyToBet = new JLabel("Money to bet:");
+		JLabel lblMoneyToBet = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("ConfirmBetGUI.lblMoneyToBet.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblMoneyToBet.setBounds(67, 142, 102, 14);
 		contentPane.add(lblMoneyToBet);
 
-		JButton btnNewButton = new JButton("BET");
+		JButton btnNewButton = new JButton(
+				ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.btnRealizarApuesta.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		btnNewButton.setBounds(67, 175, 312, 57);
 		contentPane.add(btnNewButton);
 
@@ -102,6 +109,9 @@ public class ConfirmBetGUI extends JFrame {
 				if (desired > user.getSaldo()) {
 					lblMSGBOX.setForeground(Color.RED);
 					lblMSGBOX.setText("ERROR: Not enough money");
+				} else if (desired < 0.1f) {
+					lblMSGBOX.setForeground(Color.RED);
+					lblMSGBOX.setText("ERROR: Minimum bet 0.10");
 				} else {
 					Bet b = new Bet(option.getId(), user, desired);
 					BLFacade db = LoginGUI.getBusinessLogic();

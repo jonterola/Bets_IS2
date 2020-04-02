@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -54,6 +55,7 @@ public class AddMoneyGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AddMoneyGUI(Registro user) {
+		setTitle(ResourceBundle.getBundle("Etiquetas").getString("AddMoneyGUI.this.title")); //$NON-NLS-1$ //$NON-NLS-2$
 		usuario = user;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -64,6 +66,7 @@ public class AddMoneyGUI extends JFrame {
 
 		textTarjeta = new JTextField();
 		TextPrompt placeholder1 = new TextPrompt("Numero de Tarjeta", textTarjeta);
+		placeholder1.setText(ResourceBundle.getBundle("Etiquetas").getString("AddMoneyGUI.placeholder1.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		placeholder1.changeAlpha(0.75f);
 		placeholder1.changeStyle(Font.ITALIC);
 		textTarjeta.setBounds(112, 36, 210, 20);
@@ -91,6 +94,7 @@ public class AddMoneyGUI extends JFrame {
 
 		textMes = new JTextField();
 		TextPrompt placeholder2 = new TextPrompt("Mes", textMes);
+		placeholder2.setText(ResourceBundle.getBundle("Etiquetas").getString("AddMoneyGUI.placeholder2.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		placeholder2.changeAlpha(0.75f);
 		placeholder2.changeStyle(Font.ITALIC);
 		textMes.setBounds(112, 78, 36, 20);
@@ -118,6 +122,7 @@ public class AddMoneyGUI extends JFrame {
 
 		textAño = new JTextField();
 		TextPrompt placeholder3 = new TextPrompt("Año", textAño);
+		placeholder3.setText(ResourceBundle.getBundle("Etiquetas").getString("AddMoneyGUI.placeholder3.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		placeholder3.changeAlpha(0.75f);
 		placeholder3.changeStyle(Font.ITALIC);
 		textAño.setColumns(10);
@@ -176,13 +181,14 @@ public class AddMoneyGUI extends JFrame {
 
 		textCantidad = new JTextField();
 		TextPrompt placeholder5 = new TextPrompt("Cantidad a añadir", textCantidad);
+		placeholder5.setText(ResourceBundle.getBundle("Etiquetas").getString("AddMoneyGUI.placeholder5.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		placeholder5.changeAlpha(0.75f);
 		placeholder5.changeStyle(Font.ITALIC);
 		textCantidad.setBounds(151, 158, 130, 20);
 		contentPane.add(textCantidad);
 		textCantidad.setColumns(10);
 
-		JButton btnNewButton = new JButton("A\u00F1adir saldo al monedero");
+		JButton btnNewButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("AddBalance")); //$NON-NLS-1$ //$NON-NLS-2$
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
