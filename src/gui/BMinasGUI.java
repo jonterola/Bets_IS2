@@ -21,7 +21,7 @@ public class BMinasGUI extends JFrame {
 	private Registro user;
 	private double apuesta;
 	int random = getRandomNumberInRange(1, 9);
-	int cont = 1;
+	int cont = 0;
 
 	public BMinasGUI(Registro usr, double apuesta) {
 		user = usr;
@@ -112,10 +112,9 @@ public class BMinasGUI extends JFrame {
 					button_9.setEnabled(false);
 				} else if (cont == 8) {
 					System.out.println("felicitaciones");
-				} else {
-					ganado.setText(Double.toString(apuesta));
 				}
 				apuesta = apuesta * (0.1 * cont + 1);
+				ganado.setText(Double.toString(apuesta));
 				contentPane.add(ganado);
 
 				button_1.setEnabled(false);
@@ -138,10 +137,9 @@ public class BMinasGUI extends JFrame {
 					button_9.setEnabled(false);
 				} else if (cont == 8) {
 					System.out.println("felicitaciones");
-				} else {
-					ganado.setText(Double.toString(apuesta));
 				}
 				apuesta = apuesta * (0.1 * cont + 1);
+				ganado.setText(Double.toString(apuesta));
 
 				button_2.setEnabled(false);
 
@@ -164,10 +162,9 @@ public class BMinasGUI extends JFrame {
 					button_9.setEnabled(false);
 				} else if (cont == 8) {
 					System.out.println("felicitaciones");
-				} else {
-					ganado.setText(Double.toString(apuesta));
 				}
 				apuesta = apuesta * (0.1 * cont + 1);
+				ganado.setText(Double.toString(apuesta));
 
 				button_3.setEnabled(false);
 			}
@@ -189,10 +186,9 @@ public class BMinasGUI extends JFrame {
 					button_9.setEnabled(false);
 				} else if (cont == 8) {
 					System.out.println("felicitaciones");
-				} else {
-					ganado.setText(Double.toString(apuesta));
 				}
 				apuesta = apuesta * (0.1 * cont + 1);
+				ganado.setText(Double.toString(apuesta));
 
 				button_4.setEnabled(false);
 			}
@@ -214,11 +210,9 @@ public class BMinasGUI extends JFrame {
 					button_9.setEnabled(false);
 				} else if (cont == 8) {
 					System.out.println("felicitaciones");
-				} else {
-					ganado.setText(Double.toString(apuesta));
 				}
 				apuesta = apuesta * (0.1 * cont + 1);
-
+				ganado.setText(Double.toString(apuesta));
 				button_5.setEnabled(false);
 			}
 		});
@@ -239,11 +233,11 @@ public class BMinasGUI extends JFrame {
 					button_9.setEnabled(false);
 				} else if (cont == 8) {
 					System.out.println("felicitaciones");
-				} else {
-					ganado.setText(Double.toString(apuesta));
 				}
-				button_6.setEnabled(false);
 				apuesta = apuesta * (0.1 * cont + 1);
+				ganado.setText(Double.toString(apuesta));
+				button_6.setEnabled(false);
+
 			}
 		});
 		button_7.addActionListener(new ActionListener() {
@@ -263,11 +257,9 @@ public class BMinasGUI extends JFrame {
 					button_9.setEnabled(false);
 				} else if (cont == 8) {
 					System.out.println("felicitaciones");
-				} else {
-					ganado.setText(Double.toString(apuesta));
 				}
 				apuesta = apuesta * (0.1 * cont + 1);
-
+				ganado.setText(Double.toString(apuesta));
 				button_7.setEnabled(false);
 			}
 		});
@@ -288,11 +280,9 @@ public class BMinasGUI extends JFrame {
 					button_9.setEnabled(false);
 				} else if (cont == 8) {
 					System.out.println("felicitaciones");
-				} else {
-					ganado.setText(Double.toString(apuesta));
 				}
 				apuesta = apuesta * (0.1 * cont + 1);
-
+				ganado.setText(Double.toString(apuesta));
 				button_8.setEnabled(false);
 
 			}
@@ -314,10 +304,9 @@ public class BMinasGUI extends JFrame {
 					button_9.setEnabled(false);
 				} else if (cont == 8) {
 					System.out.println("felicitaciones");
-				} else {
-					ganado.setText(Double.toString(apuesta));
 				}
 				apuesta = apuesta * (0.1 * cont + 1);
+				ganado.setText(Double.toString(apuesta));
 
 				button_9.setEnabled(false);
 			}
