@@ -19,7 +19,7 @@ public class Usuario1GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private LoginGUI log;
-	private Registro user; // mail
+	private Registro user;
 
 	public Usuario1GUI(LoginGUI lo, Registro usr) {
 		log = lo;
@@ -84,6 +84,18 @@ public class Usuario1GUI extends JFrame {
 		});
 		btnRMonedero.setBounds(10, 153, 414, 35);
 		contentPane.add(btnRMonedero);
+
+		JButton btnGames = new JButton(
+				ResourceBundle.getBundle("Etiquetas").getString("Usuario1GUI.btnNewButton.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		btnGames.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				GamesGUI g = new GamesGUI(user);
+				g.setVisible(true);
+			}
+		});
+		btnGames.setBounds(10, 199, 414, 35);
+		contentPane.add(btnGames);
 	}
 
 	private void logout() {
