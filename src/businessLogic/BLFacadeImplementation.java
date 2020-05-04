@@ -101,6 +101,15 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
+	public Vector<Event> getEvents(Category c, Date date) {
+		DataAccess dbManager = new DataAccess();
+		Vector<Event> events = dbManager.getEvents(c, date);
+		dbManager.close();
+		return events;
+	}
+
+	@Override
+	@WebMethod
 	public List<Team> getTeams(int id) {
 		DataAccess dbManager = new DataAccess();
 		List<Team> teams = dbManager.getTeams(id);

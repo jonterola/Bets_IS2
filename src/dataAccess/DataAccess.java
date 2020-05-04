@@ -353,6 +353,15 @@ public class DataAccess {
 		}
 	}
 
+	public List<Event> getEvents(Category c) {
+		int cat = c.getId();
+		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.local.getCategory()=?1",
+				Event.class);
+		query.setParameter(1, cat);
+		List<Event> events = query.getResultList();
+		return events;
+	}
+
 	/**
 	 * This method retrieves from the database the events of a given date
 	 * 
@@ -365,6 +374,22 @@ public class DataAccess {
 		Vector<Event> res = new Vector<Event>();
 		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.eventDate=?1", Event.class);
 		query.setParameter(1, date);
+		List<Event> events = query.getResultList();
+		for (Event ev : events) {
+			System.out.println(ev.toString());
+			res.add(ev);
+		}
+		return res;
+	}
+
+	public Vector<Event> getEvents(Category c, Date date) {
+		int cat = c.getId();
+		System.out.println(">> DataAccess: getEvents");
+		Vector<Event> res = new Vector<Event>();
+		TypedQuery<Event> query = db.createQuery(
+				"SELECT ev FROM Event ev WHERE ev.eventDate=?1 AND ev.local.getCategory()=?2", Event.class);
+		query.setParameter(1, date);
+		query.setParameter(2, cat);
 		List<Event> events = query.getResultList();
 		for (Event ev : events) {
 			System.out.println(ev.toString());

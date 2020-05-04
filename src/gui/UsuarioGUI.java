@@ -31,6 +31,7 @@ import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
+import domain.Category;
 import domain.Event;
 import domain.Options;
 import domain.Question;
@@ -53,8 +54,12 @@ public class UsuarioGUI extends JFrame {
 	private JScrollPane scrollPaneQueries = new JScrollPane();
 
 	private ComboBoxModel<String> options = new DefaultComboBoxModel<String>();
+	private ComboBoxModel<String> category = new DefaultComboBoxModel<String>();
 
 	private List<Options> opciones;
+	private List<Category> categories;
+
+	private Category selectedCategory;
 
 	private JTable tableEvents = new JTable();
 	private JTable tableQueries = new JTable();
@@ -77,6 +82,7 @@ public class UsuarioGUI extends JFrame {
 	private Registro user;
 	private Event event;
 	private Question question;
+	private final JLabel lblNewLabel_1 = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Category")); //$NON-NLS-1$ //$NON-NLS-2$
 
 	public UsuarioGUI(Registro user2) {
 		user = user2;
@@ -101,7 +107,12 @@ public class UsuarioGUI extends JFrame {
 		this.getContentPane().add(jLabelQueries);
 		this.getContentPane().add(jLabelEvents);
 
+		BLFacade facade = LoginGUI.getBusinessLogic();
+		categories = facade.getCategories();
+
+		JComboBox<String> comboBox1 = new JComboBox<String>();
 		JComboBox<String> comboBox = new JComboBox<String>();
+
 		comboBox.setBounds(514, 303, 149, 25);
 		getContentPane().add(comboBox);
 		comboBox.addActionListener(new ActionListener() {
@@ -112,6 +123,27 @@ public class UsuarioGUI extends JFrame {
 					selectedOption = opciones.get(selectedIndex);
 					float cuota = selectedOption.getOdds();
 					lblNewLabel.setText(String.valueOf(cuota));
+				}
+			}
+
+		});
+
+		comboBox1.setBounds(new Rectangle(101, 424, 116, 20));
+		this.getContentPane().add(comboBox1, null);
+		comboBox1.setModel(category);
+		if (categories != null) {
+			for (Category c : categories) {
+				((DefaultComboBoxModel<String>) category).addElement(c.getName());
+			}
+		}
+		selectedCategory = categories.get(0);
+		comboBox1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (category.getSize() > 0) {
+					int selectedIndex1 = comboBox1.getSelectedIndex();
+					selectedCategory = categories.get(selectedIndex1);
+
 				}
 			}
 
@@ -150,7 +182,7 @@ public class UsuarioGUI extends JFrame {
 
 						BLFacade facade = LoginGUI.getBusinessLogic();
 
-						Vector<domain.Event> events = facade.getEvents(firstDay);
+						Vector<domain.Event> events = facade.getEvents(selectedCategory, firstDay);
 
 						if (events.isEmpty())
 							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
@@ -288,6 +320,20 @@ public class UsuarioGUI extends JFrame {
 		JLabel lblSaldo = new JLabel(String.valueOf(user.getSaldo())); // $NON-NLS-1$ //$NON-NLS-2$
 		lblSaldo.setBounds(498, 20, 46, 14);
 		getContentPane().add(lblSaldo);
+		lblNewLabel_1.setBounds(26, 427, 65, 14);
+
+		getContentPane().add(lblNewLabel_1);
+
+		JButton btnView = new JButton(ResourceBundle.getBundle("Etiquetas").getString("viewTeams")); //$NON-NLS-1$ //$NON-NLS-2$
+		btnView.setBounds(514, 419, 124, 28);
+		getContentPane().add(btnView);
+		btnView.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// InterfazVerEquipos
+			}
+
+		});
 
 	}
 
@@ -295,5 +341,4 @@ public class UsuarioGUI extends JFrame {
 		this.setVisible(false);
 
 	}
-
 }
