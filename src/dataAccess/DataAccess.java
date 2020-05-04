@@ -17,10 +17,12 @@ import javax.persistence.TypedQuery;
 import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.Bet;
+import domain.Category;
 import domain.Event;
 import domain.Options;
 import domain.Question;
 import domain.Registro;
+import domain.Team;
 import exceptions.QuestionAlreadyExist;
 
 /**
@@ -83,28 +85,59 @@ public class DataAccess {
 				year += 1;
 			}
 
-			Event ev1 = new Event(1, "Atlético-Athletic", UtilDate.newDate(year, month, 17));
-			Event ev2 = new Event(2, "Eibar-Barcelona", UtilDate.newDate(year, month, 17));
-			Event ev3 = new Event(3, "Getafe-Celta", UtilDate.newDate(year, month, 17));
-			Event ev4 = new Event(4, "Alavés-Deportivo", UtilDate.newDate(year, month, 17));
-			Event ev5 = new Event(5, "Español-Villareal", UtilDate.newDate(year, month, 17));
-			Event ev6 = new Event(6, "Las Palmas-Sevilla", UtilDate.newDate(year, month, 17));
-			Event ev7 = new Event(7, "Malaga-Valencia", UtilDate.newDate(year, month, 17));
-			Event ev8 = new Event(8, "Girona-Leganés", UtilDate.newDate(year, month, 17));
-			Event ev9 = new Event(9, "Real Sociedad-Levante", UtilDate.newDate(year, month, 17));
-			Event ev10 = new Event(10, "Betis-Real Madrid", UtilDate.newDate(year, month, 17));
+			Category c1 = new Category(1, "Football");
+			Category c2 = new Category(2, "Basketball");
+			db.persist(c1);
+			db.persist(c2);
 
-			Event ev11 = new Event(11, "Atletico-Athletic", UtilDate.newDate(year, month, 1));
-			Event ev12 = new Event(12, "Eibar-Barcelona", UtilDate.newDate(year, month, 1));
-			Event ev13 = new Event(13, "Getafe-Celta", UtilDate.newDate(year, month, 1));
-			Event ev14 = new Event(14, "Alavés-Deportivo", UtilDate.newDate(year, month, 1));
-			Event ev15 = new Event(15, "Español-Villareal", UtilDate.newDate(year, month, 1));
-			Event ev16 = new Event(16, "Las Palmas-Sevilla", UtilDate.newDate(year, month, 1));
+			Team t1 = new Team("Atletico", c1.getId());
+			Team t2 = new Team("Athletic", c1.getId());
+			Team t3 = new Team("Eibar", c1.getId());
+			Team t4 = new Team("Barcelona", c1.getId());
+			Team t5 = new Team("Getafe", c1.getId());
+			Team t6 = new Team("Celta", c1.getId());
+			Team t7 = new Team("Alaves", c1.getId());
+			Team t8 = new Team("Deportivo", c1.getId());
+			Team t9 = new Team("Espanyol", c1.getId());
+			Team t10 = new Team("Villareal", c1.getId());
+			Team t11 = new Team("Las Palmas", c1.getId());
+			Team t12 = new Team("Sevilla", c1.getId());
+			Team t13 = new Team("Malaga", c1.getId());
+			Team t14 = new Team("Valencia", c1.getId());
+			Team t15 = new Team("Girona", c1.getId());
+			Team t16 = new Team("Leganes", c1.getId());
+			Team t17 = new Team("Real Sociedad", c1.getId());
+			Team t18 = new Team("Levante", c1.getId());
+			Team t19 = new Team("Betis", c1.getId());
+			Team t20 = new Team("Real Madrid", c1.getId());
 
-			Event ev17 = new Event(17, "Málaga-Valencia", UtilDate.newDate(year, month, 28));
-			Event ev18 = new Event(18, "Girona-Leganés", UtilDate.newDate(year, month, 28));
-			Event ev19 = new Event(19, "Real Sociedad-Levante", UtilDate.newDate(year, month, 28));
-			Event ev20 = new Event(20, "Betis-Real Madrid", UtilDate.newDate(year, month, 28));
+			Team t21 = new Team("Lakers", c2.getId());
+			Team t22 = new Team("Celtics", c2.getId());
+
+			Event ev1 = new Event(1, t1, t2, UtilDate.newDate(year, month, 17));
+			Event ev2 = new Event(2, t3, t4, UtilDate.newDate(year, month, 17));
+			Event ev3 = new Event(3, t5, t6, UtilDate.newDate(year, month, 17));
+			Event ev4 = new Event(4, t7, t8, UtilDate.newDate(year, month, 17));
+			Event ev5 = new Event(5, t9, t10, UtilDate.newDate(year, month, 17));
+			Event ev6 = new Event(6, t11, t12, UtilDate.newDate(year, month, 17));
+			Event ev7 = new Event(7, t13, t14, UtilDate.newDate(year, month, 17));
+			Event ev8 = new Event(8, t15, t16, UtilDate.newDate(year, month, 17));
+			Event ev9 = new Event(9, t17, t18, UtilDate.newDate(year, month, 17));
+			Event ev10 = new Event(10, t19, t20, UtilDate.newDate(year, month, 17));
+
+			Event ev11 = new Event(11, t1, t2, UtilDate.newDate(year, month, 1));
+			Event ev12 = new Event(12, t3, t4, UtilDate.newDate(year, month, 1));
+			Event ev13 = new Event(13, t5, t6, UtilDate.newDate(year, month, 1));
+			Event ev14 = new Event(14, t7, t8, UtilDate.newDate(year, month, 1));
+			Event ev15 = new Event(15, t9, t10, UtilDate.newDate(year, month, 1));
+			Event ev16 = new Event(16, t11, t12, UtilDate.newDate(year, month, 1));
+
+			Event ev17 = new Event(17, t13, t14, UtilDate.newDate(year, month, 28));
+			Event ev18 = new Event(18, t15, t16, UtilDate.newDate(year, month, 28));
+			Event ev19 = new Event(19, t17, t18, UtilDate.newDate(year, month, 28));
+			Event ev20 = new Event(20, t19, t20, UtilDate.newDate(year, month, 28));
+
+			Event ev21 = new Event(21, t21, t22, UtilDate.newDate(year, month, 17));
 
 			Question q1;
 			Question q2;
@@ -112,6 +145,7 @@ public class DataAccess {
 			Question q4;
 			Question q5;
 			Question q6;
+			Question q7;
 
 			Options o1;
 			Options o2;
@@ -127,6 +161,8 @@ public class DataAccess {
 				q4 = ev11.addQuestion("¿Cuántos goles se marcarán?", 2);
 				q5 = ev17.addQuestion("¿Quién ganará el partido?", 1);
 				q6 = ev17.addQuestion("¿Habrá goles en la primera parte?", 2);
+				q7 = ev21.addQuestion("¿Quién ganará el partido?", 1);
+
 			} else if (Locale.getDefault().equals(new Locale("en"))) {
 				q1 = ev1.addQuestion("Who will win the match?", 1);
 				q2 = ev1.addQuestion("Who will score first?", 2);
@@ -134,6 +170,8 @@ public class DataAccess {
 				q4 = ev11.addQuestion("How many goals will be scored in the match?", 2);
 				q5 = ev17.addQuestion("Who will win the match?", 1);
 				q6 = ev17.addQuestion("Will there be goals in the first half?", 2);
+				q7 = ev21.addQuestion("Who will win the match?", 1);
+
 			} else {
 				q1 = ev1.addQuestion("Zeinek irabaziko du partidua?", 1);
 				q2 = ev1.addQuestion("Zeinek sartuko du lehenengo gola?", 2);
@@ -141,6 +179,7 @@ public class DataAccess {
 				q4 = ev11.addQuestion("Zenbat gol sartuko dira?", 2);
 				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
+				q7 = ev21.addQuestion("Zeinek irabaziko du partidua?", 1);
 
 			}
 
@@ -150,6 +189,30 @@ public class DataAccess {
 			db.persist(q4);
 			db.persist(q5);
 			db.persist(q6);
+			db.persist(q7);
+
+			db.persist(t1);
+			db.persist(t2);
+			db.persist(t3);
+			db.persist(t4);
+			db.persist(t5);
+			db.persist(t6);
+			db.persist(t7);
+			db.persist(t8);
+			db.persist(t9);
+			db.persist(t10);
+			db.persist(t11);
+			db.persist(t12);
+			db.persist(t13);
+			db.persist(t14);
+			db.persist(t15);
+			db.persist(t16);
+			db.persist(t17);
+			db.persist(t18);
+			db.persist(t19);
+			db.persist(t20);
+			db.persist(t21);
+			db.persist(t22);
 
 			db.persist(ev1);
 			db.persist(ev2);
@@ -171,6 +234,7 @@ public class DataAccess {
 			db.persist(ev18);
 			db.persist(ev19);
 			db.persist(ev20);
+			db.persist(ev21);
 
 			db.getTransaction().commit();
 
@@ -242,13 +306,14 @@ public class DataAccess {
 		db.getTransaction().commit();
 	}
 
-	public void addEvent(String nombre, Date date) throws QuestionAlreadyExist {
+	public void addEvent(Team local, Team visitante, Date date) throws QuestionAlreadyExist {
+		String nombre = local.getName() + "-" + visitante.getName();
 		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev", Event.class);
 		List<Event> events = query.getResultList();
 		int id = events.size() + 1;
 		System.out.println(">> DataAccess: createEvent=> nombre= " + nombre + " Date= " + date + " id=" + id);
 		db.getTransaction().begin();
-		Event ev = new Event(id, nombre, date);
+		Event ev = new Event(id, local, visitante, date);
 		db.persist(ev);
 		db.getTransaction().commit();
 	}
@@ -300,6 +365,32 @@ public class DataAccess {
 		Vector<Event> res = new Vector<Event>();
 		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.eventDate=?1", Event.class);
 		query.setParameter(1, date);
+		List<Event> events = query.getResultList();
+		for (Event ev : events) {
+			System.out.println(ev.toString());
+			res.add(ev);
+		}
+		return res;
+	}
+
+	public List<Team> getTeams(int id) {
+		TypedQuery<Team> query = db.createQuery("SELECT t FROM Team t WHERE t.category=?1", Team.class);
+		query.setParameter(1, id);
+		List<Team> teams = query.getResultList();
+		return teams;
+	}
+
+	public List<Category> getCategories() {
+		TypedQuery<Category> query = db.createQuery("SELECT c FROM Category c", Category.class);
+		List<Category> categories = query.getResultList();
+		return categories;
+	}
+
+	public Vector<Event> getEvents(Team t) {
+		Vector<Event> res = new Vector<Event>();
+		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.local=?1 OR ev.visitante=?1",
+				Event.class);
+		query.setParameter(1, t);
 		List<Event> events = query.getResultList();
 		for (Event ev : events) {
 			System.out.println(ev.toString());

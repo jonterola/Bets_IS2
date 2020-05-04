@@ -32,6 +32,24 @@ public class Event implements Serializable {
 	private Date eventDate;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Vector<Question> questions = new Vector<Question>();
+	private Team local;
+	private Team visitante;
+
+	public Team getLocal() {
+		return local;
+	}
+
+	public void setLocal(Team local) {
+		this.local = local;
+	}
+
+	public Team getVisitante() {
+		return visitante;
+	}
+
+	public void setVisitante(Team visitante) {
+		this.visitante = visitante;
+	}
 
 	public Vector<Question> getQuestions() {
 		return questions;
@@ -45,15 +63,19 @@ public class Event implements Serializable {
 		super();
 	}
 
-	public Event(Integer eventNumber, String description, Date eventDate) {
+	public Event(Integer eventNumber, Team local, Team visitante, Date eventDate) {
 		this.eventNumber = eventNumber;
-		this.description = description;
+		this.local = local;
+		this.visitante = visitante;
 		this.eventDate = eventDate;
+		description = local.getName() + "-" + visitante.getName();
 	}
 
-	public Event(String description, Date eventDate) {
-		this.description = description;
+	public Event(Team local, Team visitante, Date eventDate) {
+		this.local = local;
+		this.visitante = visitante;
 		this.eventDate = eventDate;
+		description = local.getName() + "-" + visitante.getName();
 	}
 
 	public Integer getEventNumber() {
