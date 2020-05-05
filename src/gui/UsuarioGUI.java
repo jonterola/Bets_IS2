@@ -330,7 +330,8 @@ public class UsuarioGUI extends JFrame {
 		btnView.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// InterfazVerEquipos
+				ViewTeamsGUI vt = new ViewTeamsGUI(selectedCategory);
+				vt.setVisible(true);
 			}
 
 		});

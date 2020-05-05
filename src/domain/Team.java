@@ -19,14 +19,24 @@ public class Team {
 	@GeneratedValue
 	private int id;
 	private String name;
+	private String league;
 	private int category;
 	private Event lastEvent;
 	private Event nextEvent;
 
-	public Team(String name, int category) {
+	public Team(String name, String league, int category) {
 		this.name = name;
+		this.league = league;
 		this.category = category;
 
+	}
+
+	public String getLeague() {
+		return league;
+	}
+
+	public void setLeague(String league) {
+		this.league = league;
 	}
 
 	public int getId() {
@@ -75,13 +85,16 @@ public class Team {
 			if (finish)
 				finished.add(events.get(i));
 		}
+		if (finished.size() > 0) {
+			Event last = finished.get(0);
+			for (int j = 1; j < finished.size(); j++) {
+				if (last.getEventDate().compareTo(finished.get(j).getEventDate()) < 0)
+					last = finished.get(j);
+			}
 
-		Event last = finished.get(0);
-		for (int j = 1; j < finished.size(); j++) {
-			if (last.getEventDate().compareTo(finished.get(j).getEventDate()) < 0)
-				last = finished.get(j);
+			return last;
 		}
-		return last;
+		return null;
 	}
 
 	private Event getNext() {
@@ -100,13 +113,16 @@ public class Team {
 			if (!finish)
 				notFinished.add(events.get(i));
 		}
+		if (notFinished.size() > 0) {
 
-		Event next = notFinished.get(0);
-		for (int j = 1; j < notFinished.size(); j++) {
-			if (next.getEventDate().compareTo(notFinished.get(j).getEventDate()) > 0)
-				next = notFinished.get(j);
+			Event next = notFinished.get(0);
+			for (int j = 1; j < notFinished.size(); j++) {
+				if (next.getEventDate().compareTo(notFinished.get(j).getEventDate()) > 0)
+					next = notFinished.get(j);
+			}
+			return next;
 		}
-		return next;
+		return null;
 	}
 
 }

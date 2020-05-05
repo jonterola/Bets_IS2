@@ -90,29 +90,29 @@ public class DataAccess {
 			db.persist(c1);
 			db.persist(c2);
 
-			Team t1 = new Team("Atletico", c1.getId());
-			Team t2 = new Team("Athletic", c1.getId());
-			Team t3 = new Team("Eibar", c1.getId());
-			Team t4 = new Team("Barcelona", c1.getId());
-			Team t5 = new Team("Getafe", c1.getId());
-			Team t6 = new Team("Celta", c1.getId());
-			Team t7 = new Team("Alaves", c1.getId());
-			Team t8 = new Team("Deportivo", c1.getId());
-			Team t9 = new Team("Espanyol", c1.getId());
-			Team t10 = new Team("Villareal", c1.getId());
-			Team t11 = new Team("Las Palmas", c1.getId());
-			Team t12 = new Team("Sevilla", c1.getId());
-			Team t13 = new Team("Malaga", c1.getId());
-			Team t14 = new Team("Valencia", c1.getId());
-			Team t15 = new Team("Girona", c1.getId());
-			Team t16 = new Team("Leganes", c1.getId());
-			Team t17 = new Team("Real Sociedad", c1.getId());
-			Team t18 = new Team("Levante", c1.getId());
-			Team t19 = new Team("Betis", c1.getId());
-			Team t20 = new Team("Real Madrid", c1.getId());
+			Team t1 = new Team("Atletico", "La Liga", c1.getId());
+			Team t2 = new Team("Athletic", "La Liga", c1.getId());
+			Team t3 = new Team("Eibar", "La Liga", c1.getId());
+			Team t4 = new Team("Barcelona", "La Liga", c1.getId());
+			Team t5 = new Team("Getafe", "La Liga", c1.getId());
+			Team t6 = new Team("Celta", "La Liga", c1.getId());
+			Team t7 = new Team("Alaves", "La Liga", c1.getId());
+			Team t8 = new Team("Deportivo", "La Liga", c1.getId());
+			Team t9 = new Team("Espanyol", "La Liga", c1.getId());
+			Team t10 = new Team("Villareal", "La Liga", c1.getId());
+			Team t11 = new Team("Las Palmas", "La Liga", c1.getId());
+			Team t12 = new Team("Sevilla", "La Liga", c1.getId());
+			Team t13 = new Team("Malaga", "La Liga", c1.getId());
+			Team t14 = new Team("Valencia", "La Liga", c1.getId());
+			Team t15 = new Team("Girona", "La Liga", c1.getId());
+			Team t16 = new Team("Leganes", "La Liga", c1.getId());
+			Team t17 = new Team("Real Sociedad", "La Liga", c1.getId());
+			Team t18 = new Team("Levante", "La Liga", c1.getId());
+			Team t19 = new Team("Betis", "La Liga", c1.getId());
+			Team t20 = new Team("Real Madrid", "La Liga", c1.getId());
 
-			Team t21 = new Team("Lakers", c2.getId());
-			Team t22 = new Team("Celtics", c2.getId());
+			Team t21 = new Team("Lakers", "NBA", c2.getId());
+			Team t22 = new Team("Celtics", "NBA", c2.getId());
 
 			Event ev1 = new Event(1, t1, t2, UtilDate.newDate(year, month, 17));
 			Event ev2 = new Event(2, t3, t4, UtilDate.newDate(year, month, 17));
@@ -150,6 +150,7 @@ public class DataAccess {
 			Options o1;
 			Options o2;
 			Options o3;
+			Options o4;
 
 			Registro admin = new Registro("admin", "admin", "79133379Q", "admin@sinkingsoft.com", 21);
 			Registro user = new Registro("user", "user", "35743378F", "user@gmail.com", 18);
@@ -245,9 +246,12 @@ public class DataAccess {
 			o2 = new Options(q1.getQuestionNumber(), "X", Float.valueOf("1.6"));
 			o3 = new Options(q1.getQuestionNumber(), "Atletico", Float.valueOf("2.7"));
 
+			o4 = new Options(q7.getQuestionNumber(), "Lakers", Float.valueOf("1.1"));
+
 			db.persist(o1);
 			db.persist(o2);
 			db.persist(o3);
+			db.persist(o4);
 			db.getTransaction().commit();
 
 			System.out.println("Db initialized");

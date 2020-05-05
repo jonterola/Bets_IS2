@@ -49,8 +49,7 @@ public class Usuario1GUI extends JFrame {
 		btnLogout.setBounds(320, 11, 104, 35);
 		contentPane.add(btnLogout);
 
-		JButton btnApuesta = new JButton(
-				ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.lblSaldoDiponible.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		JButton btnApuesta = new JButton(ResourceBundle.getBundle("Etiquetas").getString("ViewEvents")); //$NON-NLS-1$ //$NON-NLS-2$
 		btnApuesta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -85,8 +84,7 @@ public class Usuario1GUI extends JFrame {
 		btnRMonedero.setBounds(10, 153, 414, 35);
 		contentPane.add(btnRMonedero);
 
-		JButton btnGames = new JButton(
-				ResourceBundle.getBundle("Etiquetas").getString("Usuario1GUI.btnNewButton.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		JButton btnGames = new JButton("Games"); //$NON-NLS-1$ //$NON-NLS-2$
 		btnGames.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
