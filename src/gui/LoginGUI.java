@@ -50,6 +50,7 @@ public class LoginGUI extends JFrame {
 	private JLabel errors;
 	private JButton btnLogin;
 	private JButton reg;
+	private JButton viewButton;
 
 	/**
 	 * Create the application.
@@ -139,6 +140,17 @@ public class LoginGUI extends JFrame {
 
 		JRadioButton radioButton_2 = getRdbtnNewRadioButton_2();
 		panel_1.add(radioButton_2);
+
+		viewButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("ViewEvents")); //$NON-NLS-1$ //$NON-NLS-2$
+		viewButton.setBounds(160, 170, 136, 23);
+		getContentPane().add(viewButton);
+		viewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				UsuarioGUI u = new UsuarioGUI(null);
+				u.setVisible(true);
+			}
+		});
 
 	}
 

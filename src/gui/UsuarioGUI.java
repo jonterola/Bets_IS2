@@ -154,8 +154,13 @@ public class UsuarioGUI extends JFrame {
 		jButtonClose.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ConfirmBetGUI c = new ConfirmBetGUI(event, question, user, selectedOption);
-				c.setVisible(true);
+				if (user == null) {
+					AskRegisterGUI ar = new AskRegisterGUI(UsuarioGUI.this);
+					ar.setVisible(true);
+				} else {
+					ConfirmBetGUI c = new ConfirmBetGUI(event, question, user, selectedOption);
+					c.setVisible(true);
+				}
 			}
 		});
 
@@ -317,7 +322,10 @@ public class UsuarioGUI extends JFrame {
 		lblSaldoDiponible.setBounds(397, 20, 96, 14);
 		getContentPane().add(lblSaldoDiponible);
 
-		JLabel lblSaldo = new JLabel(String.valueOf(user.getSaldo())); // $NON-NLS-1$ //$NON-NLS-2$
+		float saldo = 0;
+		if (user != null)
+			saldo = user.getSaldo();
+		JLabel lblSaldo = new JLabel(String.valueOf(saldo));
 		lblSaldo.setBounds(498, 20, 46, 14);
 		getContentPane().add(lblSaldo);
 		lblNewLabel_1.setBounds(26, 427, 65, 14);
