@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,15 +46,15 @@ public class GiftsGUI extends JFrame {
 
 		updateUI();
 
-		JLabel lblCodigo = new JLabel("Codigo:");
+		JLabel lblCodigo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Codigo"));
 		lblCodigo.setBounds(219, 59, 60, 14);
 		contentPane.add(lblCodigo);
 
-		JLabel lblDinero = new JLabel("Dinero:");
+		JLabel lblDinero = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Dinero"));
 		lblDinero.setBounds(219, 84, 60, 14);
 		contentPane.add(lblDinero);
 
-		JLabel lblUsos = new JLabel("Usos:");
+		JLabel lblUsos = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Usos"));
 		lblUsos.setBounds(219, 109, 60, 14);
 		contentPane.add(lblUsos);
 
@@ -69,11 +70,11 @@ public class GiftsGUI extends JFrame {
 		labelUsos.setBounds(289, 109, 46, 14);
 		contentPane.add(labelUsos);
 
-		JLabel label = new JLabel("Codigo:");
+		JLabel label = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Codigo"));
 		label.setBounds(219, 209, 60, 24);
 		contentPane.add(label);
 
-		JLabel label_1 = new JLabel("Dinero:");
+		JLabel label_1 = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Dinero"));
 		label_1.setBounds(219, 244, 60, 24);
 
 		contentPane.add(label_1);
@@ -87,7 +88,7 @@ public class GiftsGUI extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 
-		JButton btnBorrarRegalo = new JButton("Borrar Regalo");
+		JButton btnBorrarRegalo = new JButton(ResourceBundle.getBundle("Etiquetas").getString("BorrarRegalo"));
 		btnBorrarRegalo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -100,7 +101,7 @@ public class GiftsGUI extends JFrame {
 		btnBorrarRegalo.setBounds(219, 146, 116, 23);
 		contentPane.add(btnBorrarRegalo);
 
-		JButton btnNewButton = new JButton("A\u00F1adir regalo");
+		JButton btnNewButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("AnadirRegalo"));
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

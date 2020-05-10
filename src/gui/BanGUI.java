@@ -3,6 +3,7 @@ package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -78,11 +79,11 @@ public class BanGUI extends JFrame {
 		button_1.setBounds(316, 235, 89, 23);
 		contentPane.add(button_1);
 
-		JLabel lblUsers = new JLabel("Users");
+		JLabel lblUsers = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Users"));
 		lblUsers.setBounds(147, 23, 46, 14);
 		contentPane.add(lblUsers);
 
-		JLabel lblBlockedUsers = new JLabel("Blocked Users");
+		JLabel lblBlockedUsers = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("BlockedUsers"));
 		lblBlockedUsers.setBounds(513, 23, 89, 14);
 		contentPane.add(lblBlockedUsers);
 	}

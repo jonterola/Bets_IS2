@@ -3,6 +3,7 @@ package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,15 +29,15 @@ public class FinancesGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblDineroIng = new JLabel("Dinero Ingresado: ");
+		JLabel lblDineroIng = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("DineroIngresado"));
 		lblDineroIng.setBounds(39, 34, 129, 14);
 		contentPane.add(lblDineroIng);
 
-		JLabel lblDineroTotal = new JLabel("Dinero Total:");
+		JLabel lblDineroTotal = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("DineroTotal"));
 		lblDineroTotal.setBounds(39, 59, 109, 14);
 		contentPane.add(lblDineroTotal);
 
-		JLabel lblBalanceTotal = new JLabel("Balance total:");
+		JLabel lblBalanceTotal = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("BalanceTotal"));
 		lblBalanceTotal.setBounds(39, 84, 98, 14);
 		contentPane.add(lblBalanceTotal);
 
@@ -62,16 +63,15 @@ public class FinancesGUI extends JFrame {
 		labelDT.setText(String.valueOf(totalMoney));
 		float trTotal = 0;
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		model.addRow(new String[] { "Cantidad", "Fecha", "DNI Usuario" });
 		for (int i = 0; i < tr.size(); i++) {
 			trTotal += tr.get(i).getCantidad();
 			model.addRow(new Object[] { String.valueOf(tr.get(i).getCantidad()),
 					tr.get(i).getTransactionDate().toString(), tr.get(i).getIdUser() });
 		}
 		labelDI.setText(String.valueOf(trTotal));
-		labelBT.setText(String.valueOf(totalMoney - trTotal));
+		labelBT.setText(String.valueOf(trTotal - totalMoney));
 
-		JButton btnNewButton = new JButton("Back");
+		JButton btnNewButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Back"));
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

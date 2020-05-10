@@ -108,7 +108,6 @@ public class BoxGUI extends JFrame {
 					case 1:
 						facade.addMoney(user.getDni(), 1, true);
 						lblNewLabel.setText("1€");
-						facade.updateUser(user);
 						break;
 					case 2:
 						lblNewLabel.setText("0€");
@@ -118,7 +117,6 @@ public class BoxGUI extends JFrame {
 					case 3:
 						lblNewLabel.setText("3€");
 						facade.addMoney(user.getDni(), 3, true);
-						facade.updateUser(user);
 						break;
 					case 4:
 						lblCongratulationsYouWon.setText(ResourceBundle.getBundle("Etiquetas").getString("other"));
