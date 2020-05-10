@@ -85,18 +85,19 @@ public interface BLFacade {
 	public void initializeBD();
 
 	@WebMethod
-
 	public List<Options> getOptionsQuestion(Question q);
 
 	@WebMethod
+	public boolean exist(String mail);
 
-	public int createUser(String dni, String user, String mail, String pwd, int age, String gift);
+	@WebMethod
+	public int createUser(String dni, String user, String mail, String pwd, int age, String gift, float mon);
 
 	@WebMethod
 	public Registro newLogin(String mail, String pwd);
 
 	@WebMethod
-	public void addMoney(String userDni, float cantidad);
+	public void addMoney(String userDni, float cantidad, boolean isBox);
 
 	@WebMethod
 	public void updateUser(Registro user);

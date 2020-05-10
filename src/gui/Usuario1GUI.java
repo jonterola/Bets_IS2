@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import domain.Registro;
@@ -84,7 +86,8 @@ public class Usuario1GUI extends JFrame {
 		btnRMonedero.setBounds(10, 153, 414, 35);
 		contentPane.add(btnRMonedero);
 
-		JButton btnGames = new JButton("Games"); //$NON-NLS-1$ //$NON-NLS-2$
+		JButton btnGames = new JButton("Games");
+
 		btnGames.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -94,10 +97,16 @@ public class Usuario1GUI extends JFrame {
 		});
 		btnGames.setBounds(10, 199, 414, 35);
 		contentPane.add(btnGames);
+
+		JLabel lblEuros = new JLabel(Float.toString(user.getSaldo())); // $NON-NLS-1$ //$NON-NLS-2$
+		lblEuros.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEuros.setBounds(10, 11, 46, 14);
+		contentPane.add(lblEuros);
 	}
 
 	private void logout() {
 		this.setVisible(false);
 		log.setVisible(true);
 	}
+
 }

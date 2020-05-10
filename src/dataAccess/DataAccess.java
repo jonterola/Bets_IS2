@@ -324,7 +324,7 @@ public class DataAccess {
 		db.getTransaction().commit();
 	}
 
-	public int addUser(String dni, String user, String mail, String pwd, int age, String gift) {
+	public int addUser(String dni, String user, String mail, String pwd, int age, String gift, float mon) {
 
 		TypedQuery<Registro> query1 = db.createQuery("SELECT rg FROM Registro rg WHERE rg.mail ='" + mail + "'",
 				Registro.class);
@@ -341,6 +341,9 @@ public class DataAccess {
 
 		Registro u = new Registro(user, pwd, dni, mail, age);
 		db.getTransaction().begin();
+		if (mon > 0) {
+			u.setSaldo(mon);
+		}
 		if (!gift.isEmpty()) {
 			TypedQuery<Regalo> query4 = db.createQuery("SELECT gf FROM Regalo gf WHERE gf.cod ='" + gift + "'",
 					Regalo.class);
@@ -348,13 +351,11 @@ public class DataAccess {
 				return 1;
 			Regalo r = query4.getResultList().get(0);
 			u.setSaldo(u.getSaldo() + r.getMoney());
-			Transaction t = new Transaction(r.getMoney(), new Date(), dni);
 			r.sum();
 			db.remove(r);
 			db.getTransaction().commit();
 			db.getTransaction().begin();
 			db.persist(r);
-			db.persist(t);
 			db.getTransaction().commit();
 			db.getTransaction().begin();
 		}
@@ -362,6 +363,16 @@ public class DataAccess {
 		db.persist(u);
 		db.getTransaction().commit();
 		return 0;
+	}
+
+	public boolean exist(String mail) {
+		TypedQuery<Registro> query1 = db.createQuery("SELECT rg FROM Registro rg WHERE rg.mail ='" + mail + "'",
+				Registro.class);
+		if (!query1.getResultList().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public Registro login(String mail, String pwd) {
@@ -513,7 +524,7 @@ public class DataAccess {
 		db.getTransaction().commit();
 	}
 
-	public void addMoney(String userDni, float cantidad) {
+	public void addMoney(String userDni, float cantidad, boolean isBox) {
 		TypedQuery<Registro> query = db.createQuery("SELECT us FROM Registro us WHERE us.dni= ?1", Registro.class);
 		query.setParameter(1, userDni);
 		List<Registro> og = query.getResultList();
@@ -525,8 +536,12 @@ public class DataAccess {
 		db.getTransaction().commit();
 		db.getTransaction().begin();
 		user.setSaldo(user.getSaldo() + cantidad);
-		Transaction t = new Transaction(cantidad, new Date(), user.getDni());
-		db.persist(t);
+		if (isBox) {
+			user.setLastBox(new Date());
+		} else {
+			Transaction t = new Transaction(cantidad, new Date(), user.getDni());
+			db.persist(t);
+		}
 		db.persist(user);
 		db.getTransaction().commit();
 	}

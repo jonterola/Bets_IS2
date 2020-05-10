@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -15,6 +17,7 @@ public class Registro {
 	private boolean admin;
 	private int edad;
 	private float saldo;
+	private Date lastBox;
 	private boolean block;
 	// private Pronostico pron;
 
@@ -31,6 +34,8 @@ public class Registro {
 		this.mail = mail;
 		this.edad = edad;
 		this.saldo = 0f;
+		this.lastBox = new Date();
+		this.lastBox.setYear(2000);
 	}
 
 	public float getSaldo() {
@@ -88,5 +93,13 @@ public class Registro {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public Date getLastBox() {
+		return this.lastBox;
+	}
+
+	public void setLastBox(Date date) {
+		this.lastBox = date;
 	}
 }

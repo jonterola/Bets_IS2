@@ -108,7 +108,7 @@ public class LoginGUI extends JFrame {
 				if (login != null && !login.isBlocked()) {
 					loginSuccessful(login);
 
-				} else if (login.isBlocked()) {
+				} else if (login != null && login.isBlocked()) {
 					errors.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginBlocked"));
 				} else {
 					errors.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginEr"));

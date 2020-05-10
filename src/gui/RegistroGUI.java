@@ -29,6 +29,7 @@ public class RegistroGUI extends JFrame {
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
 	private JTextField textField;
+	private JTextField textField2;
 
 	/**
 	 * Launch the application.
@@ -46,7 +47,7 @@ public class RegistroGUI extends JFrame {
 	 */
 	private void initialize() {
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("Regist"));
-		this.setBounds(100, 100, 452, 475);
+		this.setBounds(100, 100, 450, 503);
 		this.getContentPane().setLayout(null);
 
 		JLabel txtpnRegistro = new JLabel();
@@ -110,7 +111,7 @@ public class RegistroGUI extends JFrame {
 
 		JLabel textPane = new JLabel();
 		textPane.setBackground(SystemColor.control);
-		textPane.setBounds(29, 326, 359, 20);
+		textPane.setBounds(29, 354, 359, 20);
 		this.getContentPane().add(textPane);
 		textPane.setForeground(Color.RED);
 
@@ -161,8 +162,13 @@ public class RegistroGUI extends JFrame {
 
 					} else {
 						BLFacade facade = LoginGUI.getBusinessLogic();
-						int i = facade.createUser(tfDni.getText(), tfUser.getText(), tfMail.getText(),
-								passwordField.getText(), age, textField.getText());
+						int i;
+						if (facade.exist(textField2.getText()))
+							i = facade.createUser(tfDni.getText(), tfUser.getText(), tfMail.getText(),
+									passwordField.getText(), age, textField.getText(), 5);
+						else
+							i = facade.createUser(tfDni.getText(), tfUser.getText(), tfMail.getText(),
+									passwordField.getText(), age, textField.getText(), 0);
 						if (i == 1) {
 							textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Mailer2"));
 							txtpnCorreoElectronico.setForeground(Color.RED);
@@ -185,7 +191,7 @@ public class RegistroGUI extends JFrame {
 		});
 
 		btnReg.setFont(new Font("Times New Roman", Font.PLAIN, 34));
-		btnReg.setBounds(29, 356, 377, 69);
+		btnReg.setBounds(29, 384, 377, 69);
 		this.getContentPane().add(btnReg);
 
 		passwordField = new JPasswordField();
@@ -198,7 +204,7 @@ public class RegistroGUI extends JFrame {
 
 		JLabel lblPromotionalCode = new JLabel(
 				ResourceBundle.getBundle("Etiquetas").getString("RegistroGUI.lblPromotionalCode.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		lblPromotionalCode.setBounds(29, 276, 129, 14);
+		lblPromotionalCode.setBounds(29, 282, 129, 14);
 		getContentPane().add(lblPromotionalCode);
 
 		textField = new JTextField();
@@ -206,9 +212,24 @@ public class RegistroGUI extends JFrame {
 		placeholder2.setText(ResourceBundle.getBundle("Etiquetas").getString("NotObligatory")); //$NON-NLS-1$ //$NON-NLS-2$
 		placeholder2.changeAlpha(0.75f);
 		placeholder2.changeStyle(Font.ITALIC);
-		textField.setBounds(181, 273, 206, 20);
+		textField.setBounds(181, 279, 206, 20);
 		getContentPane().add(textField);
 		textField.setColumns(10);
+
+		JLabel lblFriendMailoptional = new JLabel();
+		lblFriendMailoptional
+				.setText(ResourceBundle.getBundle("Etiquetas").getString("RegistroGUI.lblFriendMailoptional.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblFriendMailoptional.setBounds(29, 304, 129, 20);
+		getContentPane().add(lblFriendMailoptional);
+
+		textField2 = new JTextField();
+		TextPrompt placeholder3 = new TextPrompt("No es obligatorio", textField2);
+		placeholder3.setText(ResourceBundle.getBundle("Etiquetas").getString("NotObligatory")); //$NON-NLS-1$ //$NON-NLS-2$
+		placeholder3.changeAlpha(0.75f);
+		placeholder3.changeStyle(Font.ITALIC);
+		textField2.setColumns(10);
+		textField2.setBounds(181, 304, 206, 20);
+		getContentPane().add(textField2);
 
 	}
 

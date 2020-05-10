@@ -201,7 +201,7 @@ public class AddMoneyGUI extends JFrame {
 				}
 				usuario.setSaldo(usuario.getSaldo() + cantidad);
 				BLFacade facade = LoginGUI.getBusinessLogic();
-				facade.addMoney(usuario.getDni(), cantidad);
+				facade.addMoney(usuario.getDni(), cantidad, false);
 				closeWindow();
 			}
 		});

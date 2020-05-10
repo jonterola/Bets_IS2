@@ -197,12 +197,20 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
-	public int createUser(String dni, String user, String mail, String pwd, int age, String gift) {
+	public int createUser(String dni, String user, String mail, String pwd, int age, String gift, float mon) {
 		DataAccess dbManager = new DataAccess();
-		int i = dbManager.addUser(dni, user, mail, pwd, age, gift);
+		int i = dbManager.addUser(dni, user, mail, pwd, age, gift, mon);
 		dbManager.close();
 		return i;
 
+	}
+
+	@Override
+	@WebMethod
+	public boolean exist(String mail) {
+		DataAccess dbManager = new DataAccess();
+		boolean sol = dbManager.exist(mail);
+		return sol;
 	}
 
 	@Override
@@ -217,9 +225,9 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
-	public void addMoney(String userDni, float cantidad) {
+	public void addMoney(String userDni, float cantidad, boolean isBox) {
 		DataAccess dbManager = new DataAccess();
-		dbManager.addMoney(userDni, cantidad);
+		dbManager.addMoney(userDni, cantidad, isBox);
 		dbManager.close();
 	}
 

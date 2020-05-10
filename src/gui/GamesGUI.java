@@ -46,6 +46,12 @@ public class GamesGUI extends JFrame {
 		contentPane.add(lblGames);
 
 		JButton btnBox = new JButton();
+		btnBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				box();
+			}
+		});
 
 		btnBox.setIcon(new ImageIcon("330x192.png"));
 		btnBox.setBounds(20, 75, 193, 175);
@@ -66,6 +72,12 @@ public class GamesGUI extends JFrame {
 	public void minas() {
 		this.setVisible(false);
 		BMinas1GUI b = new BMinas1GUI(user);
+		b.setVisible(true);
+	}
+
+	public void box() {
+		this.setVisible(false);
+		BoxGUI b = new BoxGUI(user);
 		b.setVisible(true);
 	}
 }
