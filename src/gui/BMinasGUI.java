@@ -19,11 +19,11 @@ public class BMinasGUI extends JFrame {
 
 	private JPanel contentPane;
 	private Registro user;
-	private double apuesta;
+	private float apuesta;
 	int random = getRandomNumberInRange(1, 9);
 	int cont = 0;
 
-	public BMinasGUI(Registro usr, double apuesta) {
+	public BMinasGUI(Registro usr, float apuesta) {
 		user = usr;
 		this.apuesta = apuesta;
 		try {
@@ -83,37 +83,36 @@ public class BMinasGUI extends JFrame {
 		lblBuscaminas.setBounds(10, 11, 249, 25);
 		contentPane.add(lblBuscaminas);
 
-		JButton btnHelp = new JButton("help");
-		btnHelp.setBounds(10, 15, 70, 23);
-		contentPane.add(btnHelp);
-
 		JLabel ganado = new JLabel(Double.toString(apuesta));
 		ganado.setBounds(205, 19, 68, 14);
 		contentPane.add(ganado);
 
 		JButton boom = new JButton("");
-		boom.setBounds(90, 58, 108, 108);
+		boom.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				user.setSaldo(user.getSaldo() + apuesta);
+				felicidad(user, apuesta);
+			}
+		});
+		boom.setHorizontalAlignment(SwingConstants.LEFT);
+		boom.setBounds(29, 59, 230, 105);
 		contentPane.add(boom);
-
+		boom.setIcon(new ImageIcon("Bomba-falsa-1.png"));
 		button_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cont++;
 				if (random == 1) {
+					badLuck(user);
 					boom.setIcon(new ImageIcon("boom.png"));
-					button_1.setEnabled(false);
-					button_2.setEnabled(false);
-					button_3.setEnabled(false);
-					button_4.setEnabled(false);
-					button_5.setEnabled(false);
-					button_6.setEnabled(false);
-					button_7.setEnabled(false);
-					button_8.setEnabled(false);
-					button_9.setEnabled(false);
+
 				} else if (cont == 8) {
-					System.out.println("felicitaciones");
+					user.setSaldo(user.getSaldo() + apuesta);
+					felicidad(user, apuesta);
+
 				}
-				apuesta = apuesta * (0.1 * cont + 1);
+				apuesta = (float) (apuesta * (0.1 * cont + 1));
 				ganado.setText(Double.toString(apuesta));
 				contentPane.add(ganado);
 
@@ -125,20 +124,14 @@ public class BMinasGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				cont++;
 				if (random == 2) {
+					badLuck(user);
 					boom.setIcon(new ImageIcon("boom.png"));
-					button_1.setEnabled(false);
-					button_2.setEnabled(false);
-					button_3.setEnabled(false);
-					button_4.setEnabled(false);
-					button_5.setEnabled(false);
-					button_6.setEnabled(false);
-					button_7.setEnabled(false);
-					button_8.setEnabled(false);
-					button_9.setEnabled(false);
+
 				} else if (cont == 8) {
-					System.out.println("felicitaciones");
+					user.setSaldo(user.getSaldo() + apuesta);
+					felicidad(user, apuesta);
 				}
-				apuesta = apuesta * (0.1 * cont + 1);
+				apuesta = (float) (apuesta * (0.1 * cont + 1));
 				ganado.setText(Double.toString(apuesta));
 
 				button_2.setEnabled(false);
@@ -150,20 +143,14 @@ public class BMinasGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				cont++;
 				if (random == 3) {
+					badLuck(user);
 					boom.setIcon(new ImageIcon("boom.png"));
-					button_1.setEnabled(false);
-					button_2.setEnabled(false);
-					button_3.setEnabled(false);
-					button_4.setEnabled(false);
-					button_5.setEnabled(false);
-					button_6.setEnabled(false);
-					button_7.setEnabled(false);
-					button_8.setEnabled(false);
-					button_9.setEnabled(false);
+
 				} else if (cont == 8) {
-					System.out.println("felicitaciones");
+					user.setSaldo(user.getSaldo() + apuesta);
+					felicidad(user, apuesta);
 				}
-				apuesta = apuesta * (0.1 * cont + 1);
+				apuesta = (float) (apuesta * (0.1 * cont + 1));
 				ganado.setText(Double.toString(apuesta));
 
 				button_3.setEnabled(false);
@@ -174,20 +161,14 @@ public class BMinasGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				cont++;
 				if (random == 4) {
+					badLuck(user);
 					boom.setIcon(new ImageIcon("boom.png"));
-					button_1.setEnabled(false);
-					button_2.setEnabled(false);
-					button_3.setEnabled(false);
-					button_4.setEnabled(false);
-					button_5.setEnabled(false);
-					button_6.setEnabled(false);
-					button_7.setEnabled(false);
-					button_8.setEnabled(false);
-					button_9.setEnabled(false);
+
 				} else if (cont == 8) {
-					System.out.println("felicitaciones");
+					user.setSaldo(user.getSaldo() + apuesta);
+					felicidad(user, apuesta);
 				}
-				apuesta = apuesta * (0.1 * cont + 1);
+				apuesta = (float) (apuesta * (0.1 * cont + 1));
 				ganado.setText(Double.toString(apuesta));
 
 				button_4.setEnabled(false);
@@ -198,20 +179,14 @@ public class BMinasGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				cont++;
 				if (random == 5) {
+					badLuck(user);
 					boom.setIcon(new ImageIcon("boom.png"));
-					button_1.setEnabled(false);
-					button_2.setEnabled(false);
-					button_3.setEnabled(false);
-					button_4.setEnabled(false);
-					button_5.setEnabled(false);
-					button_6.setEnabled(false);
-					button_7.setEnabled(false);
-					button_8.setEnabled(false);
-					button_9.setEnabled(false);
+
 				} else if (cont == 8) {
-					System.out.println("felicitaciones");
+					user.setSaldo(user.getSaldo() + apuesta);
+					felicidad(user, apuesta);
 				}
-				apuesta = apuesta * (0.1 * cont + 1);
+				apuesta = (float) (apuesta * (0.1 * cont + 1));
 				ganado.setText(Double.toString(apuesta));
 				button_5.setEnabled(false);
 			}
@@ -221,20 +196,14 @@ public class BMinasGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				cont++;
 				if (random == 6) {
+					badLuck(user);
 					boom.setIcon(new ImageIcon("boom.png"));
-					button_1.setEnabled(false);
-					button_2.setEnabled(false);
-					button_3.setEnabled(false);
-					button_4.setEnabled(false);
-					button_5.setEnabled(false);
-					button_6.setEnabled(false);
-					button_7.setEnabled(false);
-					button_8.setEnabled(false);
-					button_9.setEnabled(false);
+
 				} else if (cont == 8) {
-					System.out.println("felicitaciones");
+					user.setSaldo(user.getSaldo() + apuesta);
+					felicidad(user, apuesta);
 				}
-				apuesta = apuesta * (0.1 * cont + 1);
+				apuesta = (float) (apuesta * (0.1 * cont + 1));
 				ganado.setText(Double.toString(apuesta));
 				button_6.setEnabled(false);
 
@@ -245,20 +214,14 @@ public class BMinasGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				cont++;
 				if (random == 7) {
+					badLuck(user);
 					boom.setIcon(new ImageIcon("boom.png"));
-					button_1.setEnabled(false);
-					button_2.setEnabled(false);
-					button_3.setEnabled(false);
-					button_4.setEnabled(false);
-					button_5.setEnabled(false);
-					button_6.setEnabled(false);
-					button_7.setEnabled(false);
-					button_8.setEnabled(false);
-					button_9.setEnabled(false);
+
 				} else if (cont == 8) {
-					System.out.println("felicitaciones");
+					user.setSaldo(user.getSaldo() + apuesta);
+					felicidad(user, apuesta);
 				}
-				apuesta = apuesta * (0.1 * cont + 1);
+				apuesta = (float) (apuesta * (0.1 * cont + 1));
 				ganado.setText(Double.toString(apuesta));
 				button_7.setEnabled(false);
 			}
@@ -268,20 +231,14 @@ public class BMinasGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				cont++;
 				if (random == 8) {
+					badLuck(user);
 					boom.setIcon(new ImageIcon("boom.png"));
-					button_1.setEnabled(false);
-					button_2.setEnabled(false);
-					button_3.setEnabled(false);
-					button_4.setEnabled(false);
-					button_5.setEnabled(false);
-					button_6.setEnabled(false);
-					button_7.setEnabled(false);
-					button_8.setEnabled(false);
-					button_9.setEnabled(false);
+
 				} else if (cont == 8) {
-					System.out.println("felicitaciones");
+					user.setSaldo(user.getSaldo() + apuesta);
+					felicidad(user, apuesta);
 				}
-				apuesta = apuesta * (0.1 * cont + 1);
+				apuesta = (float) (apuesta * (0.1 * cont + 1));
 				ganado.setText(Double.toString(apuesta));
 				button_8.setEnabled(false);
 
@@ -292,20 +249,14 @@ public class BMinasGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				cont++;
 				if (random == 9) {
+					badLuck(user);
 					boom.setIcon(new ImageIcon("boom.png"));
-					button_1.setEnabled(false);
-					button_2.setEnabled(false);
-					button_3.setEnabled(false);
-					button_4.setEnabled(false);
-					button_5.setEnabled(false);
-					button_6.setEnabled(false);
-					button_7.setEnabled(false);
-					button_8.setEnabled(false);
-					button_9.setEnabled(false);
+
 				} else if (cont == 8) {
-					System.out.println("felicitaciones");
+					user.setSaldo(user.getSaldo() + apuesta);
+					felicidad(user, apuesta);
 				}
-				apuesta = apuesta * (0.1 * cont + 1);
+				apuesta = (float) (apuesta * (0.1 * cont + 1));
 				ganado.setText(Double.toString(apuesta));
 
 				button_9.setEnabled(false);
@@ -317,6 +268,19 @@ public class BMinasGUI extends JFrame {
 	private static int getRandomNumberInRange(int min, int max) {
 		Random r = new Random();
 		return r.nextInt((max - min) + 1) + min;
+	}
+
+	private void felicidad(Registro user, float ganancia) {
+		this.setVisible(false);
+		FelicidadesGUI f = new FelicidadesGUI(user, apuesta);
+		f.setVisible(true);
+	}
+
+	private void badLuck(Registro user) {
+		this.setVisible(false);
+		BadLuckGUI b = new BadLuckGUI(user);
+		b.setVisible(true);
+
 	}
 
 }

@@ -3,6 +3,7 @@ package gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -38,7 +39,7 @@ public class GamesGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblGames = new JLabel("GAMES");
+		JLabel lblGames = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("games"));
 		lblGames.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGames.setVerticalAlignment(SwingConstants.CENTER);
 		lblGames.setFont(new Font("Dialog", Font.PLAIN, 35));

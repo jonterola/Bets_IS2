@@ -6,9 +6,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import domain.Registro;
@@ -48,7 +46,7 @@ public class Usuario1GUI extends JFrame {
 				logout();
 			}
 		});
-		btnLogout.setBounds(320, 11, 104, 35);
+		btnLogout.setBounds(267, 11, 157, 35);
 		contentPane.add(btnLogout);
 
 		JButton btnApuesta = new JButton(ResourceBundle.getBundle("Etiquetas").getString("ViewEvents")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -86,7 +84,7 @@ public class Usuario1GUI extends JFrame {
 		btnRMonedero.setBounds(10, 153, 414, 35);
 		contentPane.add(btnRMonedero);
 
-		JButton btnGames = new JButton("Games");
+		JButton btnGames = new JButton(ResourceBundle.getBundle("Etiquetas").getString("games"));
 
 		btnGames.addActionListener(new ActionListener() {
 			@Override
@@ -98,10 +96,6 @@ public class Usuario1GUI extends JFrame {
 		btnGames.setBounds(10, 199, 414, 35);
 		contentPane.add(btnGames);
 
-		JLabel lblEuros = new JLabel(Float.toString(user.getSaldo())); // $NON-NLS-1$ //$NON-NLS-2$
-		lblEuros.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblEuros.setBounds(10, 11, 46, 14);
-		contentPane.add(lblEuros);
 	}
 
 	private void logout() {

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -55,7 +56,7 @@ public class BoxGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblCongratulationsYouWon = new JLabel("PRESS THE BUTTON TO CONTINUE");
+		JLabel lblCongratulationsYouWon = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("boton"));
 		lblCongratulationsYouWon.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCongratulationsYouWon.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblCongratulationsYouWon.setBounds(10, 11, 414, 42);
@@ -70,11 +71,11 @@ public class BoxGUI extends JFrame {
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBounds(142, 113, 153, 53);
 		contentPane.add(btnNewButton);
-		JButton btnNewButton2 = new JButton("Go back");
+		JButton btnNewButton2 = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Back"));
 		btnNewButton2.setBounds(142, 113, 153, 53);
 		contentPane.add(btnNewButton2);
 
-		JButton btnGoBack = new JButton("back");
+		JButton btnGoBack = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Back"));
 		btnGoBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -94,11 +95,12 @@ public class BoxGUI extends JFrame {
 				if (today.getYear() == userd.getYear() && today.getMonth() == userd.getMonth()
 						&& today.getDay() == userd.getDay()) {
 					btnGoBack.setVisible(false);
-					lblCongratulationsYouWon.setText("YOU HAVE PLAYED TODAY");
+					lblCongratulationsYouWon.setText(ResourceBundle.getBundle("Etiquetas").getString("played"));
 					btnNewButton2.setVisible(true);
 				} else {
 
-					lblCongratulationsYouWon.setText("CONGRATULATIONS YOU WON");
+					lblCongratulationsYouWon
+							.setText(ResourceBundle.getBundle("Etiquetas").getString("congratulationsyou"));
 
 					int random = getRandomNumberInRange(0, 29);
 					BLFacade facade = LoginGUI.getBusinessLogic();
@@ -106,7 +108,7 @@ public class BoxGUI extends JFrame {
 					case 1:
 						facade.addMoney(user.getDni(), 1, true);
 						lblNewLabel.setText("1€");
-
+						facade.updateUser(user);
 						break;
 					case 2:
 						lblNewLabel.setText("0€");
@@ -116,10 +118,10 @@ public class BoxGUI extends JFrame {
 					case 3:
 						lblNewLabel.setText("3€");
 						facade.addMoney(user.getDni(), 3, true);
-
+						facade.updateUser(user);
 						break;
 					case 4:
-						lblCongratulationsYouWon.setText("YOU WON OTHER TRY");
+						lblCongratulationsYouWon.setText(ResourceBundle.getBundle("Etiquetas").getString("other"));
 
 						btnNewButton.setVisible(true);
 						break;

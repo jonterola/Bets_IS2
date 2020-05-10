@@ -34,7 +34,7 @@ public class BMinas1GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public void Init() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 343);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -59,7 +59,7 @@ public class BMinas1GUI extends JFrame {
 		JButton btnPlay = new JButton(ResourceBundle.getBundle("Etiquetas").getString("play"));
 
 		btnPlay.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 25));
-		btnPlay.setBounds(129, 158, 161, 50);
+		btnPlay.setBounds(129, 187, 161, 50);
 		contentPane.add(btnPlay);
 
 		JButton btnHelp = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Back"));
@@ -69,13 +69,17 @@ public class BMinas1GUI extends JFrame {
 				back();
 			}
 		});
-		btnHelp.setBounds(168, 219, 89, 23);
+		btnHelp.setBounds(170, 248, 89, 23);
 		contentPane.add(btnHelp);
 
 		JLabel lblKk = new JLabel("");
 		lblKk.setHorizontalAlignment(SwingConstants.CENTER);
-		lblKk.setBounds(10, 135, 414, 14);
+		lblKk.setBounds(10, 162, 414, 14);
 		contentPane.add(lblKk);
+
+		JLabel label = new JLabel(Float.toString(user.getSaldo())); // $NON-NLS-1$ //$NON-NLS-2$
+		label.setBounds(194, 137, 46, 14);
+		contentPane.add(label);
 		btnPlay.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

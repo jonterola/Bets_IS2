@@ -85,7 +85,7 @@ public class LoginGUI extends JFrame {
 		this.getContentPane().add(txtpnContrasea);
 
 		errors = new JLabel();
-		errors.setBounds(23, 173, 384, 20);
+		errors.setBounds(23, 154, 384, 20);
 		this.getContentPane().add(errors);
 
 		tMail = new JTextField();
@@ -144,7 +144,7 @@ public class LoginGUI extends JFrame {
 		panel_1.add(radioButton_2);
 
 		viewButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("ViewEvents")); //$NON-NLS-1$ //$NON-NLS-2$
-		viewButton.setBounds(160, 170, 136, 23);
+		viewButton.setBounds(149, 180, 136, 23);
 		getContentPane().add(viewButton);
 		viewButton.addActionListener(new ActionListener() {
 			@Override
