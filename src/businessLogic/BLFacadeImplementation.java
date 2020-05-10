@@ -15,8 +15,10 @@ import domain.Category;
 import domain.Event;
 import domain.Options;
 import domain.Question;
+import domain.Regalo;
 import domain.Registro;
 import domain.Team;
+import domain.Transaction;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
 
@@ -195,9 +197,9 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
-	public int createUser(String dni, String user, String mail, String pwd, int age) {
+	public int createUser(String dni, String user, String mail, String pwd, int age, String gift) {
 		DataAccess dbManager = new DataAccess();
-		int i = dbManager.addUser(dni, user, mail, pwd, age);
+		int i = dbManager.addUser(dni, user, mail, pwd, age, gift);
 		dbManager.close();
 		return i;
 
@@ -215,10 +217,27 @@ public class BLFacadeImplementation implements BLFacade {
 
 	@Override
 	@WebMethod
+	public void addMoney(String userDni, float cantidad) {
+		DataAccess dbManager = new DataAccess();
+		dbManager.addMoney(userDni, cantidad);
+		dbManager.close();
+	}
+
+	@Override
+	@WebMethod
 	public void updateUser(Registro user) {
 		DataAccess dbManager = new DataAccess();
 		dbManager.updateUser(user);
 		dbManager.close();
+	}
+
+	@Override
+	@WebMethod
+	public List<Transaction> getTransactions() {
+		DataAccess dbManager = new DataAccess();
+		List<Transaction> lista = dbManager.getTransactions();
+		dbManager.close();
+		return lista;
 	}
 
 	/**
@@ -246,14 +265,15 @@ public class BLFacadeImplementation implements BLFacade {
 	public List<Bet> getBet(String user) {
 		DataAccess dbManager = new DataAccess();
 		List<Bet> sol = dbManager.getBet(user);
+		dbManager.close();
 		return sol;
-
 	}
 
 	@Override
 	public Options getOption(int id) {
 		DataAccess dbManager = new DataAccess();
 		Options sol = dbManager.getOption(id);
+		dbManager.close();
 		return sol;
 	}
 
@@ -261,7 +281,53 @@ public class BLFacadeImplementation implements BLFacade {
 	public Question getQuestion(int id) {
 		DataAccess dbManager = new DataAccess();
 		Question sol = dbManager.getQuestion(id);
+		dbManager.close();
 		return sol;
 	}
 
+	@Override
+	public List<Registro> getAllUsers() {
+		DataAccess dbManager = new DataAccess();
+		List<Registro> us = dbManager.getAllUsers();
+		dbManager.close();
+		return us;
+
+	}
+
+	@Override
+	public float getMoneyOverall() {
+		DataAccess dbManager = new DataAccess();
+		float total = dbManager.getMoneyOverall();
+		dbManager.close();
+		return total;
+	}
+
+	@Override
+	public void statusUser(String DNI, Boolean block) {
+		DataAccess dbManager = new DataAccess();
+		dbManager.statusUser(DNI, block);
+		dbManager.close();
+	}
+
+	@Override
+	public void addGift(String cod, float money) {
+		DataAccess dbManager = new DataAccess();
+		dbManager.addGift(cod, money);
+		dbManager.close();
+	}
+
+	@Override
+	public void removeGift(String cod) {
+		DataAccess dbManager = new DataAccess();
+		dbManager.removeGift(cod);
+		dbManager.close();
+	}
+
+	@Override
+	public List<Regalo> getGifts() {
+		DataAccess dbManager = new DataAccess();
+		List<Regalo> us = dbManager.getGifts();
+		dbManager.close();
+		return us;
+	}
 }

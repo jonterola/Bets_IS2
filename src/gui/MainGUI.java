@@ -45,6 +45,9 @@ public class MainGUI extends JFrame {
 	private JButton btnNewButton;
 	private LoginGUI log;
 	private Registro login;
+	private JButton btnViewFinances;
+	private JButton btnBlockunblockUsers;
+	private JButton btnGifts;
 
 	/**
 	 * This is the default constructor
@@ -79,7 +82,7 @@ public class MainGUI extends JFrame {
 	 */
 	private void initialize() {
 		// this.setSize(271, 295);
-		this.setSize(495, 290);
+		this.setSize(547, 459);
 		this.setContentPane(getJContentPane());
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
@@ -92,12 +95,15 @@ public class MainGUI extends JFrame {
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			jContentPane = new JPanel();
-			jContentPane.setLayout(new GridLayout(6, 1, 0, 0));
+			jContentPane.setLayout(new GridLayout(9, 1, 0, 0));
 			jContentPane.add(getLblNewLabel());
 			jContentPane.add(getBoton3());
 			jContentPane.add(getBoton4());
 			jContentPane.add(getBoton2());
 			jContentPane.add(getBoton5());
+			jContentPane.add(getBtnViewFinances());
+			jContentPane.add(getBtnBlockunblockUsers());
+			jContentPane.add(getBtnGifts());
 			jContentPane.add(getBtnNewButton());
 
 		}
@@ -280,5 +286,49 @@ public class MainGUI extends JFrame {
 	private void logout() {
 		this.setVisible(false);
 		log.setVisible(true);
+	}
+
+	private JButton getBtnViewFinances() {
+		if (btnViewFinances == null) {
+			btnViewFinances = new JButton(
+					ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnViewFinances.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			btnViewFinances.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JFrame a = new FinancesGUI();
+					a.setVisible(true);
+				}
+			});
+		}
+		return btnViewFinances;
+	}
+
+	private JButton getBtnBlockunblockUsers() {
+		if (btnBlockunblockUsers == null) {
+			btnBlockunblockUsers = new JButton(
+					ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnBlockunblockUsers.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			btnBlockunblockUsers.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					JFrame a = new BanGUI();
+					a.setVisible(true);
+				}
+			});
+		}
+		return btnBlockunblockUsers;
+	}
+
+	private JButton getBtnGifts() {
+		if (btnGifts == null) {
+			btnGifts = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnGifts.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			btnGifts.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JFrame a = new GiftsGUI();
+					a.setVisible(true);
+				}
+			});
+		}
+		return btnGifts;
 	}
 } // @jve:decl-index=0:visual-constraint="0,0"

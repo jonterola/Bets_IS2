@@ -14,6 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import businessLogic.BLFacade;
+import libs.TextPrompt;
 
 public class RegistroGUI extends JFrame {
 
@@ -27,6 +28,7 @@ public class RegistroGUI extends JFrame {
 	private JTextField tfDni;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -44,7 +46,7 @@ public class RegistroGUI extends JFrame {
 	 */
 	private void initialize() {
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("Regist"));
-		this.setBounds(100, 100, 450, 429);
+		this.setBounds(100, 100, 452, 475);
 		this.getContentPane().setLayout(null);
 
 		JLabel txtpnRegistro = new JLabel();
@@ -108,7 +110,7 @@ public class RegistroGUI extends JFrame {
 
 		JLabel textPane = new JLabel();
 		textPane.setBackground(SystemColor.control);
-		textPane.setBounds(29, 254, 359, 20);
+		textPane.setBounds(29, 326, 359, 20);
 		this.getContentPane().add(textPane);
 		textPane.setForeground(Color.RED);
 
@@ -160,7 +162,7 @@ public class RegistroGUI extends JFrame {
 					} else {
 						BLFacade facade = LoginGUI.getBusinessLogic();
 						int i = facade.createUser(tfDni.getText(), tfUser.getText(), tfMail.getText(),
-								passwordField.getText(), age);
+								passwordField.getText(), age, textField.getText());
 						if (i == 1) {
 							textPane.setText(ResourceBundle.getBundle("Etiquetas").getString("Mailer2"));
 							txtpnCorreoElectronico.setForeground(Color.RED);
@@ -183,7 +185,7 @@ public class RegistroGUI extends JFrame {
 		});
 
 		btnReg.setFont(new Font("Times New Roman", Font.PLAIN, 34));
-		btnReg.setBounds(29, 284, 377, 69);
+		btnReg.setBounds(29, 356, 377, 69);
 		this.getContentPane().add(btnReg);
 
 		passwordField = new JPasswordField();
@@ -193,6 +195,20 @@ public class RegistroGUI extends JFrame {
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setBounds(181, 223, 206, 20);
 		this.getContentPane().add(passwordField_1);
+
+		JLabel lblPromotionalCode = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("RegistroGUI.lblPromotionalCode.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblPromotionalCode.setBounds(29, 276, 129, 14);
+		getContentPane().add(lblPromotionalCode);
+
+		textField = new JTextField();
+		TextPrompt placeholder2 = new TextPrompt("No es obligatorio", textField);
+		placeholder2.setText(ResourceBundle.getBundle("Etiquetas").getString("NotObligatory")); //$NON-NLS-1$ //$NON-NLS-2$
+		placeholder2.changeAlpha(0.75f);
+		placeholder2.changeStyle(Font.ITALIC);
+		textField.setBounds(181, 273, 206, 20);
+		getContentPane().add(textField);
+		textField.setColumns(10);
 
 	}
 

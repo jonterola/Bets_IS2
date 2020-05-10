@@ -21,8 +21,10 @@ import domain.Category;
 import domain.Event;
 import domain.Options;
 import domain.Question;
+import domain.Regalo;
 import domain.Registro;
 import domain.Team;
+import domain.Transaction;
 import exceptions.QuestionAlreadyExist;
 
 /**
@@ -322,7 +324,7 @@ public class DataAccess {
 		db.getTransaction().commit();
 	}
 
-	public int addUser(String dni, String user, String mail, String pwd, int age) {
+	public int addUser(String dni, String user, String mail, String pwd, int age, String gift) {
 
 		TypedQuery<Registro> query1 = db.createQuery("SELECT rg FROM Registro rg WHERE rg.mail ='" + mail + "'",
 				Registro.class);
@@ -338,8 +340,25 @@ public class DataAccess {
 			return 3;
 
 		Registro u = new Registro(user, pwd, dni, mail, age);
-
 		db.getTransaction().begin();
+		if (!gift.isEmpty()) {
+			TypedQuery<Regalo> query4 = db.createQuery("SELECT gf FROM Regalo gf WHERE gf.cod ='" + gift + "'",
+					Regalo.class);
+			if (!query1.getResultList().isEmpty())
+				return 1;
+			Regalo r = query4.getResultList().get(0);
+			u.setSaldo(u.getSaldo() + r.getMoney());
+			Transaction t = new Transaction(r.getMoney(), new Date(), dni);
+			r.sum();
+			db.remove(r);
+			db.getTransaction().commit();
+			db.getTransaction().begin();
+			db.persist(r);
+			db.persist(t);
+			db.getTransaction().commit();
+			db.getTransaction().begin();
+		}
+
 		db.persist(u);
 		db.getTransaction().commit();
 		return 0;
@@ -494,16 +513,20 @@ public class DataAccess {
 		db.getTransaction().commit();
 	}
 
-	public void updateUser(Registro user) {
-		TypedQuery<Options> query = db.createQuery("SELECT us FROM Registro us WHERE us.dni= ?1", Options.class);
-		query.setParameter(1, user.getDni());
-		List<Options> og = query.getResultList();
+	public void addMoney(String userDni, float cantidad) {
+		TypedQuery<Registro> query = db.createQuery("SELECT us FROM Registro us WHERE us.dni= ?1", Registro.class);
+		query.setParameter(1, userDni);
+		List<Registro> og = query.getResultList();
+		Registro user = og.get(0);
 		db.getTransaction().begin();
 		for (int i = 0; i < og.size(); i++) {
 			db.remove(og.get(i));
 		}
 		db.getTransaction().commit();
 		db.getTransaction().begin();
+		user.setSaldo(user.getSaldo() + cantidad);
+		Transaction t = new Transaction(cantidad, new Date(), user.getDni());
+		db.persist(t);
 		db.persist(user);
 		db.getTransaction().commit();
 	}
@@ -521,7 +544,6 @@ public class DataAccess {
 	}
 
 	public Options getOption(int id) {
-		System.out.println("SELECT rg FROM Options rg WHERE rg.id ='" + id + "'");
 		TypedQuery<Options> query = db.createQuery("SELECT rg FROM Options rg WHERE rg.id = " + id, Options.class);
 		List<Options> og = query.getResultList();
 		return og.get(0);
@@ -532,5 +554,81 @@ public class DataAccess {
 				Question.class);
 		List<Question> og = query.getResultList();
 		return og.get(0);
+	}
+
+	public void updateUser(Registro user) {
+		TypedQuery<Registro> query = db.createQuery("SELECT us FROM Registro us WHERE us.dni= ?1", Registro.class);
+		query.setParameter(1, user.getDni());
+		List<Registro> og = query.getResultList();
+		db.getTransaction().begin();
+		for (int i = 0; i < og.size(); i++) {
+			db.remove(og.get(i));
+		}
+		db.getTransaction().commit();
+		db.getTransaction().begin();
+		db.persist(user);
+		db.getTransaction().commit();
+	}
+
+	public List<Transaction> getTransactions() {
+		TypedQuery<Transaction> query = db.createQuery("SELECT tc FROM Transaction tc", Transaction.class);
+		return query.getResultList();
+	}
+
+	public float getMoneyOverall() {
+		float total = 0;
+		TypedQuery<Registro> query = db.createQuery("SELECT us FROM Registro us", Registro.class);
+		List<Registro> og = query.getResultList();
+		for (int i = 0; i < og.size(); i++) {
+			total += og.get(i).getSaldo();
+		}
+		TypedQuery<Bet> query2 = db.createQuery("SELECT rg FROM Bet rg WHERE rg.activa = true", Bet.class);
+		List<Bet> og2 = query2.getResultList();
+		for (int i = 0; i < og2.size(); i++) {
+			total += og2.get(i).getCantidadApostada();
+		}
+		return total;
+	}
+
+	public List<Registro> getAllUsers() {
+		TypedQuery<Registro> query = db.createQuery("SELECT us FROM Registro us WHERE us.admin = false",
+				Registro.class);
+		return query.getResultList();
+
+	}
+
+	public void statusUser(String DNI, Boolean block) {
+		TypedQuery<Registro> query = db.createQuery("SELECT us FROM Registro us WHERE us.dni= ?1", Registro.class);
+		query.setParameter(1, DNI);
+		List<Registro> og = query.getResultList();
+		Registro us = og.get(0);
+		us.setBlock(block);
+		db.getTransaction().begin();
+		db.remove(us);
+		db.getTransaction().commit();
+		db.getTransaction().begin();
+		db.persist(us);
+		db.getTransaction().commit();
+	}
+
+	public void addGift(String cod, float money) {
+		Regalo r = new Regalo(cod, money);
+		db.getTransaction().begin();
+		db.persist(r);
+		db.getTransaction().commit();
+	}
+
+	public void removeGift(String cod) {
+		TypedQuery<Regalo> query = db.createQuery("SELECT r FROM Regalo r WHERE r.cod= ?1", Regalo.class);
+		query.setParameter(1, cod);
+		List<Regalo> rq = query.getResultList();
+		db.getTransaction().begin();
+		db.remove(rq.get(0));
+		db.getTransaction().commit();
+	}
+
+	public List<Regalo> getGifts() {
+		TypedQuery<Regalo> query = db.createQuery("SELECT us FROM Regalo us", Regalo.class);
+		return query.getResultList();
 	}
 }

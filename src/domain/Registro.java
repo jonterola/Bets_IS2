@@ -15,6 +15,7 @@ public class Registro {
 	private boolean admin;
 	private int edad;
 	private float saldo;
+	private boolean block;
 	// private Pronostico pron;
 
 	public Registro(String nick, String pw, String dni, String mail, int edad) {
@@ -26,6 +27,7 @@ public class Registro {
 		} else {
 			this.admin = false;
 		}
+		this.block = false;
 		this.mail = mail;
 		this.edad = edad;
 		this.saldo = 0f;
@@ -65,6 +67,14 @@ public class Registro {
 
 	public boolean isAdmin() {
 		return admin;
+	}
+
+	public boolean isBlocked() {
+		return block;
+	}
+
+	public void setBlock(Boolean block) {
+		this.block = block;
 	}
 
 	@Override

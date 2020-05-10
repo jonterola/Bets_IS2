@@ -1,11 +1,12 @@
 package gui;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -33,27 +34,6 @@ public class AddMoneyGUI extends JFrame {
 	private JTextField textCantidad;
 	private static Registro usuario;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		usuario = new Registro("andergomez", "0266814", "79133379W", "a@asd.com", 19);
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					AddMoneyGUI frame = new AddMoneyGUI(usuario);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public AddMoneyGUI(Registro user) {
 		setTitle(ResourceBundle.getBundle("Etiquetas").getString("AddMoneyGUI.this.title")); //$NON-NLS-1$ //$NON-NLS-2$
 		usuario = user;
@@ -192,14 +172,15 @@ public class AddMoneyGUI extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				long tarjeta;
-				int año, anoC, mesC, mes, cvc;
+				int año, mes;
 				float cantidad;
+				LocalDate currentdate = LocalDate.now();
+				Month currentMonth = currentdate.getMonth();
+				int currentYear = currentdate.getYear();
 				try {
-					tarjeta = Long.parseLong(textTarjeta.getText());
 					año = Integer.parseInt(textAño.getText());
+					año += 2000;
 					mes = Integer.parseInt(textMes.getText());
-					cvc = Integer.parseInt(textCVC.getText());
 					cantidad = Float.parseFloat(textCantidad.getText());
 
 				} catch (Exception e) {
@@ -210,7 +191,8 @@ public class AddMoneyGUI extends JFrame {
 				if (textTarjeta.getText().length() != 16) {
 					System.out.println("ERROR: Tarjeta no valida");
 					return;
-				} else if (año < 20 || (año == 20 && mes < 3) || mes < 1 || mes > 12) {
+				} else if (año < currentYear || (año == currentYear && mes < currentMonth.getValue()) || mes < 1
+						|| mes > 12) {
 					System.out.println("ERROR: Fecha no valida");
 					return;
 				} else if (textCVC.getText().length() != 3) {
@@ -218,9 +200,8 @@ public class AddMoneyGUI extends JFrame {
 					return;
 				}
 				usuario.setSaldo(usuario.getSaldo() + cantidad);
-				System.out.println(usuario.getSaldo());
 				BLFacade facade = LoginGUI.getBusinessLogic();
-				facade.updateUser(usuario);
+				facade.addMoney(usuario.getDni(), cantidad);
 				closeWindow();
 			}
 		});

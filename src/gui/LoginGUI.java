@@ -105,9 +105,11 @@ public class LoginGUI extends JFrame {
 				errors.setText(" ");
 				BLFacade facade = LoginGUI.getBusinessLogic();
 				Registro login = facade.newLogin(tMail.getText(), tPwd.getText());
-				if (login != null) {
+				if (login != null && !login.isBlocked()) {
 					loginSuccessful(login);
 
+				} else if (login.isBlocked()) {
+					errors.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginBlocked"));
 				} else {
 					errors.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginEr"));
 				}

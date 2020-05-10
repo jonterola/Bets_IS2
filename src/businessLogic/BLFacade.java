@@ -13,8 +13,10 @@ import domain.Event;
 import domain.Options;
 //import domain.Booking;
 import domain.Question;
+import domain.Regalo;
 import domain.Registro;
 import domain.Team;
+import domain.Transaction;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
 
@@ -88,13 +90,19 @@ public interface BLFacade {
 
 	@WebMethod
 
-	public int createUser(String dni, String user, String mail, String pwd, int age);
+	public int createUser(String dni, String user, String mail, String pwd, int age, String gift);
 
 	@WebMethod
 	public Registro newLogin(String mail, String pwd);
 
 	@WebMethod
+	public void addMoney(String userDni, float cantidad);
+
+	@WebMethod
 	public void updateUser(Registro user);
+
+	@WebMethod
+	public List<Registro> getAllUsers();
 
 	@WebMethod
 	public void newBet(Bet b);
@@ -125,4 +133,22 @@ public interface BLFacade {
 
 	@WebMethod
 	public List<Team> getTeams(int id);
+
+	@WebMethod
+	public List<Transaction> getTransactions();
+
+	@WebMethod
+	public float getMoneyOverall();
+
+	@WebMethod
+	public void statusUser(String DNI, Boolean block);
+
+	@WebMethod
+	public void addGift(String cod, float money);
+
+	@WebMethod
+	public List<Regalo> getGifts();
+
+	@WebMethod
+	public void removeGift(String cod);
 }
