@@ -10,6 +10,7 @@ import javax.xml.ws.Service;
 import businessLogic.BLFacade;
 import businessLogic.BLFacadeImplementation;
 import configuration.ConfigXML;
+import dataAccess.DataAccess;
 
 public class ApplicationLauncher {
 
@@ -31,9 +32,8 @@ public class ApplicationLauncher {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 
 			if (c.isBusinessLogicLocal()) {
-
-				appFacadeInterface = new BLFacadeImplementation();
-
+				DataAccess da = new DataAccess(c.getDataBaseOpenMode().equals("initialize"));
+				appFacadeInterface = new BLFacadeImplementation(da);
 			}
 
 			else { // Si es remoto
