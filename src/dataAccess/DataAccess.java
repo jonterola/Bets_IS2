@@ -35,8 +35,16 @@ public class DataAccess {
 	protected static EntityManagerFactory emf;
 
 	ConfigXML c;
+	
+	public DataAccess (boolean initialize) {
+		open(initialize);
+	}
+	
+	public DataAccess () {
+		new DataAccess(false);
+	}
 
-	public DataAccess(boolean initializeMode) {
+	public void open(boolean initializeMode) {
 
 		c = ConfigXML.getInstance();
 
@@ -60,10 +68,6 @@ public class DataAccess {
 
 			db = emf.createEntityManager();
 		}
-	}
-
-	public DataAccess() {
-		new DataAccess(false);
 	}
 
 	/**
