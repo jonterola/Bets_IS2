@@ -26,6 +26,7 @@ import domain.Registro;
 import domain.Team;
 import domain.Transaction;
 import exceptions.QuestionAlreadyExist;
+import exceptions.UserDoesntExist;
 
 /**
  * It implements the data access to the objectDb database
@@ -35,12 +36,12 @@ public class DataAccess {
 	protected static EntityManagerFactory emf;
 
 	ConfigXML c;
-	
-	public DataAccess (boolean initialize) {
+
+	public DataAccess(boolean initialize) {
 		open(initialize);
 	}
-	
-	public DataAccess () {
+
+	public DataAccess() {
 		new DataAccess(false);
 	}
 
@@ -270,15 +271,12 @@ public class DataAccess {
 	 * This method creates a question for an event, with a question text and the
 	 * minimum bet
 	 * 
-	 * @param event
-	 *            to which question is added
-	 * @param question
-	 *            text of the question
-	 * @param betMinimum
-	 *            minimum quantity of the bet
+	 * @param event      to which question is added
+	 * @param question   text of the question
+	 * @param betMinimum minimum quantity of the bet
 	 * @return the created question, or null, or an exception
-	 * @throws QuestionAlreadyExist
-	 *             if the same question already exists for the event
+	 * @throws QuestionAlreadyExist if the same question already exists for the
+	 *                              event
 	 */
 	public Question createQuestion(Event event, String question, float betMinimum) throws QuestionAlreadyExist {
 		System.out.println(">> DataAccess: createQuestion=> event= " + event + " question= " + question + " betMinimum="
@@ -348,11 +346,9 @@ public class DataAccess {
 		if (mon > 0) {
 			u.setSaldo(mon);
 		}
-		if (!gift.isEmpty()) {
-			TypedQuery<Regalo> query4 = db.createQuery("SELECT gf FROM Regalo gf WHERE gf.cod ='" + gift + "'",
-					Regalo.class);
-			if (!query1.getResultList().isEmpty())
-				return 1;
+		TypedQuery<Regalo> query4 = db.createQuery("SELECT gf FROM Regalo gf WHERE gf.cod ='" + gift + "'",
+				Regalo.class);
+		if (!query4.getResultList().isEmpty()) {
 			Regalo r = query4.getResultList().get(0);
 			u.setSaldo(u.getSaldo() + r.getMoney());
 			r.sum();
@@ -403,8 +399,7 @@ public class DataAccess {
 	/**
 	 * This method retrieves from the database the events of a given date
 	 * 
-	 * @param date
-	 *            in which events are retrieved
+	 * @param date in which events are retrieved
 	 * @return collection of events
 	 */
 	public Vector<Event> getEvents(Date date) {
@@ -466,8 +461,7 @@ public class DataAccess {
 	 * This method retrieves from the database the dates a month for which there are
 	 * events
 	 * 
-	 * @param date
-	 *            of the month for which days with events want to be retrieved
+	 * @param date of the month for which days with events want to be retrieved
 	 * @return collection of dates
 	 */
 	public Vector<Date> getEventsMonth(Date date) {
@@ -644,6 +638,28 @@ public class DataAccess {
 		db.getTransaction().begin();
 		db.remove(rq.get(0));
 		db.getTransaction().commit();
+	}
+
+	public Registro getUser(String dni) throws UserDoesntExist {
+
+		TypedQuery<Registro> query = db.createQuery("SELECT r FROM Registro r WHERE r.dni= ?1", Registro.class);
+		query.setParameter(1, dni);
+		List<Registro> rq = query.getResultList();
+		if (query.getResultList().isEmpty())
+			throw new UserDoesntExist();
+		return rq.get(0);
+	}
+
+	public void removeUser(String dni) {
+
+		TypedQuery<Registro> query = db.createQuery("SELECT r FROM Registro r WHERE r.dni= ?1", Registro.class);
+		query.setParameter(1, dni);
+		List<Registro> rq = query.getResultList();
+		if (!query.getResultList().isEmpty()) {
+			db.getTransaction().begin();
+			db.remove(rq.get(0));
+			db.getTransaction().commit();
+		}
 	}
 
 	public List<Regalo> getGifts() {
