@@ -40,6 +40,8 @@ public class loginTestMockito {
 
 	@Test
 	void test3() {
+		// Al usar la version de mockito 1.9.5 da un error de illegal reflective access,
+		// este error se soluciona usando la ultima version (3.5.13)
 		Registro u = new Registro("andergomez", "contrasegura", "79133379Q", "agomez302@ikasle.ehu.eus", 21);
 		Mockito.doReturn(u).when(dataAccess).login("agomez302@ikasle.ehu.eus", "contrasegura");
 		assertNotNull(sut.newLogin("agomez302@ikasle.ehu.eus", "contrasegura"));

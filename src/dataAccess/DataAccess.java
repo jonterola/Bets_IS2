@@ -526,6 +526,13 @@ public class DataAccess {
 		TypedQuery<Registro> query = db.createQuery("SELECT us FROM Registro us WHERE us.dni= ?1", Registro.class);
 		query.setParameter(1, userDni);
 		List<Registro> og = query.getResultList();
+
+		if (og.isEmpty())
+			throw new RuntimeException("DNI not in DB");
+
+		if (cantidad <= 0)
+			throw new RuntimeException("Money quantity must be positive");
+
 		Registro user = og.get(0);
 		db.getTransaction().begin();
 		for (int i = 0; i < og.size(); i++) {
